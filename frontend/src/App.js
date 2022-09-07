@@ -1,13 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+
+import Homepage from './pages/homepage';
+import AboutUs from './pages/aboutUs';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<p>AHRide Website</p>
-			</header>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route path='/' element={<Homepage />} />
+				<Route path='about' element={<AboutUs />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
