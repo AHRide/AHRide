@@ -14,6 +14,7 @@ function Homepage() {
       </main>
       <nav>
         <Link to="/about">About</Link>
+        <Link to='/login'>Login</Link>
       </nav>
     </>
   );

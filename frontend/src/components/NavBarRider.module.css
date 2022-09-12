@@ -19,14 +19,21 @@ body,
   width: 100%;
   background-color: #f7bc50;
 }
+
 .NavContent {
   text-align: right;
-
   padding-top: 25px;
 }
+
 .NavName {
   padding-right: 40px;
   font-size: 25px;
   color: white;
   font-weight: bold;
+}
+
+.Logo-img {
+  width: auto;
+  height: auto;
+  position: absolute;
 }

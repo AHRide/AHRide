@@ -7,6 +7,7 @@ export default function NavBar() {
     <>
       <div className={styling.Navbar}>
         <nav className={styling.NavContent}>
+        
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
