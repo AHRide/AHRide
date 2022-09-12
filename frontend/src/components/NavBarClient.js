@@ -1,5 +1,5 @@
 import React from "react";
-import styling from "./NavBar.module.css";
+import styling from "./NavBarClient.module.css";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
@@ -12,7 +12,7 @@ export default function NavBar() {
             style={{ textDecoration: "none" }}
             to="/"
           >
-            Delivery Offers
+            Book a Delivery
           </Link>
           <Link
             className={styling.NavName}

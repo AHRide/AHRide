@@ -1,12 +1,12 @@
 import React from "react";
-import NavBar from "../components/NavBar";
-
+import NavBarRider from "../components/NavBarRider";
+import NavBarClient from "../components/NavBarClient";
 import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
     <>
-      <NavBar />
+      <NavBarRider />
 
       <main>
         <h2>Welcome to the homepage!</h2>
