@@ -17,7 +17,7 @@ export default function NavBarClient() {
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
-            to="/"
+            to="/delivery-updates"
           >
             Updates
           </Link>

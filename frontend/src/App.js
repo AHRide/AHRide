@@ -8,6 +8,8 @@ import RiderProfile from "./pages/Rider/RiderProfile";
 import ClientProfile from "./pages/Client/ClientProfile";
 import ClientHomepage from "./pages/Client/ClientHomepage";
 import RiderHomepage from "./pages/Rider/RiderHomepage";
+import DisplayUpdatePage from "./pages/delivery-updates/DisplayUpdatePage";
+import DisplayOfferPage from "./pages/delivery-offers/DisplayOfferPage";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/rider/profile" element={<RiderProfile />} />
         <Route path="/client/homepage" element={<ClientHomepage />} />
         <Route path="/rider/homepage" element={<RiderHomepage />} />
+        <Route path="delivery-updates" element={<DisplayUpdatePage />} />
+        <Route path="delivery-offers" element={<DisplayOfferPage />} />
       </Routes>
     </BrowserRouter>
   );
