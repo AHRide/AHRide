@@ -11,6 +11,7 @@ import RiderHomepage from "./pages/Rider/RiderHomepage";
 import DisplayUpdatePage from "./pages/delivery-updates/DisplayUpdatePage";
 import DisplayOfferPage from "./pages/delivery-offers/DisplayOfferPage";
 import FirstPage from "./pages/FirstPage/FirstPage";
+ import Signin_Page from "./pages/LoginPage/Form";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="delivery-updates" element={<DisplayUpdatePage />} />
         <Route path="delivery-offers" element={<DisplayOfferPage />} />
         <Route path="/firstpage" element={<FirstPage />} />
+        <Route path="/login" element={<Signin_Page />} />
       </Routes>
     </BrowserRouter>
   );
