@@ -1,6 +1,5 @@
 import React from "react";
 import NavBarRider from "../components/NavBarRider";
-import NavBarClient from "../components/NavBarClient";
 import { Link } from "react-router-dom";
 
 function Homepage() {

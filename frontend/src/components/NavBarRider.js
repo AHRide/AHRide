@@ -10,7 +10,7 @@ export default function NavBarRider() {
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
-            to="/"
+            to="/delivery-offers"
           >
             Delivery Offers
           </Link>
