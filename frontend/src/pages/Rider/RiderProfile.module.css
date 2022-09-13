@@ -1,0 +1,82 @@
+html,
+body,
+#root,
+.App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#main {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.ProfileName {
+  font-family: Roboto Mono;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 106px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.DateFont {
+  margin-top: -60px;
+  font-family: Roboto;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #747474;
+}
+.UpdateInfoButton {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 35px;
+  position: absolute;
+  letter-spacing: 0em;
+  left: 44%;
+  width: 200px;
+  height: 40px;
+  background: #f7bc50;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  cursor: pointer;
+}
+.Information {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 90px;
+  text-align: center;
+}
+.LogoutInfoButton {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  left: 80%;
+  top: 85%;
+  background: #ff0c0c;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: center;
+  cursor: pointer;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  text-align: center;
+  float: left;
+  width: 50%;
+}
+.first {
+  margin-top: 60px;
+}

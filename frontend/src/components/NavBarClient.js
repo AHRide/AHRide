@@ -2,7 +2,7 @@ import React from "react";
 import styling from "./NavBarClient.module.css";
 import { Link } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBarClient() {
   return (
     <>
       <div className={styling.Navbar}>
@@ -31,7 +31,7 @@ export default function NavBar() {
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
-            to="/"
+            to="/client/profile"
           >
             Profile
           </Link>
