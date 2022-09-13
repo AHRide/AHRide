@@ -10,6 +10,7 @@ import ClientHomepage from "./pages/Client/ClientHomepage";
 import RiderHomepage from "./pages/Rider/RiderHomepage";
 import DisplayUpdatePage from "./pages/delivery-updates/DisplayUpdatePage";
 import DisplayOfferPage from "./pages/delivery-offers/DisplayOfferPage";
+import FirstPage from "./pages/FirstPage/FirstPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/rider/homepage" element={<RiderHomepage />} />
         <Route path="delivery-updates" element={<DisplayUpdatePage />} />
         <Route path="delivery-offers" element={<DisplayOfferPage />} />
+        <Route path="/firstpage" element={<FirstPage />} />
       </Routes>
     </BrowserRouter>
   );
