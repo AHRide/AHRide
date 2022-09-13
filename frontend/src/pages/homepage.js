@@ -13,6 +13,8 @@ function Homepage() {
       </main>
       <nav>
         <Link to="/about">About</Link>
+        <Link to="/client-signup">ClientSignUp</Link>
+        <Link to="/rider-signup">RiderSignUp</Link>
       </nav>
     </>
   );
