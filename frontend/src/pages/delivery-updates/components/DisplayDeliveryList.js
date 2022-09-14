@@ -1,28 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../DisplayUpdatePage.css";
+import axios from "axios";
 
 function DisplayDeliveryList() {
+  const [updateList, setUpdateList] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/getDeliveryUpdates").then((response) => {
+      setUpdateList(response.data);
+    });
+  }, []);
 
   return (
     <>
-        <div className="center-layout">
-          <div className="row-details">
-          <div className="column-details"><h3>Krisha Briones</h3></div>
-          <div className="column-details"><h3>Chowking Cebu</h3></div>
-          <div className="column-details"><h3>Brgy. Mambaling, Cebu City</h3></div>
-          <div className="column-details"><h3>Pending</h3></div>
+          {updateList.map((lists, index) => (
+        <div className="center-layout" key={index}
+       >
+          <div className="row-details" onClick={console.log(index)}>
+          <div className="column-details"><h3>{lists.receiver_name}</h3></div>
+          <div className="column-details"><h3>{lists.from}</h3></div>
+          <div className="column-details"><h3>{lists.to}</h3></div>
+          <div className="column-details"><h3>{lists.status}</h3></div>
           </div>
         </div>
-
-        <div className="center-layout">
-          <div className="row-details">
-          <div className="column-details"><h3>Bianca Nailon</h3></div>
-          <div className="column-details"><h3>Brgy. Busay, Cebu City</h3></div>
-          <div className="column-details"><h3>Mabolo, Cebu</h3></div>
-          <div className="column-details"><h3>Done</h3></div>
-          </div>
-        </div>
+              ))}
     </>
+
   );
 }
 
