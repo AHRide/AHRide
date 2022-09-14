@@ -1,7 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Homepage from "./pages/homepage";
 import AboutUs from "./pages/aboutUs";
 import Test from "./pages/test";
 import ClientSignUp from "./pages/Client/client_signup";
@@ -13,25 +11,24 @@ import RiderHomepage from "./pages/Rider/RiderHomepage";
 import DisplayUpdatePage from "./pages/delivery-updates/DisplayUpdatePage";
 import DisplayOfferPage from "./pages/delivery-offers/DisplayOfferPage";
 import FirstPage from "./pages/FirstPage/FirstPage";
- import Signin_Page from "./pages/LoginPage/Form";
+import SigninPage from "./pages/LoginPage/Form";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/test" element={<Test />} />
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<FirstPage />} />
         <Route path="about" element={<AboutUs />} />
-        <Route path="client-signup" element={<ClientSignUp />} />
-        <Route path="rider-signup" element={<RiderSignUp />} />
+        <Route path="/rider/signup" element={<RiderSignUp />} />
         <Route path="/client/profile" element={<ClientProfile />} />
         <Route path="/rider/profile" element={<RiderProfile />} />
         <Route path="/client/homepage" element={<ClientHomepage />} />
         <Route path="/rider/homepage" element={<RiderHomepage />} />
         <Route path="delivery-updates" element={<DisplayUpdatePage />} />
         <Route path="delivery-offers" element={<DisplayOfferPage />} />
-        <Route path="/firstpage" element={<FirstPage />} />
-        <Route path="/login" element={<Signin_Page />} />
+        <Route path="/login" element={<SigninPage />} />
+        <Route path="/client/signup" element={<ClientSignUp />} />
       </Routes>
     </BrowserRouter>
   );
