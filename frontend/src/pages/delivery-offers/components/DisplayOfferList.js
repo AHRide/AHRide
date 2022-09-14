@@ -1,27 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../delivery-updates/DisplayUpdatePage.css";
+import axios from "axios";
 
 function DisplayOfferList() {
+  const [offerList, setOfferList] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/getDeliveryOffers").then((response) => {
+      setOfferList(response.data);
+    });
+  }, []);
 
   return (
     <>
-        <div className="center-layout">
-          <div className="row-details">
-          <div className="column-details"><h3>Jay Pee</h3></div>
-          <div className="column-details"><h3>CIT Back Gate</h3></div>
-          <div className="column-details"><h3>CIT Front Gate</h3></div>
-          <div className="column-details"><h3>09317420667</h3></div>
+        {offerList.map((lists, index) => (
+        <div className="center-layout" key={index}
+       >
+          <div className="row-details" onClick={console.log(index)}>
+          <div className="column-details"><h3>{lists.receiver_name}</h3></div>
+          <div className="column-details"><h3>{lists.from}</h3></div>
+          <div className="column-details"><h3>{lists.to}</h3></div>
+          <div className="column-details"><h3>{lists.client_cont}</h3></div>
           </div>
         </div>
-
-        <div className="center-layout">
-          <div className="row-details">
-          <div className="column-details"><h3>Aca Mar</h3></div>
-          <div className="column-details"><h3>Landers - Mabolo</h3></div>
-          <div className="column-details"><h3>S&R - Mambaling</h3></div>
-          <div className="column-details"><h3>09317420667</h3></div>
-          </div>
-        </div>
+              ))}
     </>
   );
 }
