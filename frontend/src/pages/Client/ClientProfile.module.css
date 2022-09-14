@@ -47,9 +47,10 @@ body,
 }
 .Information {
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 100;
   margin-top: 90px;
-  text-align: center;
+  margin-left: 40%;
+  text-align: left;
 }
 .LogoutInfoButton {
   position: absolute;
@@ -66,4 +67,17 @@ body,
   letter-spacing: 0em;
   text-align: center;
   cursor: pointer;
+}
+.backbutton {
+  box-sizing: border-box;
+  position: absolute;
+  width: 73px;
+  height: 0px;
+  left: 70px;
+  top: 100px;
+  color: black;
+}
+.Design {
+  float: left;
+  margin-left: -50px;
 }
