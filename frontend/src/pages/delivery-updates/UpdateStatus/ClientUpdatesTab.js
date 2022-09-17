@@ -1,0 +1,242 @@
+import React from "react";
+import NavBarClient from "../../../components/NavBarClient";
+import "../UpdateStatus/ClientUpdatesTab.css";
+import {Row, Col, Container} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { Grid } from "@mui/material";
+import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
+import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
+import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
+
+// const ClientUpdatesTab = () => {
+//   return (
+//     <>
+//       <NavBarClient/>
+//       {/* <div className="container">
+//         <div className="col1">
+//           <div className="row1">
+//             <div className="rowBody">
+//               <h1>Rider's Information</h1>
+//               <div className="rowNV">
+//                 <div className="colName">
+//                   <h1>Name: John Romero</h1>
+//                   <h1>Contact Number: 09105531</h1>
+//                 </div>
+//                 <div className="colVehicle">
+//                   <h1>Vehicle: Nmax - 30gf50</h1>
+//                   <h1>Payment Status: Fully Paid</h1>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="row2">
+//             <div className="rowBody">
+//               <div className="r3">
+//                 <div className="columnInRow3">
+//                 <h1>Vehicle: Nmax - 30gf50</h1>
+//                 <h1>Payment Status: Fully Paid</h1>
+//                 </div>
+//                 <h1>Vehicle: Nmax - 30gf50</h1>
+//                 <h1>Payment Status: Fully Paid</h1>
+//               </div>
+//               <div className="r2">
+//                 <h1>Vehicle: Nmax - 30gf50</h1>
+//                 <h1>Payment Status: Fully Paid</h1>
+//               </div>
+//               <div className="r3">
+//               </div>
+//               <div className="r4">
+//               </div>
+//               <div className="r5">
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//         <div className="col2">
+//           <h1>Status</h1>
+//         </div>
+//       </div>
+
+//       {/ </div> */}
+
+//       <Container>
+//         <Row>
+//           <Col>WElcome to React Js</Col>
+//         </Row>
+//         <Row>
+//           <Col>Left</Col>
+//           <Col>Right</Col>
+//         </Row>
+//       </Container>
+
+
+
+
+
+//     </>
+//   );
+// }
+
+// export default ClientUpdatesTab;
+
+
+function ClientUpdatesTab(){
+  return(
+    <>
+      <NavBarClient/>
+      <Container fluid>
+        <Row >
+          <Container >
+              <KeyboardBackspaceOutlinedIcon sx={{ fontSize: 50 }} className="backButton"/>
+          </Container>
+        </Row>
+        <Row>
+          <Col xs={9}className="LeftPane">
+            <Container className="ContainerUpperRow">
+              <h1 className="HeaderTextLabel">Rider's Information</h1>
+              <Row>
+                <Col><h1 className="DataAndTextLable">Name: Ryo Kiritani</h1></Col>
+                <Col><h1 className="DataAndTextLable">Vehicle: Kawasaki VERSYS-X300</h1></Col>
+              </Row>
+              <Row >
+                <Col><h1 className="DataAndTextLable">Contact Number: 0910323317856</h1></Col>
+                <Col><h1 className="DataAndTextLable">Payment Status: Fully Paid</h1></Col>
+              </Row>
+            </Container>
+
+            <Container className="ContainerLowerRow">
+              <h1 className="HeaderTextLabel">Client Information</h1>
+              <Row>
+                <Col><h1 className="DataAndTextLable">Name: Fiona Qwerty</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: 09091866864</h1></Col>
+              </Row>
+              <Row>
+                <Col xs={2}>
+                  <Container className="MarginerTop">
+                    <Row><h1 className="DataAndTextLable">From:</h1></Row>
+                    <Row><h1 className="InvisibleInk">None</h1></Row>
+                    <Row><h1 className="DataAndTextLable">To:</h1></Row>
+                  </Container>
+                </Col>
+                <Col xs={7}>
+                  <Row>
+                  <TextField id="TextFieldFrom" label="From" variant="outlined" className="TextField1"/>
+                  </Row>
+                  <Row >
+                    <Container >
+                        <ArrowDownwardOutlinedIcon sx={{ fontSize: 30 }} color="black"/>
+                    </Container>
+                  </Row>
+                  <Row>
+                  <TextField id="TextFieldTo" label="Going To" variant="outlined" className="TextField1"/>
+                  </Row>
+                </Col>
+                <Col xs={3}>
+                  <Container className="WhitePayment">
+                    <Row>To Pay</Row>
+                    <Row>250.00</Row>
+                  </Container>
+                </Col>
+              </Row>
+              <Container className="ContainerRevceiverContact">
+              <Row>
+                
+                {/* <Col xs={5}><TextField id="ReceiversName" label="Receiver Name:" variant="outlined" className="TextField2"/></Col> */}
+                {/* <Col xs={5}><TextField id="ContactNo" label="Contact Number:" variant="outlined" className="TextField2"/></Col> */}
+                <Col>
+                  <Box sx={{ width: 500, maxWidth: '100%', }} className="TextField2"> 
+                  <TextField fullWidth label="Receiver Name:"  multiline rows={1} id="ReceiversName" />
+                  </Box>
+                </Col>
+                <Col>
+                  <Box sx={{ width: 500, maxWidth: '100%', }} className="TextField2"> 
+                  <TextField fullWidth label="Contact Number:"  multiline rows={1} id="ContactNo" />
+                  </Box>
+                </Col>
+              </Row>
+              </Container>
+                <h1 className="DataAndTextLable">Note</h1>
+                <Box sx={{ width: 1200, maxWidth: '100%', }} className="WhiteNoteBox"> 
+                  <TextField fullWidth label="Note"  multiline rows={5} id="fullWidth" />
+                </Box>
+            </Container>
+            <Container>
+              
+            </Container>
+            
+          </Col>
+          <Col xs={3} className="RightPane">
+            <Container>
+              <h2 className="StatusText">
+               Status
+              </h2>
+              <h2 className="DataAndTextLable">
+               Time Elapsed: 20 mins
+              </h2>
+            </Container>
+            <Container>
+          
+            <Grid container direction={"column"} spacing={0}>
+              <Grid item>
+                <FormControlLabel control={<Checkbox />} label="Picking up the item" />
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <FormControlLabel control={<Checkbox />} label="Picked up item" />
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <FormControlLabel control={<Checkbox />} label="Item on the way" />
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <MoreVertOutlinedIcon/>
+              </Grid>
+              <Grid item>
+                <FormControlLabel control={<Checkbox />} label="Delivered" />
+              </Grid>
+              
+            </Grid>
+          
+            </Container>
+            <Container className="CancelButtonContainer">
+            <Stack spacing={30} direction="row">
+              <Box></Box>
+              <Button variant="contained" color="error">Cancel</Button>
+            </Stack>
+            </Container>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
+
+export default ClientUpdatesTab;
