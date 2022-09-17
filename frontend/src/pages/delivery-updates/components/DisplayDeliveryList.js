@@ -45,6 +45,7 @@ function DisplayDeliveryList() {
               }}>
           <div className="column-details"><h3>{lists.receiver_name}</h3></div>
           <div className="column-details"><h3>{lists.from}</h3></div>
+          <div className="column-details2"><h3>---</h3></div>
           <div className="column-details"><h3>{lists.to}</h3></div>
           <div className="column-details"><h3>{lists.status}</h3></div>
           </div>
