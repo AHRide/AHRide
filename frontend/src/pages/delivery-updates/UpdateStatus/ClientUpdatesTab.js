@@ -13,6 +13,8 @@ import { Grid } from "@mui/material";
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // const ClientUpdatesTab = () => {
 //   return (
@@ -85,15 +87,16 @@ import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined
 
 // export default ClientUpdatesTab;
 
-
-function ClientUpdatesTab(){
+const ClientUpdatesTab = () => {
+  const location = useLocation();
   return(
     <>
       <NavBarClient/>
-      <Container fluid>
+
+      <Container fluid >
         <Row >
-          <Container >
-              <KeyboardBackspaceOutlinedIcon sx={{ fontSize: 50 }} className="backButton"/>
+          <Container>
+              <Link to="/delivery-updates"><KeyboardBackspaceOutlinedIcon sx={{ fontSize: 50 }} className="backButton" /></Link>
           </Container>
         </Row>
         <Row>
@@ -101,20 +104,20 @@ function ClientUpdatesTab(){
             <Container className="ContainerUpperRow">
               <h1 className="HeaderTextLabel">Rider's Information</h1>
               <Row>
-                <Col><h1 className="DataAndTextLable">Name: Ryo Kiritani</h1></Col>
-                <Col><h1 className="DataAndTextLable">Vehicle: Kawasaki VERSYS-X300</h1></Col>
+                <Col><h1 className="DataAndTextLable">Rider's name: {location.state.rider_name}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Vehicle: {location.state.rider_vehi}</h1></Col>
               </Row>
               <Row >
-                <Col><h1 className="DataAndTextLable">Contact Number: 0910323317856</h1></Col>
-                <Col><h1 className="DataAndTextLable">Payment Status: Fully Paid</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: {location.state.rider_cont}</h1></Col>
+                <Col><h1 className="DataAndTextLable"></h1></Col>
               </Row>
             </Container>
 
             <Container className="ContainerLowerRow">
               <h1 className="HeaderTextLabel">Client Information</h1>
               <Row>
-                <Col><h1 className="DataAndTextLable">Name: Fiona Qwerty</h1></Col>
-                <Col><h1 className="DataAndTextLable">Contact Number: 09091866864</h1></Col>
+                <Col><h1 className="DataAndTextLable">Name: {location.state.client_name}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: {location.state.client_cont}</h1></Col>
               </Row>
               <Row>
                 <Col xs={2}>
@@ -126,7 +129,7 @@ function ClientUpdatesTab(){
                 </Col>
                 <Col xs={7}>
                   <Row>
-                  <TextField id="TextFieldFrom" label="From" variant="outlined" className="TextField1"/>
+                  <Col><h1 className="DataAndTextLable">{location.state.from}</h1></Col>
                   </Row>
                   <Row >
                     <Container >
@@ -134,13 +137,13 @@ function ClientUpdatesTab(){
                     </Container>
                   </Row>
                   <Row>
-                  <TextField id="TextFieldTo" label="Going To" variant="outlined" className="TextField1"/>
+                  <Col><h1 className="DataAndTextLable">{location.state.to}</h1></Col>
                   </Row>
                 </Col>
                 <Col xs={3}>
                   <Container className="WhitePayment">
                     <Row>To Pay</Row>
-                    <Row>250.00</Row>
+                    <Row>PHP {location.state.payment}</Row>
                   </Container>
                 </Col>
               </Row>
@@ -234,7 +237,7 @@ function ClientUpdatesTab(){
             </Container>
           </Col>
         </Row>
-      </Container>
+      </Container>             
     </>
   );
 }
