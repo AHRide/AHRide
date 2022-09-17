@@ -12,6 +12,7 @@ import DisplayUpdatePage from "./pages/delivery-updates/DisplayUpdatePage";
 import DisplayOfferPage from "./pages/delivery-offers/DisplayOfferPage";
 import FirstPage from "./pages/FirstPage/FirstPage";
 import SigninPage from "./pages/LoginPage/Form";
+import ClientUpdatesTab from "./pages/delivery-updates/UpdateStatus/ClientUpdatesTab"
 
 function App() {
   return (
@@ -25,10 +26,11 @@ function App() {
         <Route path="/rider/profile" element={<RiderProfile />} />
         <Route path="/client/homepage" element={<ClientHomepage />} />
         <Route path="/rider/homepage" element={<RiderHomepage />} />
-        <Route path="delivery-updates" element={<DisplayUpdatePage />} />
-        <Route path="delivery-offers" element={<DisplayOfferPage />} />
+        <Route path="/delivery-updates" element={<DisplayUpdatePage />} />
+        <Route path="/delivery-offers" element={<DisplayOfferPage />} />
         <Route path="/login" element={<SigninPage />} />
         <Route path="/client/signup" element={<ClientSignUp />} />
+        <Route path="/update-status" element={<ClientUpdatesTab />} />
       </Routes>
     </BrowserRouter>
   );
