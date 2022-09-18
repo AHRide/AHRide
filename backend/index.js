@@ -24,6 +24,17 @@ app.get('/getUsers', (req, res) => {
 	});
 });
 
+app.get('/getUsers/:_id', function(req, res) {
+    return UserModel.find({_id: req.params._id}).then(function(orders) { 
+        // return orders when resolved
+        res.send(orders);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+});
+
 app.get('/getDeliveryUpdates', (req, res) => {
 	DeliveryUpdateModel.find({}, (error, result) => {
 		if (error) {
@@ -34,6 +45,17 @@ app.get('/getDeliveryUpdates', (req, res) => {
 	});
 });
 
+app.get('/getDeliveryUpdates/:_id', function(req, res) {
+    return DeliveryUpdateModel.find({_id: req.params._id}).then(function(orders) { 
+        // return orders when resolved
+        res.send(orders);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+});
+
 app.get('/getDeliveryOffers', (req, res) => {
 	DeliveryOfferModel.find({}, (error, result) => {
 		if (error) {
@@ -42,6 +64,17 @@ app.get('/getDeliveryOffers', (req, res) => {
 			res.json(result);
 		}
 	});
+});
+
+app.get('/getDeliveryOffers/:_id', function(req, res) {
+    return DeliveryOfferModel.find({_id: req.params._id}).then(function(orders) { 
+        // return orders when resolved
+        res.send(orders);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
 });
 
 app.post('/createUser', async (req, res) => {

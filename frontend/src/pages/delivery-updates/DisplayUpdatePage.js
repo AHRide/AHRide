@@ -10,10 +10,10 @@ const DisplayUpdatePage = () => {
       <div className="main-container">
         <h1 className="page-title">In Progress</h1>
 
-        <div className="row">
-          <div className="column"><h2>Receiver</h2></div>
-          <div className="column"><h2>Location</h2></div>
-          <div className="column"><h2>Status</h2></div>
+        <div className="row2">
+          <div className="column4"><h2>Receiver</h2></div>
+          <div className="column5"><h2>Location</h2></div>
+          <div className="column6"><h2>Status</h2></div>
         </div>
 
         <div className="row2">

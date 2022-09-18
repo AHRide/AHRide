@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBarClient from "../../../components/NavBarClient";
 import "../UpdateStatus/ClientUpdatesTab.css";
 import {Row, Col, Container} from 'react-bootstrap';
@@ -13,6 +13,9 @@ import { Grid } from "@mui/material";
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 // const ClientUpdatesTab = () => {
 //   return (
@@ -85,15 +88,26 @@ import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined
 
 // export default ClientUpdatesTab;
 
+const ClientUpdatesTab = () => {
+  const location = useLocation();
+  const [updateList, setUpdateList] = useState([]);
+  
 
-function ClientUpdatesTab(){
+  useEffect(() => {
+    axios.get(`http://localhost:3001/getDeliveryUpdates/${location.state._id}/`).then((response) => {
+      setUpdateList(response.data);
+      console.log(response.data);
+    });
+  }, [location.state._id]);
+
   return(
     <>
       <NavBarClient/>
-      <Container fluid>
+      {updateList.map((lists, index) => (
+      <Container fluid >
         <Row >
-          <Container >
-              <KeyboardBackspaceOutlinedIcon sx={{ fontSize: 50 }} className="backButton"/>
+          <Container>
+              <Link to="/delivery-updates"><KeyboardBackspaceOutlinedIcon sx={{ fontSize: 50 }} className="backButton" /></Link>
           </Container>
         </Row>
         <Row>
@@ -101,20 +115,20 @@ function ClientUpdatesTab(){
             <Container className="ContainerUpperRow">
               <h1 className="HeaderTextLabel">Rider's Information</h1>
               <Row>
-                <Col><h1 className="DataAndTextLable">Name: Ryo Kiritani</h1></Col>
-                <Col><h1 className="DataAndTextLable">Vehicle: Kawasaki VERSYS-X300</h1></Col>
+                <Col><h1 className="DataAndTextLable">Rider's name: {lists.rider_name}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Vehicle: {lists.rider_vehi}</h1></Col>
               </Row>
               <Row >
-                <Col><h1 className="DataAndTextLable">Contact Number: 0910323317856</h1></Col>
-                <Col><h1 className="DataAndTextLable">Payment Status: Fully Paid</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: {lists.rider_cont}</h1></Col>
+                <Col><h1 className="DataAndTextLable"></h1></Col>
               </Row>
             </Container>
 
             <Container className="ContainerLowerRow">
               <h1 className="HeaderTextLabel">Client Information</h1>
               <Row>
-                <Col><h1 className="DataAndTextLable">Name: Fiona Qwerty</h1></Col>
-                <Col><h1 className="DataAndTextLable">Contact Number: 09091866864</h1></Col>
+                <Col><h1 className="DataAndTextLable">Name: {lists.client_name}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: {lists.client_cont}</h1></Col>
               </Row>
               <Row>
                 <Col xs={2}>
@@ -126,7 +140,7 @@ function ClientUpdatesTab(){
                 </Col>
                 <Col xs={7}>
                   <Row>
-                  <TextField id="TextFieldFrom" label="From" variant="outlined" className="TextField1"/>
+                  <Col><h1 className="DataAndTextLable">{lists.from}</h1></Col>
                   </Row>
                   <Row >
                     <Container >
@@ -134,13 +148,13 @@ function ClientUpdatesTab(){
                     </Container>
                   </Row>
                   <Row>
-                  <TextField id="TextFieldTo" label="Going To" variant="outlined" className="TextField1"/>
+                  <Col><h1 className="DataAndTextLable">{lists.to}</h1></Col>
                   </Row>
                 </Col>
                 <Col xs={3}>
                   <Container className="WhitePayment">
                     <Row>To Pay</Row>
-                    <Row>250.00</Row>
+                    <Row>PHP {lists.payment}</Row>
                   </Container>
                 </Col>
               </Row>
@@ -234,7 +248,8 @@ function ClientUpdatesTab(){
             </Container>
           </Col>
         </Row>
-      </Container>
+      </Container> 
+                    ))}            
     </>
   );
 }
