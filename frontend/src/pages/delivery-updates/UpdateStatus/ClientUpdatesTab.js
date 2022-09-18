@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBarClient from "../../../components/NavBarClient";
 import "../UpdateStatus/ClientUpdatesTab.css";
 import {Row, Col, Container} from 'react-bootstrap';
@@ -15,6 +15,7 @@ import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspace
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // const ClientUpdatesTab = () => {
 //   return (
@@ -89,10 +90,20 @@ import { Link } from "react-router-dom";
 
 const ClientUpdatesTab = () => {
   const location = useLocation();
+  const [updateList, setUpdateList] = useState([]);
+  
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/getDeliveryUpdates/${location.state._id}/`).then((response) => {
+      setUpdateList(response.data);
+      console.log(response.data);
+    });
+  }, [location.state._id]);
+
   return(
     <>
       <NavBarClient/>
-
+      {updateList.map((lists, index) => (
       <Container fluid >
         <Row >
           <Container>
@@ -104,11 +115,11 @@ const ClientUpdatesTab = () => {
             <Container className="ContainerUpperRow">
               <h1 className="HeaderTextLabel">Rider's Information</h1>
               <Row>
-                <Col><h1 className="DataAndTextLable">Rider's name: {location.state.rider_name}</h1></Col>
-                <Col><h1 className="DataAndTextLable">Vehicle: {location.state.rider_vehi}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Rider's name: {lists.rider_name}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Vehicle: {lists.rider_vehi}</h1></Col>
               </Row>
               <Row >
-                <Col><h1 className="DataAndTextLable">Contact Number: {location.state.rider_cont}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: {lists.rider_cont}</h1></Col>
                 <Col><h1 className="DataAndTextLable"></h1></Col>
               </Row>
             </Container>
@@ -116,8 +127,8 @@ const ClientUpdatesTab = () => {
             <Container className="ContainerLowerRow">
               <h1 className="HeaderTextLabel">Client Information</h1>
               <Row>
-                <Col><h1 className="DataAndTextLable">Name: {location.state.client_name}</h1></Col>
-                <Col><h1 className="DataAndTextLable">Contact Number: {location.state.client_cont}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Name: {lists.client_name}</h1></Col>
+                <Col><h1 className="DataAndTextLable">Contact Number: {lists.client_cont}</h1></Col>
               </Row>
               <Row>
                 <Col xs={2}>
@@ -129,7 +140,7 @@ const ClientUpdatesTab = () => {
                 </Col>
                 <Col xs={7}>
                   <Row>
-                  <Col><h1 className="DataAndTextLable">{location.state.from}</h1></Col>
+                  <Col><h1 className="DataAndTextLable">{lists.from}</h1></Col>
                   </Row>
                   <Row >
                     <Container >
@@ -137,13 +148,13 @@ const ClientUpdatesTab = () => {
                     </Container>
                   </Row>
                   <Row>
-                  <Col><h1 className="DataAndTextLable">{location.state.to}</h1></Col>
+                  <Col><h1 className="DataAndTextLable">{lists.to}</h1></Col>
                   </Row>
                 </Col>
                 <Col xs={3}>
                   <Container className="WhitePayment">
                     <Row>To Pay</Row>
-                    <Row>PHP {location.state.payment}</Row>
+                    <Row>PHP {lists.payment}</Row>
                   </Container>
                 </Col>
               </Row>
@@ -237,7 +248,8 @@ const ClientUpdatesTab = () => {
             </Container>
           </Col>
         </Row>
-      </Container>             
+      </Container> 
+                    ))}            
     </>
   );
 }
