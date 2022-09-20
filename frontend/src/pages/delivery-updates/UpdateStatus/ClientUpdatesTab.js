@@ -130,8 +130,8 @@ const ClientUpdatesTab = () => {
                 <Col><h1 className="DataAndTextLable">Name: {lists.client_name}</h1></Col>
                 <Col><h1 className="DataAndTextLable">Contact Number: {lists.client_cont}</h1></Col>
               </Row>
-              <Row>
-                <Col xs={2}>
+              <Row >
+                <Col xs={2} >
                   <Container className="MarginerTop">
                     <Row><h1 className="DataAndTextLable">From:</h1></Row>
                     <Row><h1 className="InvisibleInk">None</h1></Row>
@@ -139,22 +139,28 @@ const ClientUpdatesTab = () => {
                   </Container>
                 </Col>
                 <Col xs={7}>
-                  <Row>
-                  <Col><h1 className="DataAndTextLable">{lists.from}</h1></Col>
-                  </Row>
-                  <Row >
-                    <Container >
-                        <ArrowDownwardOutlinedIcon sx={{ fontSize: 30 }} color="black"/>
-                    </Container>
-                  </Row>
-                  <Row>
-                  <Col><h1 className="DataAndTextLable">{lists.to}</h1></Col>
-                  </Row>
+                  <Container className="MarginerTop">
+                    <Row>
+                    <Col className="FromToContainer">
+                        <h1 className="DataAndTextLable">{lists.from}</h1>
+                    </Col>
+                    </Row>
+                    <Row>
+                      <Container className="CenterText">
+                          <ArrowDownwardOutlinedIcon sx={{ fontSize: 30 }} color="black"/>
+                      </Container>
+                    </Row>
+                    <Row>
+                    <Col className="FromToContainer"><h1 className="DataAndTextLable">{lists.to}</h1></Col>
+                    </Row>
+                  </Container>
                 </Col>
                 <Col xs={3}>
                   <Container className="WhitePayment">
-                    <Row>To Pay</Row>
-                    <Row>PHP {lists.payment}</Row>
+                    <Row><h2>To Pay</h2></Row>
+                    <Col>
+                      <h2 className="CenterText">PHP {lists.payment}.00</h2>
+                    </Col>
                   </Container>
                 </Col>
               </Row>
@@ -164,24 +170,31 @@ const ClientUpdatesTab = () => {
                 {/* <Col xs={5}><TextField id="ReceiversName" label="Receiver Name:" variant="outlined" className="TextField2"/></Col> */}
                 {/* <Col xs={5}><TextField id="ContactNo" label="Contact Number:" variant="outlined" className="TextField2"/></Col> */}
                 <Col>
+                  <h2 className="HeaderTextLabelSmall">Receiver's Name:</h2>
                   <Box sx={{ width: 500, maxWidth: '100%', }} className="TextField2"> 
-                  <TextField fullWidth label="Receiver Name:"  multiline rows={1} id="ReceiversName" />
-                  </Box>
+                    <Col className="FromToContainer">
+                          <h1 className="DataAndTextLable">{lists.receiver_name}</h1>
+                      </Col>
+                    </Box>
                 </Col>
                 <Col>
+                  <h2 className="HeaderTextLabelSmall">Contact Number:</h2>
                   <Box sx={{ width: 500, maxWidth: '100%', }} className="TextField2"> 
-                  <TextField fullWidth label="Contact Number:"  multiline rows={1} id="ContactNo" />
+                    <Col className="FromToContainer">
+                          <h1 className="DataAndTextLable">{lists.receiver_cont}</h1>
+                      </Col>
                   </Box>
                 </Col>
               </Row>
               </Container>
                 <h1 className="DataAndTextLable">Note</h1>
-                <Box sx={{ width: 1200, maxWidth: '100%', }} className="WhiteNoteBox"> 
-                  <TextField fullWidth label="Note"  multiline rows={5} id="fullWidth" />
+                <Box sx={{ width: 1200, maxWidth: '100%', height:150 }} className="WhiteNoteBox"> 
+                  <Col >
+                      <h1 className="NoteContent">{lists.note}</h1>
+                  </Col>
                 </Box>
             </Container>
-            <Container>
-              
+            <Container>   
             </Container>
             
           </Col>
