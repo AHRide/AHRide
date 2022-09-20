@@ -25,9 +25,9 @@ app.get('/getUsers', (req, res) => {
 });
 
 app.get('/getUsers/:_id', function(req, res) {
-    return UserModel.find({_id: req.params._id}).then(function(orders) { 
+    return UserModel.find({_id: req.params._id}).then(function(users) { 
         // return orders when resolved
-        res.send(orders);
+        res.send(users);
     })
     .catch(function (error) {
         // handle error
@@ -46,9 +46,9 @@ app.get('/getDeliveryUpdates', (req, res) => {
 });
 
 app.get('/getDeliveryUpdates/:_id', function(req, res) {
-    return DeliveryUpdateModel.find({_id: req.params._id}).then(function(orders) { 
+    return DeliveryUpdateModel.find({_id: req.params._id}).then(function(deliveryUpdates) { 
         // return orders when resolved
-        res.send(orders);
+        res.send(deliveryUpdates);
     })
     .catch(function (error) {
         // handle error
@@ -67,12 +67,10 @@ app.get('/getDeliveryOffers', (req, res) => {
 });
 
 app.get('/getDeliveryOffers/:_id', function(req, res) {
-    return DeliveryOfferModel.find({_id: req.params._id}).then(function(orders) { 
-        // return orders when resolved
-        res.send(orders);
+    return DeliveryOfferModel.find({_id: req.params._id}).then(function(deliveryOffers) { 
+        res.send(deliveryOffers);
     })
     .catch(function (error) {
-        // handle error
         console.log(error);
     })
 });
