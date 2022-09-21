@@ -12,7 +12,8 @@ import DisplayUpdatePage from "./pages/delivery-updates/DisplayUpdatePage";
 import DisplayOfferPage from "./pages/delivery-offers/DisplayOfferPage";
 import FirstPage from "./pages/FirstPage/FirstPage";
 import SigninPage from "./pages/LoginPage/Form";
-import ClientUpdatesTab from "./pages/delivery-updates/UpdateStatus/ClientUpdatesTab"
+import ClientUpdatesTab from "./pages/delivery-updates/UpdateStatus/ClientUpdatesTab";
+import StatusOfDelivery from "./pages/Rider/DeliveryStatusOfDeliveryFolder/StatusOfDelivery";
 import RiderDeliveryItemInfo from "./pages/Rider/RiderDeliveryInfoFolder/DeliveryItemInfo";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/login" element={<SigninPage />} />
         <Route path="/client/signup" element={<ClientSignUp />} />
         <Route path="/update-status" element={<ClientUpdatesTab />} />
+        <Route path="/rider-status-of-delivery" element={<StatusOfDelivery />} />
         <Route path="/rider/deliveryInfo" element={<RiderDeliveryItemInfo />} />
       </Routes>
     </BrowserRouter>
