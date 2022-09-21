@@ -171,7 +171,7 @@ const ClientUpdatesTab = () => {
                 {/* <Col xs={5}><TextField id="ContactNo" label="Contact Number:" variant="outlined" className="TextField2"/></Col> */}
                 <Col>
                   <h2 className="HeaderTextLabelSmall">Receiver's Name:</h2>
-                  <Box sx={{ width: 500, maxWidth: '100%', }} className="TextField2"> 
+                  <Box  className="TextField2"> 
                     <Col className="FromToContainer">
                           <h1 className="DataAndTextLable">{lists.receiver_name}</h1>
                       </Col>
@@ -179,7 +179,7 @@ const ClientUpdatesTab = () => {
                 </Col>
                 <Col>
                   <h2 className="HeaderTextLabelSmall">Contact Number:</h2>
-                  <Box sx={{ width: 500, maxWidth: '100%', }} className="TextField2"> 
+                  <Box className="TextField2"> 
                     <Col className="FromToContainer">
                           <h1 className="DataAndTextLable">{lists.receiver_cont}</h1>
                       </Col>
