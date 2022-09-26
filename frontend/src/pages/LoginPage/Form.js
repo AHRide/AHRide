@@ -18,12 +18,21 @@ const SigninPage = () => {
             <h1>Don't have an account yet?</h1>
             <button
               onClick={() => {
-                navigate("/login");
+                navigate("/rider/signup");
               }}
               className="sign-in-form-input-btn2"
               type="submit"
             >
-              Sign up
+              Rider
+            </button>
+            <button
+              onClick={() => {
+                navigate("/client/signup");
+              }}
+              className="sign-in-form-input-btn2"
+              type="submit"
+            >
+              Client
             </button>
           </div>
           {!isSubmitted ? (
