@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useMemo } from 'react';
+import Axios from 'axios';
 import './BookDelivery.css';
 
 import NavBarClient from '../../components/NavBarClient';
@@ -21,6 +21,7 @@ import { useJsApiLoader, GoogleMap, MarkerF } from '@react-google-maps/api';
 import usePlacesAutocomplete, {
 	getGeocode,
 	getLatLng,
+	getDetails,
 } from 'use-places-autocomplete';
 
 import {
@@ -47,10 +48,25 @@ function BookDelivery() {
 
 	const [selectedFrom, setSelectedFrom] = useState(null);
 	const [selectedTo, setSelectedTo] = useState(null);
+	const [from, setFrom] = useState(null);
+	const [to, setTo] = useState(null);
+	const [receiver_name, setReceiver] = useState('');
+	const [receiver_cont, setContact] = useState('');
+	const [note, setNote] = useState('');
 
 	if (!isLoaded) {
 		return <div> loading...</div>;
 	}
+
+	const bookDelivery = () => {
+		Axios.post('http://localhost:3001/bookDelivery', {
+			from,
+			to,
+			receiver_name,
+			receiver_cont,
+			note,
+		});
+	};
 
 	return (
 		<div>
@@ -94,7 +110,10 @@ function BookDelivery() {
 										justifyContent: 'space-evenly',
 									}}>
 									<h1 className='textField1'>From:</h1>
-									<PlacesAutoCompleteFrom setSelectedFrom={setSelectedFrom} />
+									<PlacesAutoCompleteFrom
+										setSelectedFrom={setSelectedFrom}
+										setFrom={setFrom}
+									/>
 								</div>
 								<div style={{ alignSelf: 'center', padding: '0.8rem' }}>
 									<ArrowDownward sx={{ color: orange[300] }} fontSize='large' />
@@ -106,7 +125,10 @@ function BookDelivery() {
 										justifyContent: 'space-evenly',
 									}}>
 									<h1 className='textField1'>To:</h1>
-									<PlacesAutoCompleteTo setSelectedTo={setSelectedTo} />
+									<PlacesAutoCompleteTo
+										setSelectedTo={setSelectedTo}
+										setTo={setTo}
+									/>
 								</div>
 							</div>
 							<div style={{ padding: '1rem' }}>
@@ -128,6 +150,10 @@ function BookDelivery() {
 											border: '1px solid #000000',
 											borderRadius: '5px',
 										}}
+										name='receiver_name'
+										onChange={(event) => {
+											setReceiver(event.target.value);
+										}}
 									/>
 								</div>
 								<div className='box-pad'>
@@ -142,6 +168,10 @@ function BookDelivery() {
 											border: '1px solid #000000',
 											borderRadius: '5px',
 										}}
+										name='receiver_cont'
+										onChange={(event) => {
+											setContact(event.target.value);
+										}}
 									/>
 								</div>
 							</div>
@@ -154,6 +184,10 @@ function BookDelivery() {
 									placeholder='Do you have special request? or want to input specific locations?'
 									multiline
 									rows={4}
+									name='note'
+									onChange={(event) => {
+										setNote(event.target.value);
+									}}
 								/>
 							</div>
 						</div>
@@ -185,6 +219,7 @@ function BookDelivery() {
 				</div>
 				<div style={{ alignSelf: 'center', padding: '2rem' }}>
 					<Button
+						onClick={bookDelivery}
 						sx={{
 							width: '15.5rem',
 							height: '4rem',
@@ -203,7 +238,7 @@ function BookDelivery() {
 	);
 }
 
-const PlacesAutoCompleteFrom = ({ setSelectedFrom }) => {
+const PlacesAutoCompleteFrom = ({ setSelectedFrom, setFrom }) => {
 	const {
 		ready,
 		value,
@@ -214,9 +249,18 @@ const PlacesAutoCompleteFrom = ({ setSelectedFrom }) => {
 
 	const handleSelect = async (address) => {
 		setValue(address, false);
+
 		clearSuggestions();
 
 		const results = await getGeocode({ address });
+		const parameter = {
+			placeId: results[0].place_id,
+
+			fields: ['name'],
+		};
+		getDetails(parameter).then((details) => {
+			setFrom(details.name);
+		});
 		const { lat, lng } = await getLatLng(results[0]);
 		setSelectedFrom({ lat, lng });
 	};
@@ -241,7 +285,7 @@ const PlacesAutoCompleteFrom = ({ setSelectedFrom }) => {
 	);
 };
 
-const PlacesAutoCompleteTo = ({ setSelectedTo }) => {
+const PlacesAutoCompleteTo = ({ setSelectedTo, setTo }) => {
 	const {
 		ready,
 		value,
@@ -252,9 +296,18 @@ const PlacesAutoCompleteTo = ({ setSelectedTo }) => {
 
 	const handleSelect = async (address) => {
 		setValue(address, false);
+
 		clearSuggestions();
 
 		const results = await getGeocode({ address });
+		const parameter = {
+			placeId: results[0].place_id,
+
+			fields: ['name'],
+		};
+		getDetails(parameter).then((details) => {
+			setTo(details.name);
+		});
 		const { lat, lng } = await getLatLng(results[0]);
 		setSelectedTo({ lat, lng });
 	};
