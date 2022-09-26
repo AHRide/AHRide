@@ -1,10 +1,70 @@
 import React from "react";
+import { useContext, useState} from "react";
 import "./rider_signup.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user.context";
+import { TextField } from "@mui/material";
+import Axios from "axios";
 
-function RiderSignUp() {
+const RiderSignUp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const[name, setName] = useState("");
+  const[gender, setGender] = useState("");
+  const[birthdate, setBirth] = useState("");
+  const[contact, setContact] = useState("");
+  const[email, setEmail] = useState("");
+  const[password, setPassword] = useState("");
+
+  const createUser = () => {
+    Axios.post("http://localhost:3001/createUser", {
+      name,
+      gender,
+      birthdate,
+      contact,
+      email,
+      password,
+      user_type: "rider",
+    })
+  }
+
+  // As explained in the Login page.
+  const { emailPasswordSignup } = useContext(UserContext);
+  const [form, setForm] = useState({
+    name: "",
+    gender: "",
+    birthdate: "",
+    contact: "",
+    email: "",
+    password: ""
+  });
+
+  // As explained in the Login page.
+  const onFormInputChange = (event) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  // As explained in the Login page.
+  const redirectNow = () => {
+    const redirectTo = location.search.replace("?redirectTo=", "");
+    navigate(redirectTo ? redirectTo : "/");
+  }
+
+  const onSubmit = async () => {
+    try {
+      const user = await emailPasswordSignup(form.email, form.password);
+      if (user) {
+        createUser();
+        redirectNow();
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <body className="bodyPage">
       <div className="columnL">
@@ -15,51 +75,81 @@ function RiderSignUp() {
             part of us! Great exchange, right?
           </p>
           <p className="text_Labels">Name</p>
-          <input
-            type="text"
-            className="textfield"
-            placeholder="Your name.."
-          ></input>
+          <TextField
+            name="name"
+            type="name"
+            label="Name"
+            variant="outlined"
+            fullWidth
+            value={form.name}
+            onInput={onFormInputChange}
+            onChange={(event) => {setName(event.target.value)}}
+          ></TextField>
           <div className="innercolumnL">
             <p className="text_Labels">Gender</p>
-            <input
-              type="text"
-              className="textfieldL"
-              placeholder="Male/Female/etc."
-            ></input>
+            <TextField
+              name="gender"
+              type="gender"
+              label="Gender"
+              variant="outlined"
+              fullWidth
+              value={form.gender}
+              onInput={onFormInputChange}
+              onChange={(event) => {setGender(event.target.value)}}
+            ></TextField>
           </div>
           <div className="innercolumnR">
             <p className="text_Labels">Birthdate</p>
-            <input
-              type="text"
-              className="textfieldR"
-              placeholder="mm/dd/yyyy"
-            ></input>
+            <TextField
+              name="birthdate"
+              type="date"
+              
+              variant="outlined"
+              fullWidth
+              value={form.birthdate}
+              onInput={onFormInputChange}
+              onChange={(event) => {setBirth(event.target.value)}}
+            ></TextField>
           </div>
 
           <p className="text_Labels">Contact Number</p>
-          <input
-            type="text"
-            className="textfield"
-            placeholder="Your number.."
-          ></input>
+          <TextField
+            name="contact"
+            type="contact"
+            label="Contact No."
+            variant="outlined"
+            fullWidth
+            value={form.contact}
+            onInput={onFormInputChange}
+            onChange={(event) => {setContact(event.target.value)}}
+          ></TextField>
           <p className="text_Labels">Email Address</p>
-          <input
-            type="text"
-            className="textfield"
-            placeholder="Your email.."
-          ></input>
+          <TextField
+            name="email"
+            type="email"
+            label="Email"
+            variant="outlined"
+            fullWidth
+            value={form.email}
+            onInput={onFormInputChange}
+            onChange={(event) => {setEmail(event.target.value)}}
+          ></TextField>
           <p className="text_Labels">Password</p>
-          <input
-            type="text"
-            className="textfield"
-            placeholder="Your password.."
-          ></input>
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            name="password"
+            fullWidth
+            value={form.password}
+            onInput={onFormInputChange}
+            onChange={(event) => {setPassword(event.target.value)}}
+          ></TextField>
           <center>
             <ArrowForwardIcon
               sx={{ fontSize: 120 }}
               className="button_SignUp_Rider"
-              type="submit"
+              onClick={onSubmit}
             ></ArrowForwardIcon>
           </center>
         </div>
