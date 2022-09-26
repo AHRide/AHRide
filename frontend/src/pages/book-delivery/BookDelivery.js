@@ -112,12 +112,12 @@ function BookDelivery() {
 							<div style={{ padding: '1rem' }}>
 								<FormControlLabel
 									control={<Checkbox defaultChecked size='large' />}
-									label='Are you the reciever?'
+									label='Are you the receiver?'
 								/>
 							</div>
 							<div className='border-box'>
 								<div className='box-pad'>
-									<h2 className='text2'>Reciever Name: </h2>
+									<h2 className='text2'>Receiver Name: </h2>
 									<Input
 										id='input-textfield'
 										variant='standard'
