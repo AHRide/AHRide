@@ -15,7 +15,8 @@ import SigninPage from "./pages/LoginPage/Form";
 import ClientUpdatesTab from "./pages/delivery-updates/UpdateStatus/ClientUpdatesTab"
 import { UserProvider } from "./contexts/user.context";
 import PrivateRoute from "./pages/PrivateRoute.page";
-
+import StatusOfDelivery from "./pages/Rider/DeliveryStatusOfDeliveryFolder/StatusOfDelivery";
+import RiderDeliveryItemInfo from "./pages/Rider/RiderDeliveryInfoFolder/DeliveryItemInfo";
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
               <Route path="/delivery-offers" element={<DisplayOfferPage />} />
               <Route path="/update-status" element={<ClientUpdatesTab />} />
               <Route path="/test" element={<Test />} />
+              <Route path="/rider-status-of-delivery" element={<StatusOfDelivery />} />
+              <Route path="/rider/deliveryInfo" element={<RiderDeliveryItemInfo />} />
             </Route>
         </Routes>
       </UserProvider>
