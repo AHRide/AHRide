@@ -66,8 +66,8 @@ app.get('/getDeliveryUpdates', (req, res) => {
 	});
 });
 
-app.get('/getDeliveryUpdates/:client_name', function (req, res) {
-	return DeliveryUpdateModel.find({ client_name: req.params.client_name })
+app.get('/getDeliveryUpdates/:client_email', function (req, res) {
+	return DeliveryUpdateModel.find({ client_email: req.params.client_email})
 		.then(function (deliveryUpdates) {
 			// return orders when resolved
 			res.send(deliveryUpdates);

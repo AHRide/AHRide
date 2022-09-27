@@ -10,9 +10,8 @@ function DisplayDeliveryList() {
   const [updateList, setUpdateList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/getDeliveryUpdates${user._profile.data.email}`).then((response) => {
+    axios.get(`http://localhost:3001/getDeliveryUpdates/${user._profile.data.email}`).then((response) => {
       setUpdateList(response.data);
-      console.log(response.data);
     });
   }, []);
 

@@ -8,7 +8,6 @@ function DisplayPendingList() {
 	const navigate = useNavigate();
 	const [updateList, setUpdateList] = useState([]);
 	const { user } = useContext(UserContext);
-	console.log(user._profile.data.email);
 	useEffect(() => {
 		axios
 			.get(
