@@ -39,7 +39,7 @@ function App() {
 						<Route path='/update-status' element={<ClientUpdatesTab />} />
 						<Route path='/test' element={<Test />} />
 						<Route
-							path='/rider-status-of-delivery'
+							path='/rider/status-of-delivery'
 							element={<StatusOfDelivery />}
 						/>
 						<Route
