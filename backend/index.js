@@ -78,6 +78,18 @@ app.get('/getDeliveryUpdates/:client_email', function (req, res) {
 		});
 });
 
+app.get('/getDeliveryUpdates/rider/:rider_email', function (req, res) {
+	return DeliveryUpdateModel.find({ rider_email: req.params.rider_email })
+		.then(function (deliveryUpdates) {
+			// return orders when resolved
+			res.send(deliveryUpdates);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
+});
+
 app.get('/getBookDelivery', (req, res) => {
 	BookDeliveryModel.find({}, (error, result) => {
 		if (error) {
@@ -111,6 +123,8 @@ app.get('/getBookDelivery/user/:client_email', function (req, res) {
 			console.log(error);
 		});
 });
+
+
 
 app.get('/getDeliveryOffers', (req, res) => {
 	DeliveryOfferModel.find({}, (error, result) => {

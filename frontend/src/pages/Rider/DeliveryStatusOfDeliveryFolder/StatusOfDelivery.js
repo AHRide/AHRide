@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../../contexts/user.context';
 import NavBarRider from "../../../components/NavBarRider";
 import "./StatusOfDelivery.css";
 import { Row, Col, Container } from "react-bootstrap";
@@ -22,7 +23,7 @@ import ModalReport from "../../../components/ModalReport";
 
 const StatusOfDelivery = () => {
   const location = useLocation();
-
+  const { user } = useContext(UserContext);
   const [openmodal, setOpenModal] = useState(false);
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -40,20 +41,23 @@ const StatusOfDelivery = () => {
     setOpen1(!open1);
   };
 
-  // const [updateList, setUpdateList] = useState([]);
+  const [updateList, setUpdateList] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3001/getDeliveryUpdates/${location.state._id}/`).then((response) => {
-  //     setUpdateList(response.data);
-  //     console.log(response.data);
-  //   });
-  // }, [location.state._id]);
+	useEffect(() => {
+		axios
+			.get(
+				`http://localhost:3001/getDeliveryUpdates/rider/${user._profile.data.email}`
+			)
+			.then((response) => {
+				setUpdateList(response.data);
+			});
+	}, [user._profile.data.email]);
 
   return (
     <>
       <NavBarRider />
-      {/* {updateList.map((lists, index) => ( */}
-      <Container fluid>
+      {updateList.map((lists, index) => (
+      <Container fluid key={index}>
         <Row>
           <Container>
             <Link to="/delivery-updates">
@@ -88,10 +92,10 @@ const StatusOfDelivery = () => {
               <h1 className="HeaderTextLabel">Client Information</h1>
               <Row>
                 <Col>
-                  <h1 className="DataAndTextLable">Name: DELTA mama</h1>
+                  <h1 className="DataAndTextLable">Name: {lists.receiver_name}</h1>
                 </Col>
                 <Col>
-                  <h1 className="DataAndTextLable">Contact Number: 091111</h1>
+                  <h1 className="DataAndTextLable">Contact Number:  {lists.receiver_cont}</h1>
                 </Col>
               </Row>
               <Row>
@@ -112,7 +116,7 @@ const StatusOfDelivery = () => {
                   <Container className="MarginerTop">
                     <Row>
                       <Col className="FromToContainer">
-                        <h1 className="DataAndTextLable">From padro</h1>
+                        <h1 className="DataAndTextLable"> {lists.from}</h1>
                       </Col>
                     </Row>
                     <Row>
@@ -126,7 +130,7 @@ const StatusOfDelivery = () => {
                     <Row>
                       <Col className="FromToContainer">
                         <h1 className="DataAndTextLable">
-                          SM seadile lang nya
+                        {lists.to}
                         </h1>
                       </Col>
                     </Row>
@@ -138,7 +142,7 @@ const StatusOfDelivery = () => {
                       <h2>To Pay</h2>
                     </Row>
                     <Col>
-                      <h2 className="CenterText">PHP 900.00</h2>
+                      <h2 className="CenterText">PHP  {lists.payment}</h2>
                     </Col>
                   </Container>
                 </Col>
@@ -151,7 +155,7 @@ const StatusOfDelivery = () => {
                     <h2 className="HeaderTextLabelSmall">Receiver's Name:</h2>
                     <Box className="TextField2">
                       <Col className="FromToContainer">
-                        <h1 className="DataAndTextLable">dawaterist</h1>
+                        <h1 className="DataAndTextLable"> {lists.receiver_name}</h1>
                       </Col>
                     </Box>
                   </Col>
@@ -159,7 +163,7 @@ const StatusOfDelivery = () => {
                     <h2 className="HeaderTextLabelSmall">Contact Number:</h2>
                     <Box className="TextField2">
                       <Col className="FromToContainer">
-                        <h1 className="DataAndTextLable">22222</h1>
+                        <h1 className="DataAndTextLable"> {lists.receiver_cont}</h1>
                       </Col>
                     </Box>
                   </Col>
@@ -171,7 +175,7 @@ const StatusOfDelivery = () => {
                 className="WhiteNoteBox"
               >
                 <Col>
-                  <h1 className="NoteContent">Kapuy na kaayu ako life</h1>
+                  <h1 className="NoteContent">{lists.note}</h1>
                 </Col>
               </Box>
             </Container>
@@ -218,7 +222,7 @@ const StatusOfDelivery = () => {
           <Col xs={3} className="RightPane">
             <Container>
               <h2 className="StatusText">Status</h2>
-              <h2 className="DataAndTextLable">Time Elapsed: 20 mins</h2>
+              <h2 className="DataAndTextLable">Estimated Time: {lists.duration}</h2>
             </Container>
             <Container>
               <Grid container direction={"column"} spacing={0}>
@@ -283,7 +287,7 @@ const StatusOfDelivery = () => {
           </Col>
         </Row>
       </Container>
-      {/* ))}             */}
+       ))} 
     </>
   );
 };

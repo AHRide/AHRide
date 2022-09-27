@@ -5,6 +5,7 @@ import { UserContext } from '../../contexts/user.context';
 import NavBarClient from '../../components/NavBarClient';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowDownward from '@mui/icons-material/ArrowDownward';
+import { useNavigate } from "react-router-dom";
 
 import {
 	Box,
@@ -45,6 +46,7 @@ const containerStyle = {
 };
 
 function BookDelivery() {
+	const navigate = useNavigate();
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyBjVHt2JjYCpHVzZOGfYjxdJVPLzkoB8jc',
@@ -113,6 +115,8 @@ function BookDelivery() {
 			payment,
 			duration,
 		});
+		alert(`Successfully Booked a Delivery!`);
+		navigate("/delivery-updates");
 	};
 
 	return (
