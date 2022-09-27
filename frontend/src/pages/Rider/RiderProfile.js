@@ -21,7 +21,7 @@ function RiderProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/getUsers/${user._profile.data.email}`)
+      .get(`http://localhost:3001/getUserRider/${user._profile.data.email}`)
       .then((response) => {
         setuserProfileList(response.data);
       });

@@ -1,25 +1,24 @@
-.bodyPage_SignUp {
+.bodyPage {
   height: 100vh;
   width: 100%;
   margin: 0;
 }
 
-.blankPageTop_SignUp {
+.blankPageTop {
   padding-top: 700px;
 }
 
-.blankPageBottom_SignUp {
+.blankPageBottom {
   padding-bottom: 5%;
 }
 
-.RiderSignUpMain {
+.ClientSignInMain {
   float: left;
-  padding-top: 50px;
   height: 100%;
   padding-left: 100px;
 }
 
-.text_SignUp {
+.text_SignIn {
   text-align: center;
   font-family: "Inter";
   font-weight: 700;
@@ -27,7 +26,7 @@
   line-height: 73px;
 }
 
-.text_TagLine_SignUp {
+.text_TagLine {
   font-family: "Roboto";
   font-weight: 400;
   font-size: 25px;
@@ -37,7 +36,7 @@
   color: #747474;
 }
 
-.text_Labels_SignUp {
+.text_Labels {
   font-family: "Roboto";
   font-weight: 400;
   font-size: 30px;
@@ -49,7 +48,7 @@
   color: #747474;
 }
 
-.text_LabelR_SignUp {
+.text_LabelL {
   font-family: "Roboto";
 
   font-weight: 700;
@@ -60,7 +59,7 @@
   color: #000000;
 }
 
-.button_LogIn_SignUp {
+.button_SignUp {
   width: 200px;
   height: 40px;
   background: #f7bc50;
@@ -73,7 +72,7 @@
   cursor: pointer;
 }
 
-.button_SignUp_Rider_SignUp {
+.button_SignIn {
   margin-top: 70px;
   width: 200px;
   height: 40px;
@@ -84,28 +83,31 @@
   cursor: pointer;
 }
 
-.button_Home_SignUp {
+.button_Home {
   margin-top: 10px;
   margin-left: 10px;
   width: 200px;
   height: 70px;
   size: 50px;
-  color: #f7bc50;
+  color: white;
   font-size: 20px;
   font-weight: 700;
   float: left;
   cursor: pointer;
 }
 
-.columnL_SignUp {
+.columnR {
   float: left;
   width: 70%;
   height: 100%;
+  padding-top: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
 
   background: white;
 }
 
-.columnR_SignUp {
+.columnL {
   float: left;
   height: 100%;
   width: 30%;
@@ -113,18 +115,17 @@
   background: #f7bc50;
 }
 
-.innercolumnL_SignUp {
-  width: 50%;
-  float: left;
-  padding-right: 3%;
-}
-
-.innercolumnR_SignUp {
+.innercolumnL {
   width: 50%;
   float: left;
 }
 
-.textfield_SignUp {
+.innercolumnR {
+  width: 50%;
+  float: left;
+}
+
+.textfield {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -134,7 +135,7 @@
   box-sizing: border-box;
 }
 
-.textfieldL_SignUp {
+.textfieldL {
   width: 95%;
   padding-top: 12px;
   padding: 12px 20px;
@@ -145,7 +146,7 @@
   box-sizing: border-box;
 }
 
-.textfieldR_SignUp {
+.textfieldR {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

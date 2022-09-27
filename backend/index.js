@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
+const UserModelRider = require('./models/UserRider');
 const DeliveryUpdateModel = require('./models/DeliveryUpdates');
 const DeliveryOfferModel = require('./models/DeliveryOffers');
 const BookDeliveryModel = require('./models/BookDelivery');
@@ -25,8 +26,28 @@ app.get('/getUsers', (req, res) => {
 	});
 });
 
-app.get('/getUsers/:email', function (req, res) {
+app.get('/getUserRider', (req, res) => {
+	UserModelRider.find({}, (err, result) => {
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(result);
+		}
+	});
+});
+
+app.get('/getUser/:email', function (req, res) {
 	return UserModel.find({ email: req.params.email })
+		.then(function (users) {
+			res.send(users);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
+app.get('/getUserRider/:email', function (req, res) {
+	return UserModelRider.find({ email: req.params.email })
 		.then(function (users) {
 			res.send(users);
 		})
@@ -119,6 +140,14 @@ app.post('/createUser', async (req, res) => {
 	res.json(user);
 });
 
+app.post('/createUserRider', async (req, res) => {
+	const user = req.body;
+	const newUser = new UserModelRider(user);
+	await newUser.save();
+
+	res.json(user);
+});
+
 app.post('/bookDelivery', async (req, res) => {
 	const bookdeli = req.body;
 	const newBookDeli = new BookDeliveryModel(bookdeli);
@@ -157,4 +186,4 @@ app.delete('/getBookDelivery/:_id', function (req, res) {
 
 app.listen(3001, () => {
 	console.log('Server is Running ...');
-});
+})
