@@ -66,8 +66,8 @@ app.get('/getDeliveryUpdates', (req, res) => {
 	});
 });
 
-app.get('/getDeliveryUpdates/:_id', function (req, res) {
-	return DeliveryUpdateModel.find({ _id: req.params._id })
+app.get('/getDeliveryUpdates/:client_name', function (req, res) {
+	return DeliveryUpdateModel.find({ client_name: req.params.client_name })
 		.then(function (deliveryUpdates) {
 			// return orders when resolved
 			res.send(deliveryUpdates);
@@ -100,8 +100,8 @@ app.get('/getBookDelivery/:_id', function (req, res) {
 		});
 });
 
-app.get('/getBookDelivery/user/:email', function (req, res) {
-	return BookDeliveryModel.find({ email: req.params.email })
+app.get('/getBookDelivery/user/:client_email', function (req, res) {
+	return BookDeliveryModel.find({ client_email: req.params.client_email })
 		.then(function (bookDelivery) {
 			// return orders when resolved
 			res.send(bookDelivery);
