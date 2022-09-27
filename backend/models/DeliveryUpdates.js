@@ -1,60 +1,40 @@
 const mongoose = require('mongoose');
 
 const DeliveryUpdateSchema = new mongoose.Schema({
-	client_id: {
+	rider_email: {
 		type: String,
 		required: true,
 	},
-    rider_id: {
+	client_email: {
 		type: String,
 		required: true,
 	},
-	rider_name: {
+	to: {
 		type: String,
 		required: true,
 	},
-    rider_cont: {
+	from: {
 		type: String,
 		required: true,
 	},
-    rider_vehi: {
+	receiver_name: {
 		type: String,
 		required: true,
 	},
-    client_name: {
-		type: String,
+	receiver_cont: {
+		type: Number,
 		required: true,
 	},
-    client_cont: {
-		type: String,
-		required: true,
-	},
-    to: {
-		type: String,
-		required: true,
-	},
-    from: {
-		type: String,
-		required: true,
-	},
-    receiver_name: {
-		type: String,
-		required: true,
-	},
-    receiver_cont: {
-		type: String,
-		required: true,
-	},
-    note: {
-		type: String,
-		required: false,
-	},
-	time: {
+	note: {
 		type: String,
 		required: true,
 	},
 	payment: {
 		type: Number,
+		required: true,
+	},
+	duration: {
+		type: String,
 		required: true,
 	},
 	status: {
@@ -63,5 +43,8 @@ const DeliveryUpdateSchema = new mongoose.Schema({
 	},
 });
 
-const DeliveryUpdateModel = mongoose.model('deliveryupdates', DeliveryUpdateSchema);
+const DeliveryUpdateModel = mongoose.model(
+	'deliveryupdates',
+	DeliveryUpdateSchema
+);
 module.exports = DeliveryUpdateModel;

@@ -16,7 +16,7 @@ export default function NavBarRider() {
 					<Link
 						className={styling.NavName}
 						style={{ textDecoration: 'none' }}
-						to='/'>
+						to='/rider/status-of-delivery'>
 						Updates
 					</Link>
 					<Link

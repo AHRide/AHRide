@@ -79,6 +79,17 @@ app.get('/getBookDelivery/:_id', function (req, res) {
 		});
 });
 
+app.get('/getBookDelivery/user/:email', function (req, res) {
+	return BookDeliveryModel.find({ email: req.params.email })
+		.then(function (bookDelivery) {
+			// return orders when resolved
+			res.send(bookDelivery);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
+});
 
 app.get('/getDeliveryOffers', (req, res) => {
 	DeliveryOfferModel.find({}, (error, result) => {
@@ -130,6 +141,18 @@ app.post('/createDeliveryOffers', async (req, res) => {
 	await newDeliOffers.save();
 
 	res.json(delioffers);
+});
+
+app.delete('/getBookDelivery/:_id', function (req, res) {
+	return BookDeliveryModel.findByIdAndDelete({ _id: req.params._id })
+		.then(function (bookDelivery) {
+			// return orders when resolved
+			res.send(bookDelivery);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
 });
 
 app.listen(3001, () => {
