@@ -10,13 +10,13 @@ function DisplayDeliveryList() {
   const [updateList, setUpdateList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/getDeliveryUpdates/${user._profile.data.email}`).then((response) => {
+    axios.get(`http://localhost:3001/getDeliveryUpdates/user/${user._profile.data.email}`).then((response) => {
       setUpdateList(response.data);
     });
   }, []);
 
-  const toUpdateStatus = (_id) => {
-    navigate("/update-status", { state: { _id} });
+  const toUpdateStatus = (_id, pending) => {
+    navigate("/update-status", { state: {_id, pending} });
   };
 
   return (
@@ -25,7 +25,7 @@ function DisplayDeliveryList() {
         <div className="center-layout" key={index}
        >
           <div className="row-details" onClick={() => {
-                toUpdateStatus(lists._id)
+                toUpdateStatus(lists._id, 'inprogress')
               }}>
           <div className="column-details"><h3>{lists.receiver_name}</h3></div>
           <div className="column-details"><h3>{lists.from}</h3></div>

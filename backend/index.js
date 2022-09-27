@@ -66,7 +66,19 @@ app.get('/getDeliveryUpdates', (req, res) => {
 	});
 });
 
-app.get('/getDeliveryUpdates/:client_email', function (req, res) {
+app.get('/getDeliveryUpdates/:_id', function (req, res) {
+	return DeliveryUpdateModel.find({ _id: req.params._id})
+		.then(function (deliveryUpdates) {
+			// return orders when resolved
+			res.send(deliveryUpdates);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
+});
+
+app.get('/getDeliveryUpdates/user/:client_email', function (req, res) {
 	return DeliveryUpdateModel.find({ client_email: req.params.client_email})
 		.then(function (deliveryUpdates) {
 			// return orders when resolved

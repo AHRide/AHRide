@@ -119,7 +119,7 @@ const ClientUpdatesTab = () => {
 		<>
 			<NavBarClient />
 			{updateList.map((lists, index) => (
-				<Container fluid>
+				<Container fluid key={index}>
 					<Row>
 						<Container>
 							<Link to='/delivery-updates'>
@@ -147,6 +147,7 @@ const ClientUpdatesTab = () => {
 					</Row>
 					<Row>
 						<Col xs={9} className='LeftPane'>
+							{location.state.pending != 'pending' &&
 							<Container className='ContainerUpperRow'>
 								<h1 className='HeaderTextLabel'>Rider's Information</h1>
 								<Row>
@@ -172,7 +173,7 @@ const ClientUpdatesTab = () => {
 									</Col>
 								</Row>
 							</Container>
-
+						}
 							<Container className='ContainerLowerRow'>
 								<h1 className='HeaderTextLabel'>Client Information</h1>
 								<Row>
