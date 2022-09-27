@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../../contexts/user.context';
 import "../DisplayUpdatePage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function DisplayDeliveryList() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [updateList, setUpdateList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/getDeliveryUpdates").then((response) => {
+    axios.get(`http://localhost:3001/getDeliveryUpdates${user._profile.data.email}`).then((response) => {
       setUpdateList(response.data);
       console.log(response.data);
     });

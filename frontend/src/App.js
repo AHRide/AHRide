@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AboutUs from "./pages/aboutUs";
+import AboutPageClient from "./pages/AboutPage/About";
+import AboutPageRider from "./pages/AboutPage/About2";
 import Test from "./pages/test";
 import ClientSignUp from "./pages/Client/client_signup";
 import RiderSignUp from "./pages/Rider/rider_signup";
@@ -34,7 +35,8 @@ function App() {
               <Route path="/client/book" element={<BookDelivery />} />
               <Route path="/rider/homepage" element={<RiderHomepage />} />
               <Route path="/client/homepage" element={<ClientHomepage />} />
-              <Route path="about" element={<AboutUs />} />
+              <Route path="/rider/about" element={<AboutPageRider />} />
+              <Route path="/client/about" element={<AboutPageClient />} />
               <Route path="/client/profile" element={<ClientProfile />} />
               <Route path="/rider/profile" element={<RiderProfile />} />
               <Route path="/delivery-updates" element={<DisplayUpdatePage />} />
