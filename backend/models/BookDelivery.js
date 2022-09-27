@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
-const DeliveryUpdateSchema = new mongoose.Schema({
-	rider_email: {
-		type: String,
-		required: true,
-	},
+const BookDeliverySchema = new mongoose.Schema({
 	client_email: {
 		type: String,
 		required: true,
@@ -37,14 +33,7 @@ const DeliveryUpdateSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	status: {
-		type: String,
-		required: true,
-	},
 });
 
-const DeliveryUpdateModel = mongoose.model(
-	'deliveryupdates',
-	DeliveryUpdateSchema
-);
-module.exports = DeliveryUpdateModel;
+const BookDeliveryModel = mongoose.model('bookdelivery', BookDeliverySchema);
+module.exports = BookDeliveryModel;

@@ -32,7 +32,7 @@ const ClientSignin = () => {
   // appropriate page once the authentication is done.
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
-    navigate(redirectTo ? redirectTo : "/rider/homepage");
+    navigate(redirectTo ? redirectTo : "/client/homepage");
   };
 
   // Since there can be chances that the user is already logged in
