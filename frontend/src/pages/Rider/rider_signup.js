@@ -1,34 +1,55 @@
 import React from "react";
-import { useContext, useState} from "react";
+import { useContext, useState } from "react";
 import "./rider_signup.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { TextField } from "@mui/material";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import MenuItem from "@mui/material/MenuItem";
 import Axios from "axios";
 
+const genders = [
+  {
+    value: "Male",
+    label: "Male",
+  },
+  {
+    value: "Female",
+    label: "Female",
+  },
+  {
+    value: "Others",
+    label: "Others",
+  },
+];
+
 const RiderSignUp = () => {
+  const [gender, setGender] = React.useState("Male");
+
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const[name, setName] = useState("");
-  const[gender, setGender] = useState("");
-  const[birthdate, setBirth] = useState("");
-  const[contact, setContact] = useState("");
-  const[email, setEmail] = useState("");
-  const[password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [birthdate, setBirth] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const createUser = () => {
-    Axios.post("http://localhost:3001/createUser", {
+    Axios.post("http://localhost:3001/createUserRider", {
       name,
       gender,
       birthdate,
       contact,
       email,
       password,
-      user_type: "rider",
-    })
-  }
+    });
+  };
 
   // As explained in the Login page.
   const { emailPasswordSignup } = useContext(UserContext);
@@ -38,7 +59,7 @@ const RiderSignUp = () => {
     birthdate: "",
     contact: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   // As explained in the Login page.
@@ -50,8 +71,8 @@ const RiderSignUp = () => {
   // As explained in the Login page.
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
-    navigate(redirectTo ? redirectTo : "/");
-  }
+    navigate(redirectTo ? redirectTo : "/rider/homepage");
+  };
 
   const onSubmit = async () => {
     try {
@@ -66,15 +87,23 @@ const RiderSignUp = () => {
   };
 
   return (
-    <body className="bodyPage">
-      <div className="columnL">
+    <body className="bodyPage_SignUp">
+      <div className="columnL_SignUp">
+        <FirstPageIcon
+          sx={{ fontSize: 60 }}
+          className="button_Home_SignUp"
+          onClick={() => {
+            navigate("/");
+          }}
+          type="submit"
+        ></FirstPageIcon>
         <div className="RiderSignUpMain">
           <p className="text_SignUp">Sign Up</p>
           <p className="text_TagLine">
             Creating an account only take a minute or so and you will become
             part of us! Great exchange, right?
           </p>
-          <p className="text_Labels">Name</p>
+          <p className="text_Labels_SignUp">Name</p>
           <TextField
             name="name"
             type="name"
@@ -83,47 +112,57 @@ const RiderSignUp = () => {
             fullWidth
             value={form.name}
             onInput={onFormInputChange}
-            onChange={(event) => {setName(event.target.value)}}
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
           ></TextField>
-          <div className="innercolumnL">
-            <p className="text_Labels">Gender</p>
+          <div className="innercolumnL_SignUp">
+            <p className="text_Labels_SignUp">Gender</p>
             <TextField
-              name="gender"
-              type="gender"
-              label="Gender"
+              select
               variant="outlined"
               fullWidth
-              value={form.gender}
+              label="Select"
+              value={gender}
               onInput={onFormInputChange}
-              onChange={(event) => {setGender(event.target.value)}}
-            ></TextField>
+              onChange={handleChange}
+            >
+              {genders.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
-          <div className="innercolumnR">
-            <p className="text_Labels">Birthdate</p>
+          <div className="innercolumnR_SignUp">
+            <p className="text_Labels_SignUp">Birthdate</p>
             <TextField
               name="birthdate"
               type="date"
-              
               variant="outlined"
               fullWidth
               value={form.birthdate}
               onInput={onFormInputChange}
-              onChange={(event) => {setBirth(event.target.value)}}
+              onChange={(event) => {
+                setBirth(event.target.value);
+              }}
             ></TextField>
           </div>
 
-          <p className="text_Labels">Contact Number</p>
+          <p className="text_Labels_SignUp">Contact Number</p>
           <TextField
             name="contact"
-            type="contact"
+            type="number"
             label="Contact No."
             variant="outlined"
             fullWidth
             value={form.contact}
             onInput={onFormInputChange}
-            onChange={(event) => {setContact(event.target.value)}}
+            onChange={(event) => {
+              setContact(event.target.value);
+            }}
           ></TextField>
-          <p className="text_Labels">Email Address</p>
+          <p className="text_Labels_SignUp">Email Address</p>
           <TextField
             name="email"
             type="email"
@@ -132,9 +171,11 @@ const RiderSignUp = () => {
             fullWidth
             value={form.email}
             onInput={onFormInputChange}
-            onChange={(event) => {setEmail(event.target.value)}}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
           ></TextField>
-          <p className="text_Labels">Password</p>
+          <p className="text_Labels_SignUp">Password</p>
           <TextField
             label="Password"
             type="password"
@@ -143,35 +184,37 @@ const RiderSignUp = () => {
             fullWidth
             value={form.password}
             onInput={onFormInputChange}
-            onChange={(event) => {setPassword(event.target.value)}}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           ></TextField>
           <center>
             <ArrowForwardIcon
               sx={{ fontSize: 120 }}
-              className="button_SignUp_Rider"
+              className="button_SignUp_Rider_SignUp"
               onClick={onSubmit}
             ></ArrowForwardIcon>
           </center>
         </div>
       </div>
-      <div className="columnR">
-        <div className="blankPageTop"></div>
-        <p className="text_LabelR">Already have an account?</p>
+      <div className="columnR_SignUp">
+        <div className="blankPageTop_SignUp"></div>
+        <p className="text_LabelR_SignUp">Already have an account?</p>
         <center>
           <button
             onClick={() => {
-              navigate("/login");
+              navigate("/rider/signin");
             }}
-            className="button_LogIn"
+            className="button_LogIn_SignUp"
             type="submit"
           >
             Log In
           </button>
         </center>
-        <div className="blankPageBottom"></div>
+        <div className="blankPageBottom_SignUp"></div>
       </div>
     </body>
   );
-}
+};
 
 export default RiderSignUp;

@@ -1,19 +1,17 @@
 import React from "react";
-// import validate from "./validateInfo";
-// import useForm from "./useForm";
-// import "./Form.css";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
 import { TextField } from "@mui/material";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import "./client_signin.css";
 
-
-const FormSignin = () => {
+const ClientSignin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // We are consuming our user-management context to 
+  // We are consuming our user-management context to
   // get & set the user details here
   const { user, fetchUser, emailPasswordLogin } = useContext(UserContext);
 
@@ -21,7 +19,7 @@ const FormSignin = () => {
   //  of the form values.
   const [form, setForm] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   // This function will be called whenever the user edits the form.
@@ -30,12 +28,12 @@ const FormSignin = () => {
     setForm({ ...form, [name]: value });
   };
 
-  // This function will redirect the user to the 
+  // This function will redirect the user to the
   // appropriate page once the authentication is done.
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
     navigate(redirectTo ? redirectTo : "/rider/homepage");
-  }
+  };
 
   // Since there can be chances that the user is already logged in
   // but whenever the app gets refreshed the user context will become
@@ -50,7 +48,7 @@ const FormSignin = () => {
         redirectNow();
       }
     }
-  }
+  };
 
   // This useEffect will run only once when the component is mounted.
   // Hence this is helping us in verifying whether the user is already logged in
@@ -70,47 +68,69 @@ const FormSignin = () => {
         redirectNow();
       }
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   };
 
   return (
-    <div className="sign-in-form-content-right">
-        <h1>Sign In</h1>
-        <p className="sign-in-form-welcome">
+    <div className="bodyPage">
+      <div className="columnL">
+        <FirstPageIcon
+          sx={{ fontSize: 60 }}
+          className="button_Home"
+          onClick={() => {
+            navigate("/");
+          }}
+          type="submit"
+        ></FirstPageIcon>
+        <div className="blankPageTop"></div>
+        <p className="text_LabelL">Don't have an account yet?</p>
+        <center>
+          <button
+            onClick={() => {
+              navigate("/client/signup");
+            }}
+            className="button_SignUp"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </center>
+      </div>
+      <div className="columnR">
+        <h1 className="text_SignUp">Sign In</h1>
+        <p className="text_TagLine">
           Please sign in to your account to continue.
         </p>
-        <div className='sign-in-form-inputs'>
-          <label className='sign-in-form-label'>Email</label>
-          <TextField
-            name="email"
-            type="name"
-            label="Email"
-            variant="outlined"
-            fullWidth
-            value={form.email}
-            onChange={onFormInputChange}
-          />
-        </div>
-        <div className='sign-in-form-inputs'>
-          <label className='sign-in-form-label'>Password</label>
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            name="password"
-            fullWidth
-            value={form.password}
-            onChange={onFormInputChange}
-          />
-        </div>
+
+        <label className="text_Labels">Email</label>
+        <TextField
+          name="email"
+          type="name"
+          label="Email"
+          variant="outlined"
+          fullWidth
+          value={form.email}
+          onChange={onFormInputChange}
+        />
+        <label className="text_Labels">Password</label>
+        <TextField
+          label="Password"
+          type="password"
+          variant="outlined"
+          name="password"
+          fullWidth
+          value={form.password}
+          onChange={onFormInputChange}
+        />
         <ArrowForwardIcon
-              sx={{ fontSize: 120 }}
-              className="button_SignUp_Rider"
-              onClick={onSubmit}
-            ></ArrowForwardIcon>
+          sx={{ fontSize: 120 }}
+          className="button_SignIn"
+          onClick={onSubmit}
+        ></ArrowForwardIcon>
+      </div>
     </div>
   );
 };
 
-export default FormSignin;
+export default ClientSignin;

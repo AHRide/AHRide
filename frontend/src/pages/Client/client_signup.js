@@ -1,21 +1,43 @@
 import React from "react";
 import "./client_signup.css";
-import { useContext, useState} from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { TextField } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
 import Axios from "axios";
 
+const genders = [
+  {
+    value: "Male",
+    label: "Male",
+  },
+  {
+    value: "Female",
+    label: "Female",
+  },
+  {
+    value: "Others",
+    label: "Others",
+  },
+];
+
 function ClientSignUp() {
+  const [gender, setGender] = React.useState("Male");
+
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const[name, setName] = useState("");
-  const[gender, setGender] = useState("");
-  const[birthdate, setBirth] = useState("");
-  const[contact, setContact] = useState("");
-  const[email, setEmail] = useState("");
-  const[password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [birthdate, setBirth] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const createUser = () => {
     Axios.post("http://localhost:3001/createUser", {
@@ -25,9 +47,8 @@ function ClientSignUp() {
       contact,
       email,
       password,
-      user_type: "client",
-    })
-  }
+    });
+  };
 
   // As explained in the Login page.
   const { emailPasswordSignup } = useContext(UserContext);
@@ -37,7 +58,7 @@ function ClientSignUp() {
     birthdate: "",
     contact: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   // As explained in the Login page.
@@ -50,7 +71,7 @@ function ClientSignUp() {
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
     navigate(redirectTo ? redirectTo : "/client/homepage");
-  }
+  };
 
   const onSubmit = async () => {
     try {
@@ -64,15 +85,23 @@ function ClientSignUp() {
     }
   };
   return (
-    <body className="bodyPage">
-      <div className="columnL">
+    <body className="bodyPage_SignUp">
+      <div className="columnL_SignUp">
+        <FirstPageIcon
+          sx={{ fontSize: 60 }}
+          className="button_Home_SignUp"
+          onClick={() => {
+            navigate("/");
+          }}
+          type="submit"
+        ></FirstPageIcon>
         <div className="ClientSignUpMain">
           <p className="text_SignUp">Sign Up</p>
-          <p className="text_TagLine">
+          <p className="text_TagLine_SignUp">
             Creating an account only take a minute or so and you will become
             part of us! Great exchange, right?
           </p>
-          <p className="text_Labels">Name</p>
+          <p className="text_Labels_SignUp">Name</p>
           <TextField
             name="name"
             type="name"
@@ -81,47 +110,57 @@ function ClientSignUp() {
             fullWidth
             value={form.name}
             onInput={onFormInputChange}
-            onChange={(event) => {setName(event.target.value)}}
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
           ></TextField>
-          <div className="innercolumnL">
-            <p className="text_Labels">Gender</p>
+          <div className="innercolumnL_SignUp">
+            <p className="text_Labels_SignUp">Gender</p>
             <TextField
-              name="gender"
-              type="gender"
-              label="Gender"
+              select
               variant="outlined"
               fullWidth
-              value={form.gender}
+              label="Select"
+              value={gender}
               onInput={onFormInputChange}
-              onChange={(event) => {setGender(event.target.value)}}
-            ></TextField>
+              onChange={handleChange}
+            >
+              {genders.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
-          <div className="innercolumnR">
-            <p className="text_Labels">Birthdate</p>
+          <div className="innercolumnR_SignUp">
+            <p className="text_Labels_SignUp">Birthdate</p>
             <TextField
               name="birthdate"
               type="date"
-              
               variant="outlined"
               fullWidth
               value={form.birthdate}
               onInput={onFormInputChange}
-              onChange={(event) => {setBirth(event.target.value)}}
+              onChange={(event) => {
+                setBirth(event.target.value);
+              }}
             ></TextField>
           </div>
 
-          <p className="text_Labels">Contact Number</p>
+          <p className="text_Labels_SignUp">Contact Number</p>
           <TextField
             name="contact"
-            type="contact"
+            type="number"
             label="Contact No."
             variant="outlined"
             fullWidth
             value={form.contact}
             onInput={onFormInputChange}
-            onChange={(event) => {setContact(event.target.value)}}
+            onChange={(event) => {
+              setContact(event.target.value);
+            }}
           ></TextField>
-          <p className="text_Labels">Email Address</p>
+          <p className="text_Labels_SignUp">Email Address</p>
           <TextField
             name="email"
             type="email"
@@ -130,9 +169,11 @@ function ClientSignUp() {
             fullWidth
             value={form.email}
             onInput={onFormInputChange}
-            onChange={(event) => {setEmail(event.target.value)}}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
           ></TextField>
-          <p className="text_Labels">Password</p>
+          <p className="text_Labels_SignUp">Password</p>
           <TextField
             label="Password"
             type="password"
@@ -141,30 +182,36 @@ function ClientSignUp() {
             fullWidth
             value={form.password}
             onInput={onFormInputChange}
-            onChange={(event) => {setPassword(event.target.value)}}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           ></TextField>
           <center>
-            <button className="button_SignUp" type="submit" onClick={onSubmit}>
+            <button
+              className="button_SignUp_SignUp"
+              type="submit"
+              onClick={onSubmit}
+            >
               Sign Up
             </button>
           </center>
         </div>
       </div>
-      <div className="columnR">
-        <div className="blankPageTop"></div>
-        <p className="text_LabelR">Already have an account?</p>
+      <div className="columnR_SignUp">
+        <div className="blankPageTop_SignUp"></div>
+        <p className="text_LabelR_SignUp">Already have an account?</p>
         <center>
           <button
             onClick={() => {
-              navigate("/login");
+              navigate("/client/signin");
             }}
-            className="button_LogIn"
+            className="button_LogIn_SignUp"
             type="submit"
           >
             Log In
           </button>
         </center>
-        <div className="blankPageBottom"></div>
+        <div className="blankPageBottom_SignUp"></div>
       </div>
     </body>
   );

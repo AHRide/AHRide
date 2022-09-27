@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ClientHomepage() {
   const navigate = useNavigate();
+  
   return (
     <>
       <div className={styler.Screen}>
@@ -11,7 +12,7 @@ export default function ClientHomepage() {
           <div className={styler.column1}>
             <button
               onClick={() => {
-                navigate("/login");
+                navigate("/rider/signin");
               }}
               className={styler.RiderSignIn}
               type="button"
@@ -31,7 +32,7 @@ export default function ClientHomepage() {
           <div className={styler.column2}>
             <button
               onClick={() => {
-                navigate("/login");
+                navigate("/client/signin");
               }}
               className={styler.ClientSignIn}
               type="submit"
