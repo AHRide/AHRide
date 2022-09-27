@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useContext } from 'react';
 import Axios from 'axios';
 import './BookDelivery.css';
-
+import { UserContext } from '../../contexts/user.context';
 import NavBarClient from '../../components/NavBarClient';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowDownward from '@mui/icons-material/ArrowDownward';
@@ -17,7 +17,12 @@ import {
 } from '@mui/material';
 import { orange } from '@mui/material/colors';
 
-import { useJsApiLoader, GoogleMap, MarkerF } from '@react-google-maps/api';
+import {
+	useJsApiLoader,
+	GoogleMap,
+	MarkerF,
+	DirectionsRenderer,
+} from '@react-google-maps/api';
 import usePlacesAutocomplete, {
 	getGeocode,
 	getLatLng,
@@ -46,25 +51,67 @@ function BookDelivery() {
 		libraries: ['places'],
 	});
 
+	const { user } = useContext(UserContext);
+	const [map, setMap] = useState(/** @type google.maps.Map */ (null));
 	const [selectedFrom, setSelectedFrom] = useState(null);
 	const [selectedTo, setSelectedTo] = useState(null);
-	const [from, setFrom] = useState(null);
-	const [to, setTo] = useState(null);
+	const [from, setFrom] = useState('');
+	const [to, setTo] = useState('');
 	const [receiver_name, setReceiver] = useState('');
 	const [receiver_cont, setContact] = useState('');
 	const [note, setNote] = useState('');
+
+	const [directionsResponse, setDirectionsResponse] = useState(null);
+	const [distance, setDistance] = useState('');
+	const [duration, setDuration] = useState('');
+
+	const removeUnit = distance.replace('km', '');
+	const payment = parseFloat(removeUnit) * 1000 * 0.03;
 
 	if (!isLoaded) {
 		return <div> loading...</div>;
 	}
 
+	async function calculateRoute() {
+		if (from === '' || to === '') {
+			return;
+		}
+		// eslint-disable-next-line no-undef
+		const directionsService = new google.maps.DirectionsService();
+		const results = await directionsService.route({
+			origin: from,
+			destination: to,
+			// eslint-disable-next-line no-undef
+			travelMode: google.maps.TravelMode.DRIVING,
+		});
+
+		setDirectionsResponse(results);
+		setDistance(results.routes[0].legs[0].distance.text);
+		setDuration(results.routes[0].legs[0].duration.text);
+	}
+
+	function clearRoute() {
+		map.panTo(center);
+		map.setZoom(13);
+		setDirectionsResponse(null);
+		setDistance('');
+		setDuration('');
+		setFrom('');
+		setTo('');
+		setSelectedFrom(null);
+		setSelectedTo(null);
+	}
+
 	const bookDelivery = () => {
 		Axios.post('http://localhost:3001/bookDelivery', {
+			client_email: user._profile.data.email,
 			from,
 			to,
 			receiver_name,
 			receiver_cont,
 			note,
+			payment,
+			duration,
 		});
 	};
 
@@ -191,33 +238,88 @@ function BookDelivery() {
 								/>
 							</div>
 						</div>
-
-						<div
-							style={{
-								width: '35rem',
-								height: '35rem',
-								border: '5px solid #f7bc50',
-								borderRadius: '5px',
-								boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-							}}>
-							<GoogleMap
-								zoom={13}
-								center={center}
-								mapContainerStyle={containerStyle}
-								mapContainerClassName='map-containers'
-								options={{
-									zoomControl: true,
-									streetViewControl: false,
-									mapTypeControl: false,
-									fullscreenControl: false,
+						<div style={{ display: 'flex', flexDirection: 'column' }}>
+							<div
+								style={{
+									width: '35rem',
+									height: '35rem',
+									border: '5px solid #f7bc50',
+									borderRadius: '5px',
+									boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 								}}>
-								{selectedFrom && <MarkerF position={selectedFrom} />}
-								{selectedTo && <MarkerF position={selectedTo} />}
-							</GoogleMap>
+								<GoogleMap
+									zoom={13}
+									center={center}
+									mapContainerStyle={containerStyle}
+									mapContainerClassName='map-containers'
+									options={{
+										zoomControl: true,
+										streetViewControl: false,
+										mapTypeControl: false,
+										fullscreenControl: false,
+									}}
+									onLoad={(map) => setMap(map)}>
+									{directionsResponse && (
+										<DirectionsRenderer directions={directionsResponse} />
+									)}
+									{selectedFrom && (
+										<MarkerF
+											position={selectedFrom}
+											onPositionChanged={() => {
+												map.panTo(selectedFrom);
+												map.setZoom(14);
+											}}
+										/>
+									)}
+									{selectedTo && (
+										<MarkerF
+											position={selectedTo}
+											onPositionChanged={() => {
+												map.panTo(selectedTo);
+												map.setZoom(14);
+											}}
+										/>
+									)}
+								</GoogleMap>
+							</div>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									justifyContent: 'space-evenly',
+									alignContent: 'center',
+									padding: '2rem',
+								}}>
+								<Button
+									onClick={calculateRoute}
+									sx={{
+										width: '2rem',
+										height: '2rem',
+
+										background: '#F7BC50',
+										boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+										borderRadius: '15px',
+										color: 'black',
+										fontSize: 'small',
+									}}>
+									Save
+								</Button>
+								<p>Distance: {distance} </p>
+								<p>Est. Time: {duration} </p>
+								<p>To Pay:Php {payment} </p>
+								<Button
+									onClick={clearRoute}
+									sx={{
+										width: '3em',
+										height: '2em',
+									}}>
+									Clear
+								</Button>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div style={{ alignSelf: 'center', padding: '2rem' }}>
+				<div style={{ alignSelf: 'center' }}>
 					<Button
 						onClick={bookDelivery}
 						sx={{

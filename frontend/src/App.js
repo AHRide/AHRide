@@ -18,9 +18,6 @@ import PrivateRoute from './pages/PrivateRoute.page';
 import StatusOfDelivery from './pages/Rider/DeliveryStatusOfDeliveryFolder/StatusOfDelivery';
 import RiderDeliveryItemInfo from './pages/Rider/RiderDeliveryInfoFolder/DeliveryItemInfo';
 import BookDelivery from './pages/book-delivery/BookDelivery';
-import BookMapFrom from './pages/book-delivery/BookMapFrom';
-import BookMapTo from './pages/book-delivery/BookMapTo';
-import GoogleMapComp from './components/GoogleMap';
 
 function App() {
 	return (

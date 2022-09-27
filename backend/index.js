@@ -25,14 +25,12 @@ app.get('/getUsers', (req, res) => {
 	});
 });
 
-app.get('/getUsers/:_id', function (req, res) {
-	return UserModel.find({ _id: req.params._id })
+app.get('/getUsers/:email', function (req, res) {
+	return UserModel.find({ email: req.params.email })
 		.then(function (users) {
-			// return orders when resolved
 			res.send(users);
 		})
 		.catch(function (error) {
-			// handle error
 			console.log(error);
 		});
 });
