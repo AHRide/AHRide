@@ -3,7 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
 const DeliveryUpdateModel = require('./models/DeliveryUpdates');
-const DeliveryOfferModel = require('./models/DeliveryOffers')
+const DeliveryOfferModel = require('./models/DeliveryOffers');
+const BookDeliveryModel = require('./models/BookDelivery');
 
 const cors = require('cors');
 
@@ -24,15 +25,16 @@ app.get('/getUsers', (req, res) => {
 	});
 });
 
-app.get('/getUsers/:_id', function(req, res) {
-    return UserModel.find({_id: req.params._id}).then(function(users) { 
-        // return orders when resolved
-        res.send(users);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
+app.get('/getUsers/:_id', function (req, res) {
+	return UserModel.find({ _id: req.params._id })
+		.then(function (users) {
+			// return orders when resolved
+			res.send(users);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
 });
 
 app.get('/getDeliveryUpdates', (req, res) => {
@@ -45,15 +47,26 @@ app.get('/getDeliveryUpdates', (req, res) => {
 	});
 });
 
-app.get('/getDeliveryUpdates/:_id', function(req, res) {
-    return DeliveryUpdateModel.find({_id: req.params._id}).then(function(deliveryUpdates) { 
-        // return orders when resolved
-        res.send(deliveryUpdates);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
+app.get('/getDeliveryUpdates/:_id', function (req, res) {
+	return DeliveryUpdateModel.find({ _id: req.params._id })
+		.then(function (deliveryUpdates) {
+			// return orders when resolved
+			res.send(deliveryUpdates);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
+});
+
+app.get('/getBookDelivery', (req, res) => {
+	BookDeliveryModel.find({}, (error, result) => {
+		if (error) {
+			res.json(error);
+		} else {
+			res.json(result);
+		}
+	});
 });
 
 app.get('/getDeliveryOffers', (req, res) => {
@@ -66,13 +79,14 @@ app.get('/getDeliveryOffers', (req, res) => {
 	});
 });
 
-app.get('/getDeliveryOffers/:_id', function(req, res) {
-    return DeliveryOfferModel.find({_id: req.params._id}).then(function(deliveryOffers) { 
-        res.send(deliveryOffers);
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
+app.get('/getDeliveryOffers/:_id', function (req, res) {
+	return DeliveryOfferModel.find({ _id: req.params._id })
+		.then(function (deliveryOffers) {
+			res.send(deliveryOffers);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 });
 
 app.post('/createUser', async (req, res) => {
@@ -81,6 +95,14 @@ app.post('/createUser', async (req, res) => {
 	await newUser.save();
 
 	res.json(user);
+});
+
+app.post('/bookDelivery', async (req, res) => {
+	const bookdeli = req.body;
+	const newBookDeli = new BookDeliveryModel(bookdeli);
+	await newBookDeli.save();
+
+	res.json(bookdeli);
 });
 
 app.post('/createDeliveryUpdates', async (req, res) => {
