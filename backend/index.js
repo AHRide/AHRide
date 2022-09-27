@@ -67,6 +67,19 @@ app.get('/getBookDelivery', (req, res) => {
 	});
 });
 
+app.get('/getBookDelivery/:_id', function (req, res) {
+	return BookDeliveryModel.find({ _id: req.params._id })
+		.then(function (bookDelivery) {
+			// return orders when resolved
+			res.send(bookDelivery);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
+});
+
+
 app.get('/getDeliveryOffers', (req, res) => {
 	DeliveryOfferModel.find({}, (error, result) => {
 		if (error) {
