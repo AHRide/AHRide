@@ -62,8 +62,6 @@ function RiderProfile() {
             <div className={style.column}>
               <WcIcon fontSize="large" className={style.Design} />
               <h1>{lists.gender}</h1>
-              <LocationOnIcon fontSize="large" className={style.Design} />
-              <h1>New York City, USA</h1>
               <CallIcon fontSize="large" className={style.Design} />
               <h1>094512345678</h1>
               <AlternateEmailIcon fontSize="large" className={style.Design} />
