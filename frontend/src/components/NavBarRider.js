@@ -22,7 +22,7 @@ export default function NavBarRider() {
 					<Link
 						className={styling.NavName}
 						style={{ textDecoration: 'none' }}
-						to='/about'>
+						to='/rider/about'>
 						About
 					</Link>
 					<Link

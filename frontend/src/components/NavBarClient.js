@@ -22,7 +22,7 @@ export default function NavBarClient() {
 					<Link
 						className={styling.NavName}
 						style={{ textDecoration: 'none' }}
-						to='/'>
+						to='/client/about'>
 						About
 					</Link>
 					<Link
