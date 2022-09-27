@@ -5,7 +5,7 @@ import { UserContext } from '../../contexts/user.context';
 import NavBarClient from '../../components/NavBarClient';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowDownward from '@mui/icons-material/ArrowDownward';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import {
 	Box,
@@ -46,13 +46,13 @@ const containerStyle = {
 };
 
 function BookDelivery() {
-	const navigate = useNavigate();
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyBjVHt2JjYCpHVzZOGfYjxdJVPLzkoB8jc',
 		libraries: ['places'],
 	});
 
+	const navigate = useNavigate();
 	const { user } = useContext(UserContext);
 	const [map, setMap] = useState(/** @type google.maps.Map */ (null));
 	const [selectedFrom, setSelectedFrom] = useState(null);
@@ -116,7 +116,7 @@ function BookDelivery() {
 			duration,
 		});
 		alert(`Successfully Booked a Delivery!`);
-		navigate("/delivery-updates");
+		navigate('/delivery-updates');
 	};
 
 	return (
@@ -133,7 +133,10 @@ function BookDelivery() {
 						justifyContent: 'space-between',
 						padding: '1.5rem',
 					}}>
-					<IconButton className='back' size='large'>
+					<IconButton
+						className='back'
+						size='large'
+						onClick={() => navigate('/client/homepage')}>
 						<ArrowBackIcon sx={{ color: orange[300] }} fontSize='inherit' />
 					</IconButton>
 					<div className='bookBox'>Book Delivery</div>
