@@ -20,6 +20,8 @@ body,
   line-height: 106px;
   letter-spacing: 0em;
   text-align: center;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
 }
 .DateFont {
   margin-top: -60px;
@@ -30,6 +32,7 @@ body,
   letter-spacing: 0em;
   text-align: center;
   color: #747474;
+  margin-bottom: 2rem;
 }
 .UpdateInfoButton {
   font-size: 20px;
