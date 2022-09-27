@@ -17,14 +17,8 @@ function ClientProfile() {
   console.log(user._profile.data.email);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/getUsers").then((response) => {
-      setuserProfileList(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
     axios
-      .get(`http://localhost:3001/getUsers/${user._profile.data.email}`)
+      .get(`http://localhost:3001/getUser/${user._profile.data.email}`)
       .then((response) => {
         setuserProfileList(response.data);
       });
@@ -66,8 +60,6 @@ function ClientProfile() {
             <div className={styles.Information}>
               <WcIcon fontSize="large" className={styles.Design} />
               <h1>{lists.gender}</h1>
-              <LocationOnIcon fontSize="large" className={styles.Design} />
-              <h1>New York City, USA</h1>
               <CallIcon fontSize="large" className={styles.Design} />
               <h1>094512345678</h1>
               <AlternateEmailIcon fontSize="large" className={styles.Design} />
