@@ -11,8 +11,6 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-
-
 const RiderDeliveryItemInfo = () => {
   const location = useLocation();
   const [updateList, setUpdateList] = useState([]);
