@@ -11,8 +11,10 @@ import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RiderDeliveryItemInfo = () => {
+	const navigate = useNavigate();
 	const location = useLocation();
 	const [updateList, setUpdateList] = useState([]);
 	const [deliveryList, setDeliveryList] = useState([]);
@@ -61,6 +63,8 @@ const RiderDeliveryItemInfo = () => {
 			.then((response) => {
 				console.log(response);
 			});
+			alert('Delivery Accepted');
+			navigate('/rider/status-of-delivery');
 	};
 
 	return (

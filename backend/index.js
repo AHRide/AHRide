@@ -210,6 +210,19 @@ app.delete('/getBookDelivery/:_id', function (req, res) {
 		});
 });
 
+app.delete('/getDeliveryUpdates/:_id', function (req, res) {
+	return DeliveryUpdateModel.findByIdAndDelete({ _id: req.params._id })
+		.then(function (updateDelivery) {
+			// return orders when resolved
+			res.send(updateDelivery);
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		});
+});
+
+
 app.listen(3001, () => {
 	console.log('Server is Running ...');
 })
