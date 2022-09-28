@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../../contexts/user.context';
 import NavBarClient from '../../../components/NavBarClient';
 import '../UpdateStatus/ClientUpdatesTab.css';
 import { Row, Col, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
@@ -19,83 +19,20 @@ import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import ModalRate from '../../../components/ModalRate';
 
-// const ClientUpdatesTab = () => {
-//   return (
-//     <>
-//       <NavBarClient/>
-//       {/* <div className="container">
-//         <div className="col1">
-//           <div className="row1">
-//             <div className="rowBody">
-//               <h1>Rider's Information</h1>
-//               <div className="rowNV">
-//                 <div className="colName">
-//                   <h1>Name: John Romero</h1>
-//                   <h1>Contact Number: 09105531</h1>
-//                 </div>
-//                 <div className="colVehicle">
-//                   <h1>Vehicle: Nmax - 30gf50</h1>
-//                   <h1>Payment Status: Fully Paid</h1>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//           <div className="row2">
-//             <div className="rowBody">
-//               <div className="r3">
-//                 <div className="columnInRow3">
-//                 <h1>Vehicle: Nmax - 30gf50</h1>
-//                 <h1>Payment Status: Fully Paid</h1>
-//                 </div>
-//                 <h1>Vehicle: Nmax - 30gf50</h1>
-//                 <h1>Payment Status: Fully Paid</h1>
-//               </div>
-//               <div className="r2">
-//                 <h1>Vehicle: Nmax - 30gf50</h1>
-//                 <h1>Payment Status: Fully Paid</h1>
-//               </div>
-//               <div className="r3">
-//               </div>
-//               <div className="r4">
-//               </div>
-//               <div className="r5">
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="col2">
-//           <h1>Status</h1>
-//         </div>
-//       </div>
-
-//       {/ </div> */}
-
-//       <Container>
-//         <Row>
-//           <Col>WElcome to React Js</Col>
-//         </Row>
-//         <Row>
-//           <Col>Left</Col>
-//           <Col>Right</Col>
-//         </Row>
-//       </Container>
-
-//     </>
-//   );
-// }
-
-// export default ClientUpdatesTab;
-
 const ClientUpdatesTab = () => {
-	const [open2, setOpen2] = React.useState(false);
+	const [open2, setOpen2] = useState(false);
 	const handleClose2 = () => {
 		setOpen2(false);
 	};
 	const handleToggle2 = () => {
 		setOpen2(!open2);
 	};
+
+	const { user } = useContext(UserContext);
 	const location = useLocation();
 	const [updateList, setUpdateList] = useState([]);
+	const [userProfileList, setuserProfileList] = useState([]);
+	const [riderProfileList, setRiderProfileList] = useState([]);
 
 	useEffect(() => {
 		if (location.state.pending === 'pending') {
@@ -103,17 +40,34 @@ const ClientUpdatesTab = () => {
 				.get(`http://localhost:3001/getBookDelivery/${location.state._id}/`)
 				.then((response) => {
 					setUpdateList(response.data);
-					console.log(response.data);
 				});
 		} else {
 			axios
 				.get(`http://localhost:3001/getDeliveryUpdates/${location.state._id}/`)
 				.then((response) => {
 					setUpdateList(response.data);
-					console.log(response.data);
+				});
+
+			axios
+				.get(`http://localhost:3001/getUserRider/${location.state.email}`)
+				.then((response) => {
+					setRiderProfileList(response.data);
 				});
 		}
-	}, [location.state._id]);
+		axios
+			.get(`http://localhost:3001/getUser/${user._profile.data.email}`)
+			.then((response) => {
+				setuserProfileList(response.data);
+			});
+	}, [
+		location.state._id,
+		location.state.email,
+		location.state.pending,
+		user._profile.data.email,
+		setuserProfileList,
+		setUpdateList,
+		setRiderProfileList,
+	]);
 
 	return (
 		<>
@@ -138,8 +92,7 @@ const ClientUpdatesTab = () => {
 										zIndex: (theme) => theme.zIndex.drawer + 1,
 									}}
 									open={open2}
-									// onClick={handleClose2}
-								>
+									onClick={handleClose2}>
 									<ModalRate />
 								</Backdrop>
 							</div>
@@ -147,47 +100,49 @@ const ClientUpdatesTab = () => {
 					</Row>
 					<Row>
 						<Col xs={9} className='LeftPane'>
-							{location.state.pending != 'pending' &&
-							<Container className='ContainerUpperRow'>
-								<h1 className='HeaderTextLabel'>Rider's Information</h1>
-								<Row>
-									<Col>
-										<h1 className='DataAndTextLable'>
-											Rider's name: {lists.rider_name}
-										</h1>
-									</Col>
-									<Col>
-										<h1 className='DataAndTextLable'>
-											Vehicle: {lists.rider_vehi}
-										</h1>
-									</Col>
-								</Row>
-								<Row>
-									<Col>
-										<h1 className='DataAndTextLable'>
-											Contact Number: {lists.rider_cont}
-										</h1>
-									</Col>
-									<Col>
-										<h1 className='DataAndTextLable'></h1>
-									</Col>
-								</Row>
-							</Container>
-						}
+							{location.state.pending !== 'pending' && (
+								<Container className='ContainerUpperRow'>
+									{riderProfileList.map((rider, index) => (
+										<div key={index}>
+											<h1 className='HeaderTextLabel'>Rider's Information</h1>
+											<Row>
+												<Col>
+													<h1 className='DataAndTextLable'>
+														Rider's name: {rider.name}
+													</h1>
+												</Col>
+												<Col>
+													<h1 className='DataAndTextLable'>
+														Vehicle: {lists.rider_vehi}
+													</h1>
+												</Col>
+											</Row>
+											<Row>
+												<Col>
+													<h1 className='DataAndTextLable'>
+														Contact Number: {rider.contact}
+													</h1>
+												</Col>
+											</Row>
+										</div>
+									))}
+								</Container>
+							)}
 							<Container className='ContainerLowerRow'>
 								<h1 className='HeaderTextLabel'>Client Information</h1>
-								<Row>
-									<Col>
-										<h1 className='DataAndTextLable'>
-											Name: {lists.client_name}
-										</h1>
-									</Col>
-									<Col>
-										<h1 className='DataAndTextLable'>
-											Contact Number: {lists.client_cont}
-										</h1>
-									</Col>
-								</Row>
+								{userProfileList.map((user, index) => (
+									<Row key={index}>
+										<Col>
+											<h1 className='DataAndTextLable'>Name: {user.name}</h1>
+										</Col>
+										<Col>
+											<h1 className='DataAndTextLable'>
+												Contact Number: {user.contact}
+											</h1>
+										</Col>
+									</Row>
+								))}
+								,
 								<Row>
 									<Col xs={2}>
 										<Container className='MarginerTop'>
@@ -275,7 +230,9 @@ const ClientUpdatesTab = () => {
 						<Col xs={3} className='RightPane'>
 							<Container>
 								<h2 className='StatusText'>Status</h2>
-								<h2 className='DataAndTextLable'>Time Elapsed: 20 mins</h2>
+								<h2 className='DataAndTextLable'>
+									Estimated Time: {lists.duration}
+								</h2>
 							</Container>
 							<Container>
 								<Grid container direction={'column'} spacing={0}>
