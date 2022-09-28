@@ -10,6 +10,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Button1 from "@mui/material/Button";
+import Button2 from "@mui/material/Button";
+import Button3 from "@mui/material/Button";
+import Button4 from "@mui/material/Button";
 import { Grid } from "@mui/material";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
@@ -24,6 +28,23 @@ import ModalRiderDelivery from "../../../components/ModalRiderDelivery";
 import { useNavigate } from 'react-router-dom';
 
 const StatusOfDelivery = () => {
+  const [bttn1, setBttn1] = useState(false);
+  const handleChange1 = () => {
+    setBttn1(!bttn1);
+    Button1.style.textDecoration = "none";
+  };
+  const [bttn2, setBttn2] = useState(false);
+  const handleChange2 = () => {
+    setBttn2(!bttn2);
+  };
+  const [bttn3, setBttn3] = useState(false);
+  const handleChange3 = () => {
+    setBttn3(!bttn3);
+  };
+  const [bttn4, setBttn4] = useState(false);
+  const handleChange4 = () => {
+    setBttn4(!bttn4);
+  };
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useContext(UserContext);
@@ -217,31 +238,29 @@ const StatusOfDelivery = () => {
                 <Container className="buttonMargine">
                   <Row>
                     <Col>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className="button"
-                      >
-                        Picking up Item
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className="button"
-                      >
-                        Picked up Item
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className="button"
-                      >
-                        Item on the Way
-                      </Button>
+                    <Button1 variant="contained" size="large" className="button" onClick={handleChange1}>
+                    Picking up Item
+                  </Button1>
+                </Col>
+                <Col>
+                  <Button2 variant="contained" size="large" className="button" onClick={handleChange2}>
+                    Picked up Item
+                  </Button2>
+                </Col>
+                <Col>
+                  <Button3 variant="contained" size="large" className="button" onClick={handleChange3}>
+                    Item on the Way
+                  </Button3>
+                </Col>
+                <Col>
+                  <Button4
+                    variant="contained"
+                    size="large"
+                    className="button"
+                    onClick={handleChange4}
+                  >
+                    Delivered
+                  </Button4>
                     </Col>
                     <Col>
                       <ModalRiderDelivery />
@@ -259,57 +278,60 @@ const StatusOfDelivery = () => {
                 <Container>
                   <Grid container direction={"column"} spacing={0}>
                     <Grid item>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Picking up the item"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Picked up item"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Item on the way"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <MoreVertOutlinedIcon />
-                    </Grid>
-                    <Grid item>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Delivered"
-                      />
-                    </Grid>
-                  </Grid>
+                    <FormControlLabel
+                    control={<Checkbox />}
+                    label="Picking up the item"
+                    checked = {bttn1}
+                  />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Picked up item"
+                    checked = {bttn2}
+                  />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Item on the way"
+                    checked = {bttn3}
+                  />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <MoreVertOutlinedIcon />
+                </Grid>
+                <Grid item>
+                  <FormControlLabel 
+                  control={<Checkbox />} 
+                  label="Delivered" 
+                  checked = {bttn4} />
+                </Grid>
+              </Grid>
                 </Container>
                 <Container className="CancelButtonContainer">
                   <Stack spacing={20} direction="row">
