@@ -23,7 +23,6 @@ export default function ModalRiderDelivery() {
     <div>
       <Button
         className={style.buttonDesign}
-        variant="outlined"
         onClick={handleClickOpen}
       >
         Delivered
