@@ -125,13 +125,10 @@ const StatusOfDelivery = () => {
               </Container>
             </Row>
             <Row>
-              <Row></Row>
-              <Row></Row>
               <Col xs={9} className="LeftPane">
                 <div class="d-flex justify-content-end" size="medium">
                   <ModalReportV1 />
                 </div>
-
                 <Container className="ContainerLowerRow">
                   <h1 className="HeaderTextLabel">Client Information</h1>
                   <Row>
@@ -254,16 +251,13 @@ const StatusOfDelivery = () => {
                 </Col>
                 <Col>
                   <Button4
-                    variant="contained"
+                    variant="outlined"
                     size="large"
                     className="button"
                     onClick={handleChange4}
                   >
-                    Delivered
+                    <ModalRiderDelivery></ModalRiderDelivery>
                   </Button4>
-                    </Col>
-                    <Col>
-                      <ModalRiderDelivery />
                     </Col>
                   </Row>
                 </Container>
