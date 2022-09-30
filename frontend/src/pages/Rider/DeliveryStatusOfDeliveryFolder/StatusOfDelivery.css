@@ -1,8 +1,9 @@
 .buttonMargine{
     margin-left: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .button{
-    background-color: #F7BC50 !important;
+  background-color: #f7bc50 !important;
+  color: white;
 }
