@@ -30,3 +30,14 @@ body,
   color: white;
   font-weight: bold;
 }
+.logobg {
+  background-color: #f7bc50;
+  float: left;
+  height: 5rem;
+}
+.logo {
+  height: 250%;
+  width: 100%;
+  margin-top: -25%;
+  margin-left: 5%;
+}

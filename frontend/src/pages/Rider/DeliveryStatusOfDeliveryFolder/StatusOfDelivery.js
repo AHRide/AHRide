@@ -10,6 +10,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Button1 from "@mui/material/Button";
+import Button2 from "@mui/material/Button";
+import Button3 from "@mui/material/Button";
+import Button4 from "@mui/material/Button";
 import { Grid } from "@mui/material";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
@@ -25,6 +29,23 @@ import { useNavigate } from "react-router-dom";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 
 const StatusOfDelivery = () => {
+  const [bttn1, setBttn1] = useState(false);
+  const handleChange1 = () => {
+    setBttn1(!bttn1);
+    Button1.style.textDecoration = "none";
+  };
+  const [bttn2, setBttn2] = useState(false);
+  const handleChange2 = () => {
+    setBttn2(!bttn2);
+  };
+  const [bttn3, setBttn3] = useState(false);
+  const handleChange3 = () => {
+    setBttn3(!bttn3);
+  };
+  const [bttn4, setBttn4] = useState(false);
+  const handleChange4 = () => {
+    setBttn4(!bttn4);
+  };
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [openmodal, setOpenModal] = useState(false);
@@ -144,13 +165,10 @@ const StatusOfDelivery = () => {
               </Container>
             </Row>
             <Row>
-              <Row></Row>
-              <Row></Row>
               <Col xs={9} className="LeftPane">
                 <div class="d-flex justify-content-end" size="medium">
                   <ModalReportV1 />
                 </div>
-
                 <Container className="ContainerLowerRow">
                   <h1 className="HeaderTextLabel">Client Information</h1>
                   <Row>

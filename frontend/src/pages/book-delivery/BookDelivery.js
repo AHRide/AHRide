@@ -355,7 +355,7 @@ const PlacesAutoCompleteFrom = ({ setSelectedFrom, setFrom }) => {
 		suggestions: { status, data },
 		clearSuggestions,
 	} = usePlacesAutocomplete();
-
+	const [index, setIndex] = useState(0);
 	const handleSelect = async (address) => {
 		setValue(address, false);
 
@@ -363,14 +363,14 @@ const PlacesAutoCompleteFrom = ({ setSelectedFrom, setFrom }) => {
 
 		const results = await getGeocode({ address });
 		const parameter = {
-			placeId: results[0].place_id,
+			placeId: results[index].place_id,
 
 			fields: ['name'],
 		};
 		getDetails(parameter).then((details) => {
 			setFrom(details.name);
 		});
-		const { lat, lng } = await getLatLng(results[0]);
+		const { lat, lng } = await getLatLng(results[index]);
 		setSelectedFrom({ lat, lng });
 	};
 
@@ -385,8 +385,13 @@ const PlacesAutoCompleteFrom = ({ setSelectedFrom, setFrom }) => {
 			<ComboboxPopover>
 				<ComboboxList>
 					{status === 'OK' &&
-						data.map(({ place_id, description }) => (
-							<ComboboxOption key={place_id} value={description} />
+						data.map(({ place_id, description, index }) => (
+							<ComboboxOption
+								key={place_id}
+								value={description}
+								index={index}
+								onClick={() => setIndex(index)}
+							/>
 						))}
 				</ComboboxList>
 			</ComboboxPopover>
@@ -403,6 +408,7 @@ const PlacesAutoCompleteTo = ({ setSelectedTo, setTo }) => {
 		clearSuggestions,
 	} = usePlacesAutocomplete();
 
+	const [index, setIndex] = useState(0);
 	const handleSelect = async (address) => {
 		setValue(address, false);
 
@@ -410,14 +416,14 @@ const PlacesAutoCompleteTo = ({ setSelectedTo, setTo }) => {
 
 		const results = await getGeocode({ address });
 		const parameter = {
-			placeId: results[0].place_id,
+			placeId: results[index].place_id,
 
 			fields: ['name'],
 		};
 		getDetails(parameter).then((details) => {
 			setTo(details.name);
 		});
-		const { lat, lng } = await getLatLng(results[0]);
+		const { lat, lng } = await getLatLng(results[index]);
 		setSelectedTo({ lat, lng });
 	};
 
@@ -436,8 +442,13 @@ const PlacesAutoCompleteTo = ({ setSelectedTo, setTo }) => {
 			<ComboboxPopover>
 				<ComboboxList>
 					{status === 'OK' &&
-						data.map(({ place_id, description }) => (
-							<ComboboxOption key={place_id} value={description} />
+						data.map(({ place_id, description, index }) => (
+							<ComboboxOption
+								key={place_id}
+								value={description}
+								index={index}
+								onClick={() => setIndex(index)}
+							/>
 						))}
 				</ComboboxList>
 			</ComboboxPopover>
