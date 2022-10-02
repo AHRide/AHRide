@@ -222,6 +222,50 @@ app.delete('/getDeliveryUpdates/:_id', function (req, res) {
 		});
 });
 
+  app.put('/getDeliveryUpdates/PickingUI/:_id', (req, res) =>{
+	DeliveryUpdateModel.findByIdAndUpdate(
+		{_id: req.params._id},
+		{
+			status: "Picking Up Item",
+		}
+		)
+		.then(function (updateDelivery) {
+			res.send(updateDelivery);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
+app.put('/getDeliveryUpdates/PickedUI/:_id', (req, res) =>{
+	DeliveryUpdateModel.findByIdAndUpdate(
+		{_id: req.params._id},
+		{
+			status: "Picked Up Item",
+		}
+		)
+		.then(function (updateDelivery) {
+			res.send(updateDelivery);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
+app.put('/getDeliveryUpdates/OTW/:_id', (req, res) =>{
+	DeliveryUpdateModel.findByIdAndUpdate(
+		{_id: req.params._id},
+		{
+			status: "Item On The Way",
+		}
+		)
+		.then(function (updateDelivery) {
+			res.send(updateDelivery);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
 
 app.listen(3001, () => {
 	console.log('Server is Running ...');
