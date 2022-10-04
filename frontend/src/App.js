@@ -25,6 +25,7 @@ import AdminRider from "./Admin/AdminRider";
 import AdminClient from "./Admin/AdminClient";
 import AdminRiderInformation from "./Admin/AdminRiderInformation";
 import AdminClientInformation from "./Admin/AdminClientInformation";
+import RiderSignUpPage2 from "./pages/Rider/rider_signup_page2/RiderSignupPage2"
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
             <Route path="/update-status" element={<ClientUpdatesTab />} />
             <Route path="/admin/rider/report" element={<AdminRider />} />
             <Route path="/admin/client/report" element={<AdminClient />} />
+            <Route path="/rider/rider-signUp2" element={<RiderSignUpPage2 />} />
             <Route
               path="/admin/rider/report/information"
               element={<AdminRiderInformation />}
