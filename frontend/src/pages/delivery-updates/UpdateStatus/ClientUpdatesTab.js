@@ -35,6 +35,9 @@ const ClientUpdatesTab = () => {
   const [updateList, setUpdateList] = useState([]);
   const [userProfileList, setuserProfileList] = useState([]);
   const [riderProfileList, setRiderProfileList] = useState([]);
+  const [chkValuePicking, setChkValuePicking] = useState(false);
+  const [chkValuePicked, setChkValuePicked] = useState(false);
+  const [chkValueOTW, setChkValueOTW] = useState(false);
 
   useEffect(() => {
     if (location.state.pending === "pending") {
@@ -251,51 +254,239 @@ const ClientUpdatesTab = () => {
               </Container>
               <Container>
                 <Grid container direction={"column"} spacing={0}>
-                  <Grid item>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Picking up the item"
-                    />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Picked up item"
-                    />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Item on the way"
-                    />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
-                  <Grid item>
-                    <MoreVertOutlinedIcon />
-                  </Grid>
+                     {/* PICKING UP ITEM */}
+                     {lists.sPicking && !lists.sPicked && !lists.sOTW && (
+                      <div>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                disabled={true}
+                                checked={chkValuePicked}
+                              />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={chkValueOTW} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </div>
+                    )}
+                    {/*   PICKED UP ITEM */}
+                    {!lists.sPicking && !lists.sPicked && !lists.sOTW && (
+                      <div>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                disabled={true}
+                                checked={chkValuePicking}
+                              />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                disabled={true}
+                                checked={chkValuePicked}
+                              />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={chkValueOTW} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </div>
+                    )}
+                    {/*   ITEM ON THE WAY */}
+                    {lists.sPicking && lists.sPicked && !lists.sOTW && (
+                      <Row>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={chkValueOTW} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </Row>
+                    )}
+                    {lists.sPicking && lists.sPicked && lists.sOTW && (
+                      <div>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </div>
+                    )}
                   <Grid item>
                     <FormControlLabel
                       control={<Checkbox />}

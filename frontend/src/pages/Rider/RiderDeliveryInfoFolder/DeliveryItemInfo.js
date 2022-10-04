@@ -56,7 +56,9 @@ const RiderDeliveryItemInfo = () => {
 			note,
 			payment,
 			duration,
-			status: 'In Progress',
+			sPicking: false,
+			sPicked: false,
+			sOTW: false,
 		});
 		axios
 			.delete(`http://localhost:3001/getBookDelivery/${location.state._id}/`)
