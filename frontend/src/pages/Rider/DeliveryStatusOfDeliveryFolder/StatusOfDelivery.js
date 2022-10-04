@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 
 const StatusOfDelivery = () => {
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });;
 
   const [bttn1, setBttn1] = useState(false);
   const handleChange1 = () => {
@@ -106,18 +107,23 @@ const StatusOfDelivery = () => {
     receiver_name,
     receiver_cont,
     note,
-    payment,
-    duration
+    payment
   ) => {
-    axios.post("http://localhost:3001/bookDelivery", {
+    axios.post("http://localhost:3001/deliveryHistory", {
+      delivery_id: _id,
+      status: "Cancelled",
+      rider_email: user._profile.data.email,
       client_email,
-      from,
       to,
+      from,
       receiver_name,
       receiver_cont,
       note,
       payment,
-      duration,
+      sPicking: btnValuePicking,
+      sPicked: btnValuePicked,
+      sOTW: btnValueOTW,
+      timeEnd: time
     });
     axios
       .delete(`http://localhost:3001/getDeliveryUpdates/${_id}/`)
@@ -140,7 +146,7 @@ const StatusOfDelivery = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
-      axios
+    axios
       .put(
         `http://localhost:3001/getDeliveryUpdates/start/${post._id}/`,
         post
@@ -340,7 +346,20 @@ const StatusOfDelivery = () => {
                       </Button>
                     </Col>
                     <Col>
-                      <ModalRiderDelivery />
+                      <ModalRiderDelivery
+                        delivery_id={lists._id}
+                        rider_email={user._profile.data.email}
+                        client_email={lists.client_email}
+                        to={lists.to}
+                        from={lists.from}
+                        receiver_name={lists.receiver_name}
+                        receiver_cont={lists.receiver_cont}
+                        note={lists.note}
+                        payment={lists.payment}
+                        sPicking={btnValuePicking}
+                        sPicked={btnValuePicked}
+                        sOTW={btnValueOTW}
+                        timeEnd={time} />
                     </Col>
                   </Row>
                 </Container>

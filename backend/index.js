@@ -6,6 +6,7 @@ const UserModelRider = require('./models/UserRider');
 const DeliveryUpdateModel = require('./models/DeliveryUpdates');
 const DeliveryOfferModel = require('./models/DeliveryOffers');
 const BookDeliveryModel = require('./models/BookDelivery');
+const DeliveryHistoryModel = require('./models/DeliveryHistory');
 const cors = require('cors');
 
 
@@ -163,6 +164,25 @@ app.get('/getDeliveryOffers/:_id', function (req, res) {
 		});
 });
 
+app.get('/getDeliveryHistory/rider/:rider_email', function (req, res) {
+	return DeliveryHistoryModel.find({ rider_email: req.params.rider_email })
+		.then(function (deli) {
+			res.send(deli);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+app.get('/getDeliveryHistory/client/:email', function (req, res) {
+	return DeliveryHistoryModel.find({ client_email: req.params.client_email })
+		.then(function (deli) {
+			res.send(deli);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
 app.post('/createUser', async (req, res) => {
 	const user = req.body;
 	const newUser = new UserModel(user);
@@ -185,6 +205,14 @@ app.post('/bookDelivery', async (req, res) => {
 	await newBookDeli.save();
 
 	res.json(bookdeli);
+});
+
+app.post('/deliveryHistory', async (req, res) => {
+	const historydeli = req.body;
+	const newHistoryDeli = new DeliveryHistoryModel(historydeli);
+	await newHistoryDeli.save();
+
+	res.json(historydeli);
 });
 
 app.post('/createDeliveryUpdates', async (req, res) => {

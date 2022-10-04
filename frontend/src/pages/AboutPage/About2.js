@@ -1,7 +1,7 @@
 import "./About.css";
-import Picture1 from "../../images/Picture1.png";
-import Picture2 from "../../images/Picture2.png";
 import Picture3 from "../../images/Picture3.png";
+import Picture2 from "../../images/Picture2.png";
+import Picture4 from "../../images/Picture4.gif"
 import NavBarRider from "../../components/NavBarRider";
 
 const AboutPageRider = () => {
@@ -11,7 +11,7 @@ const AboutPageRider = () => {
       <div className="about-form-container">
         <div className="group-about-form-container">
           <h1>about</h1>
-          <img className="about-form-img" src={Picture1} alt="Rider" />
+          <img className="about-form-img" src={Picture4} alt="Rider" />
           <img className="about-form-img2" src={Picture2} alt="Men" />
           <div className="in-about-form-container">
             <img className="about-form-img3" src={Picture3} alt="Logo" />

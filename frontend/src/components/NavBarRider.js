@@ -34,6 +34,13 @@ export default function NavBarRider() {
           >
             About
           </Link>
+           <Link
+            className={styling.NavName}
+            style={{ textDecoration: "none" }}
+            to="/rider/deliveryHistory"
+          >
+            History
+          </Link>
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}

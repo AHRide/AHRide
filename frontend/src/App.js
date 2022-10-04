@@ -25,6 +25,7 @@ import AdminRider from "./Admin/AdminRider";
 import AdminClient from "./Admin/AdminClient";
 import AdminRiderInformation from "./Admin/AdminRiderInformation";
 import AdminClientInformation from "./Admin/AdminClientInformation";
+import RiderHistoryPage from "./pages/HistoryPage/Rider/RiderHistoryPage";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
               element={<RiderDeliveryItemInfo />}
             />
             <Route path="/admin/homepage" element={<AdminHomepage />} />
+            <Route path="/rider/deliveryHistory" element={<RiderHistoryPage />} />
           </Route>
         </Routes>
       </UserProvider>
