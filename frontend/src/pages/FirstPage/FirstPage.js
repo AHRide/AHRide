@@ -1,9 +1,31 @@
 import React from "react";
-import styler from "./FirstPage.module.css";
-import { useNavigate } from "react-router-dom";
+import styler from "./FirstPage.module.css";import { useContext, useEffect} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user.context";
 
 export default function ClientHomepage() {
+  const location = useLocation();
   const navigate = useNavigate();
+  const { user, fetchUser} = useContext(UserContext);
+
+  const redirectNow = () => {
+    const redirectTo = location.search.replace("?redirectTo=", "");
+    navigate(redirectTo ? redirectTo : "/rider/homepage");
+  };
+
+  const loadUser = async () => {
+    if (!user) {
+      const fetchedUser = await fetchUser();
+      if (fetchedUser) {
+        // Redirecting them once fetched.
+        redirectNow();
+      }
+    }
+  };
+
+  useEffect(() => {
+    loadUser(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   return (
     <>

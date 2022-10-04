@@ -37,10 +37,26 @@ const DeliveryUpdateSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	status: {
-		type: String,
-		required: true,
+	sPicking: {
+		type: Boolean,
+		required: false,
 	},
+	sPicked: {
+		type: Boolean,
+		required: false,
+	},
+	sOTW: {
+		type: Boolean,
+		required: false,
+	},
+	timeStart: {
+		type: String,
+		default: false
+	  },
+	timeEnd: {
+		type: String,
+		default: false
+	  }
 });
 
 const DeliveryUpdateModel = mongoose.model(

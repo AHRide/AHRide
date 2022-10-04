@@ -44,10 +44,28 @@ function DisplayDeliveryList() {
 						<div className='column-details'>
 							<h3>{lists.to}</h3>
 						</div>
+						{!lists.sPicking && !lists.sPicked && !lists.sOTW && (
 						<div className='column-details'>
-							<h3>{lists.status}</h3>
+							<h3>In Progress</h3>
 						</div>
+						)}
+						{lists.sPicking && !lists.sPicked && !lists.sOTW && (
+						<div className='column-details'>
+							<h3>Picking Up Item</h3>
+						</div>
+						)}
+						{lists.sPicking && lists.sPicked && !lists.sOTW && (
+						<div className='column-details'>
+							<h3>Picked Up Item</h3>
+						</div>
+						)}
+						{lists.sPicking && lists.sPicked && lists.sOTW && (
+						<div className='column-details'>
+							<h3>Item On The Way</h3>
+						</div>
+						)}
 					</div>
+					
 				</div>
 			))}
 		</>

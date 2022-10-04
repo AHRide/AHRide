@@ -25,9 +25,11 @@ import Backdrop from "@mui/material/Backdrop";
 import Modal from "../../../components/Modal";
 import ModalReportV1 from "../../../components/ModalReportV1";
 import ModalRiderDelivery from "../../../components/ModalRiderDelivery";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 
 const StatusOfDelivery = () => {
+
   const [bttn1, setBttn1] = useState(false);
   const handleChange1 = () => {
     setBttn1(!bttn1);
@@ -46,7 +48,6 @@ const StatusOfDelivery = () => {
     setBttn4(!bttn4);
   };
   const navigate = useNavigate();
-  const location = useLocation();
   const { user } = useContext(UserContext);
   const [openmodal, setOpenModal] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -66,6 +67,13 @@ const StatusOfDelivery = () => {
   };
 
   const [updateList, setUpdateList] = useState([]);
+  const [updateStatus, setUpdateStatus] = useState([]);
+  const [chkValuePicking, setChkValuePicking] = useState(false);
+  const [chkValuePicked, setChkValuePicked] = useState(false);
+  const [chkValueOTW, setChkValueOTW] = useState(false);
+  const [btnValuePicking, setBtnValuePicking] = useState(false);
+  const [btnValuePicked, setBtnValuePicked] = useState(false);
+  const [btnValueOTW, setBtnValueOTW] = useState(false);
 
   useEffect(() => {
     axios
@@ -74,6 +82,19 @@ const StatusOfDelivery = () => {
       )
       .then((response) => {
         setUpdateList(response.data);
+      });
+
+    axios
+      .get(
+        `http://localhost:3001/getDeliveryUpdates/rider/${user._profile.data.email}`
+      )
+      .then((response) => {
+        const picking = response.data.map((res) => res.sPicking);
+        const picked = response.data.map((res) => res.sPicked);
+        const OTW = response.data.map((res) => res.sOTW);
+        setBtnValueOTW(OTW[0]);
+        setBtnValuePicked(picked[0]);
+        setBtnValuePicking(picking[0]);
       });
   }, [user._profile.data.email]);
 
@@ -105,7 +126,58 @@ const StatusOfDelivery = () => {
       });
 
     alert("Successfully Cancelled");
-    navigate('/delivery-offers');
+    navigate("/delivery-offers");
+  };
+
+  const onPickingUpdate = (post) => {
+    setChkValuePicking(true);
+    setBtnValuePicking(true);
+    axios
+      .put(
+        `http://localhost:3001/getDeliveryUpdates/PickingUI/${post._id}/`,
+        post
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+      axios
+      .put(
+        `http://localhost:3001/getDeliveryUpdates/start/${post._id}/`,
+        post
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const onPickedUpdate = (post) => {
+    if (btnValuePicking === false) {
+      alert("Don't Skip");
+      return;
+    }
+    setBtnValuePicked(true);
+    setChkValuePicked(true);
+
+    axios
+      .put(
+        `http://localhost:3001/getDeliveryUpdates/PickedUI/${post._id}/`,
+        post
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const onOTWUpdate = (post) => {
+    if (btnValuePicked === false || btnValuePicking === false) {
+      alert("Don't Skip");
+      return;
+    }
+    setBtnValueOTW(true);
+    setChkValueOTW(true);
+
+    axios
+      .put(`http://localhost:3001/getDeliveryUpdates/OTW/${post._id}/`, post)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   if (updateList.length > 0) {
@@ -235,29 +307,40 @@ const StatusOfDelivery = () => {
                 <Container className="buttonMargine">
                   <Row>
                     <Col>
-                    <Button1 variant="contained" size="large" className="button" onClick={handleChange1}>
-                    Picking up Item
-                  </Button1>
-                </Col>
-                <Col>
-                  <Button2 variant="contained" size="large" className="button" onClick={handleChange2}>
-                    Picked up Item
-                  </Button2>
-                </Col>
-                <Col>
-                  <Button3 variant="contained" size="large" className="button" onClick={handleChange3}>
-                    Item on the Way
-                  </Button3>
-                </Col>
-                <Col>
-                  <Button4
-                    variant="outlined"
-                    size="large"
-                    className="button"
-                    onClick={handleChange4}
-                  >
-                    <ModalRiderDelivery></ModalRiderDelivery>
-                  </Button4>
+                      <Button
+                        variant="contained"
+                        size="large"
+                        className="button"
+                        disabled={btnValuePicking}
+                        onClick={() => onPickingUpdate(lists)}
+                      >
+                        Picking up Item
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        variant="contained"
+                        size="large"
+                        className="button"
+                        disabled={btnValuePicked}
+                        onClick={() => onPickedUpdate(lists)}
+                      >
+                        Picked up Item
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        variant="contained"
+                        size="large"
+                        className="button"
+                        disabled={btnValueOTW}
+                        onClick={() => onOTWUpdate(lists)}
+                      >
+                        Item on the Way
+                      </Button>
+                    </Col>
+                    <Col>
+                      <ModalRiderDelivery />
                     </Col>
                   </Row>
                 </Container>
@@ -271,61 +354,247 @@ const StatusOfDelivery = () => {
                 </Container>
                 <Container>
                   <Grid container direction={"column"} spacing={0}>
+                    {/* PICKING UP ITEM */}
+                    {lists.sPicking && !lists.sPicked && !lists.sOTW && (
+                      <div>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                disabled={true}
+                                checked={chkValuePicked}
+                              />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={chkValueOTW} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </div>
+                    )}
+                    {/*   PICKED UP ITEM */}
+                    {!lists.sPicking && !lists.sPicked && !lists.sOTW && (
+                      <div>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                disabled={true}
+                                checked={chkValuePicking}
+                              />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                disabled={true}
+                                checked={chkValuePicked}
+                              />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={chkValueOTW} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </div>
+                    )}
+                    {/*   ITEM ON THE WAY */}
+                    {lists.sPicking && lists.sPicked && !lists.sOTW && (
+                      <Row>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={chkValueOTW} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </Row>
+                    )}
+                    {lists.sPicking && lists.sPicked && lists.sOTW && (
+                      <div>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picking up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Picked up item"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <FormControlLabel
+                            control={
+                              <Checkbox disabled={true} checked={true} />
+                            }
+                            label="Item on the way"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                        <Grid item>
+                          <MoreVertOutlinedIcon />
+                        </Grid>
+                      </div>
+                    )}
+
                     <Grid item>
-                    <FormControlLabel
-                    control={<Checkbox />}
-                    label="Picking up the item"
-                    checked = {bttn1}
-                  />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Picked up item"
-                    checked = {bttn2}
-                  />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Item on the way"
-                    checked = {bttn3}
-                  />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <MoreVertOutlinedIcon />
-                </Grid>
-                <Grid item>
-                  <FormControlLabel 
-                  control={<Checkbox />} 
-                  label="Delivered" 
-                  checked = {bttn4} />
-                </Grid>
-              </Grid>
+                      <FormControlLabel
+                        control={<Checkbox />}
+                        label="Delivered"
+                      />
+                    </Grid>
+                  </Grid>
                 </Container>
                 <Container className="CancelButtonContainer">
                   <Stack spacing={20} direction="row">
