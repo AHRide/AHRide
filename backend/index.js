@@ -6,8 +6,13 @@ const UserModelRider = require('./models/UserRider');
 const DeliveryUpdateModel = require('./models/DeliveryUpdates');
 const DeliveryOfferModel = require('./models/DeliveryOffers');
 const BookDeliveryModel = require('./models/BookDelivery');
-
 const cors = require('cors');
+
+
+const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});;
+
+
+
 
 app.use(express.json());
 app.use(cors());
@@ -226,7 +231,7 @@ app.delete('/getDeliveryUpdates/:_id', function (req, res) {
 	DeliveryUpdateModel.findByIdAndUpdate(
 		{_id: req.params._id},
 		{
-			status: "Picking Up Item",
+			sPicking: true,
 		}
 		)
 		.then(function (updateDelivery) {
@@ -241,7 +246,7 @@ app.put('/getDeliveryUpdates/PickedUI/:_id', (req, res) =>{
 	DeliveryUpdateModel.findByIdAndUpdate(
 		{_id: req.params._id},
 		{
-			status: "Picked Up Item",
+			sPicked: true,
 		}
 		)
 		.then(function (updateDelivery) {
@@ -256,7 +261,36 @@ app.put('/getDeliveryUpdates/OTW/:_id', (req, res) =>{
 	DeliveryUpdateModel.findByIdAndUpdate(
 		{_id: req.params._id},
 		{
-			status: "Item On The Way",
+			sOTW: true,
+		}
+		)
+		.then(function (updateDelivery) {
+			res.send(updateDelivery);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
+app.put('/getDeliveryUpdates/start/:_id', (req, res) =>{
+	DeliveryUpdateModel.findByIdAndUpdate(
+		{_id: req.params._id},
+		{
+			timeStart: time,
+		}
+		)
+		.then(function (updateDelivery) {
+			res.send(updateDelivery);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+app.put('/getDeliveryUpdates/end/:_id', (req, res) =>{
+	DeliveryUpdateModel.findByIdAndUpdate(
+		{_id: req.params._id},
+		{
+			timeEnd: time,
 		}
 		)
 		.then(function (updateDelivery) {
