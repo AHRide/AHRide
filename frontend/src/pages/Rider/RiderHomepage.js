@@ -14,6 +14,11 @@ export default function RiderHomepage() {
           </button>
         </Link>
       </div>
+      <Link to="/admin/homepage">
+        <button className={styled.DeliveryOffersButton} type="submit">
+          Admin
+        </button>
+      </Link>
       <div></div>
     </>
   );
