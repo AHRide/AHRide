@@ -5,9 +5,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import style from "../components/BanRider.module.css";
+import delivered from "../images/delivered.gif";
+import style from "../components/modalcancelled.module.css";
 
-export default function BanRider() {
+export default function ModalDelivery() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,15 +21,9 @@ export default function BanRider() {
 
   return (
     <div>
-      <div className={style.Button1}>
-        <Button
-          className={style.Button}
-          variant="outlined"
-          onClick={handleClickOpen}
-        >
-          BAN
-        </Button>
-      </div>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Open alert dialog
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -36,18 +31,20 @@ export default function BanRider() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Are you sure you want to BAN the rider?"}
+          {"The Rider has Delivered the parcel."}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Warning: The rider loses access to the account permanently after
-            being banned.
+            The rider has successfully delivered the parcel. Please check for
+            any damages or loss.
+            <div className={style.delivered}>
+              <img src={delivered} alt="delivered logo" />
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button className={style.ban} onClick={handleClose} autoFocus>
-            Ban
+          <Button className={style.button} onClick={handleClose}>
+            Done
           </Button>
         </DialogActions>
       </Dialog>

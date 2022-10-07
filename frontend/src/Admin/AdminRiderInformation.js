@@ -7,9 +7,11 @@ import TextField from "@mui/material/TextField";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Rating from "@mui/material/Rating";
 import BanRider from "../Admin/components/BanRider";
+import ModalDelivery from "../components/ModalDelivery";
+import ModalCancelled from "../components/ModalCancelled";
 
 function AdminRiderInformation() {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
 
   return (
     <>
@@ -43,7 +45,7 @@ function AdminRiderInformation() {
               </div>
               <ArrowDownwardIcon className={style.arrow} fontSize="large" />
               <h1 className={style.to1}>To:</h1>
-              <div>
+              <div className={style.to2}>
                 <TextField
                   className={style.text2}
                   id="filled-basic"
@@ -54,23 +56,21 @@ function AdminRiderInformation() {
             </div>
             <div className={style.column13}>
               <h1 className={style.rating}>Rating:</h1>
-              <Rating
-                name="read-only"
-                value={value}
-                readOnly
-                className={style.stars}
-                size="large"
-              />
+              {/* <ModalCancelled /> */}
+              {/* <ModalDelivery /> */}
+              <div className={style.stars}>
+                <Rating name="read-only" value={value} readOnly size="large" />
+              </div>
               <h1 className={style.note}>Note from Client: </h1>
-              <TextField
-                className={style.text3}
-                id="filled-multiline-static"
-                // label="Multiline"
-                multiline
-                rows={4}
-                // defaultValue="Default Value"
-                variant="filled"
-              />
+              <div className={style.t3}>
+                <TextField
+                  className={style.text3}
+                  id="filled-multiline-static"
+                  multiline
+                  rows={4}
+                  variant="filled"
+                />
+              </div>
             </div>
           </div>
         </div>
