@@ -27,6 +27,7 @@ import AdminRiderInformation from "./Admin/AdminRiderInformation";
 import AdminClientInformation from "./Admin/AdminClientInformation";
 import RiderHistoryPage from "./pages/HistoryPage/Rider/RiderHistoryPage";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -50,6 +51,7 @@ function App() {
             <Route path="/update-status" element={<ClientUpdatesTab />} />
             <Route path="/admin/rider/report" element={<AdminRider />} />
             <Route path="/admin/client/report" element={<AdminClient />} />
+           
             <Route
               path="/admin/rider/report/information"
               element={<AdminRiderInformation />}
