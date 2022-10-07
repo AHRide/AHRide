@@ -37,6 +37,13 @@ export default function NavBarClient() {
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
+            to="/client/deliveryHistory"
+          >
+            History
+            </Link>
+          <Link
+            className={styling.NavName}
+            style={{ textDecoration: "none" }}
             to="/client/profile"
           >
             Profile

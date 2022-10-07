@@ -1,6 +1,6 @@
 import React from "react";
 import NavBarRider from "../../../components/NavBarRider";
-import "../../HistoryPage/HistoryPages.css";
+import "../HistoryPages.css";
 import DisplayRiderHistory from "./RiderHistoryCards";
 
 const RiderHistoryPage = () => {

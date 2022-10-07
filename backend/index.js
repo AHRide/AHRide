@@ -184,7 +184,7 @@ app.get('/getDeliveryHistory/:_id', function (req, res) {
 		});
 });
 
-app.get('/getDeliveryHistory/client/:email', function (req, res) {
+app.get('/getDeliveryHistory/client/:client_email', function (req, res) {
 	return DeliveryHistoryModel.find({ client_email: req.params.client_email })
 		.then(function (deli) {
 			res.send(deli);

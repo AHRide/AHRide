@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../../contexts/user.context';
-import "../../HistoryPage/HistoryPages.css";
+import '../HistoryPageCards.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
