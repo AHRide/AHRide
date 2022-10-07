@@ -173,6 +173,17 @@ app.get('/getDeliveryHistory/rider/:rider_email', function (req, res) {
 			console.log(error);
 		});
 });
+
+app.get('/getDeliveryHistory/:_id', function (req, res) {
+	return DeliveryHistoryModel.find({ _id: req.params._id })
+		.then(function (deli) {
+			res.send(deli);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
 app.get('/getDeliveryHistory/client/:email', function (req, res) {
 	return DeliveryHistoryModel.find({ client_email: req.params.client_email })
 		.then(function (deli) {

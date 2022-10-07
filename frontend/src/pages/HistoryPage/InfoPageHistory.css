@@ -191,11 +191,3 @@
 
 	color: #000000;
 }
-
-.completed_rider {
-    background-color: green;
-}
-
-.cancelled_rider {
-    background-color: grey;
-}
