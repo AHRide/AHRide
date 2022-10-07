@@ -19,7 +19,7 @@ export default function AdminClientInformation() {
           <Link
             className={style.backbutton}
             style={{ textDecoration: "none" }}
-            to="/admin/rider/report"
+            to="/admin/client/report"
           >
             <ArrowBackIcon fontSize="large" />
           </Link>
@@ -43,7 +43,7 @@ export default function AdminClientInformation() {
               </div>
               <ArrowDownwardIcon className={style.arrow} fontSize="large" />
               <h1 className={style.to1}>To:</h1>
-              <div>
+              <div className={style.to2}>
                 <TextField
                   className={style.text2}
                   id="filled-basic"
@@ -54,23 +54,21 @@ export default function AdminClientInformation() {
             </div>
             <div className={style.column13}>
               <h1 className={style.rating}>Rating:</h1>
-              <Rating
-                name="read-only"
-                value={value}
-                readOnly
-                className={style.stars}
-                size="large"
-              />
+              <div className={style.stars}>
+                <Rating name="read-only" value={value} readOnly size="large" />
+              </div>
               <h1 className={style.note}>Note from Rider: </h1>
-              <TextField
-                className={style.text3}
-                id="filled-multiline-static"
-                // label="Multiline"
-                multiline
-                rows={4}
-                // defaultValue="Default Value"
-                variant="filled"
-              />
+              <div className={style.location1}>
+                <TextField
+                  className={style.text3}
+                  id="filled-multiline-static"
+                  // label="Multiline"
+                  multiline
+                  rows={4}
+                  // defaultValue="Default Value"
+                  variant="filled"
+                />
+              </div>
             </div>
           </div>
         </div>
