@@ -40,6 +40,8 @@ const ClientUpdatesTab = () => {
   const [chkValueOTW, setChkValueOTW] = useState(false);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      
     if (location.state.pending === "pending") {
       axios
         .get(`http://localhost:3001/getBookDelivery/${location.state._id}/`)
@@ -64,6 +66,10 @@ const ClientUpdatesTab = () => {
       .then((response) => {
         setuserProfileList(response.data);
       });
+
+    }, 500);
+
+    return () => clearInterval(interval);
   }, [
     location.state._id,
     location.state.email,
