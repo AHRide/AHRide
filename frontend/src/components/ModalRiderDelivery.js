@@ -48,7 +48,7 @@ const ModalRiderDelivery = ({ delivery_id, rider_email, client_email,
         console.log(response);
       });
       handleClose();
-    alert("Successfully Cancelled");
+    alert("Successfully Delivered");
     navigate("/delivery-offers");
   };
 
@@ -67,7 +67,7 @@ const ModalRiderDelivery = ({ delivery_id, rider_email, client_email,
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Complete!Well Done!"}
+          {"Complete! Well Done!"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
