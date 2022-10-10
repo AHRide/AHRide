@@ -10,6 +10,7 @@ function DisplayDeliveryList() {
 	const [updateList, setUpdateList] = useState([]);
 
 	useEffect(() => {
+		const interval = setInterval(() => {
 		axios
 			.get(
 				`http://localhost:3001/getDeliveryUpdates/user/${user._profile.data.email}`
@@ -17,6 +18,8 @@ function DisplayDeliveryList() {
 			.then((response) => {
 				setUpdateList(response.data);
 			});
+		}, 500);
+		return () => clearInterval(interval);
 	}, [user._profile.data.email]);
 
 	const toUpdateStatus = (_id, email, pending) => {
