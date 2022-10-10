@@ -51,16 +51,6 @@
 	background: white;
 }
 
-.WhitePayment {
-	padding-top: 10px;
-	padding-left: 30px;
-	background: white;
-	width: 100px;
-	height: 140px;
-	border: 2px solid #000000;
-	flex-direction: center;
-	border-radius: 10px;
-}
 .CenterText {
 	text-align: center;
 }
@@ -120,15 +110,7 @@
 	color: #000000;
 }
 
-.ContainerRevceiverContact {
-	margin-top: 30px;
-	width: 500px;
-	background-color: white;
-	height: 100px;
-	padding-top: 10px;
-	border-end-end-radius: 20;
-	border-radius: 10px;
-}
+
 
 .StatusText {
 	width: 160px;
