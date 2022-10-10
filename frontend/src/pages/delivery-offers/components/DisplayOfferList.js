@@ -9,9 +9,13 @@ function DisplayOfferList() {
   const [offerList, setOfferList] = useState([]);
 
   useEffect(() => {
+    const interval = setInterval(() => {
     axios.get(`http://localhost:3001/getBookDelivery`).then((response) => {
       setOfferList(response.data);
     });
+  }, 500);
+  return () => clearInterval(interval);
+
   }, []);
 
   const toUpdateStatus = (_id, email) => {

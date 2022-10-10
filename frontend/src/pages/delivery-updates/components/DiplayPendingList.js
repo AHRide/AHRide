@@ -9,6 +9,7 @@ function DisplayPendingList() {
 	const [updateList, setUpdateList] = useState([]);
 	const { user } = useContext(UserContext);
 	useEffect(() => {
+		const interval = setInterval(() => {
 		axios
 			.get(
 				`http://localhost:3001/getBookDelivery/user/${user._profile.data.email}`
@@ -16,6 +17,9 @@ function DisplayPendingList() {
 			.then((response) => {
 				setUpdateList(response.data);
 			});
+
+		}, 500);
+		return () => clearInterval(interval);
 	}, [user._profile.data.email]);
 
 	const toUpdateStatus = (_id, pending) => {
