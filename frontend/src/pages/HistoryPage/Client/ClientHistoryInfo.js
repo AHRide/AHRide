@@ -40,6 +40,7 @@ const ClientHistoryInfo = () => {
     const [chkValueOTW, setChkValueOTW] = useState(false);
 
     useEffect(() => {
+        
         axios
             .get(`http://localhost:3001/getDeliveryHistory/${location.state._id}/`)
             .then((response) => {

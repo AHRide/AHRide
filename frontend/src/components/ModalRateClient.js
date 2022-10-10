@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,6 +14,8 @@ import axios from "axios";
 
 const AlertDialog = ({ historyID }) => {;
   const [open, setOpen] = React.useState(false);
+  const [btnValue, setBtnValue] = useState(false);
+  const [rating, setRating] = useState("");
   const [value, setValue] = React.useState(0);
   const [updatedPost, setUpdatedPost] = useState({
     rating: "",
@@ -27,6 +29,22 @@ const AlertDialog = ({ historyID }) => {;
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+		const interval = setInterval(() => {
+		axios
+			.get(
+				`http://localhost:3001/getDeliveryHistory/${historyID}/`
+			)
+			.then((response) => {
+				const btn = response.data.map((res) => res.rating);
+        setRating(btn[0]);
+       
+			});
+		}, 500);
+    
+		return () => clearInterval(interval);
+	}, [historyID]);
 
   // const updatePost = (rating) => {
   //   setUpdatedPost((prev) => {
@@ -57,19 +75,39 @@ const AlertDialog = ({ historyID }) => {;
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
+
+      setBtnValue(true);
+
+
     handleClose();
   };
 
   return (
     <>
       <div>
+        {rating > 0 && (
         <Button
           className={style.RateLocation}
           variant="outlined"
+          disabled={true}
           onClick={handleClickOpen}
         >
           Rate
         </Button>
+
+        )}
+        {rating === 0 && (
+        <Button
+          className={style.RateLocation}
+          variant="outlined"
+          disabled={true}
+          onClick={handleClickOpen}
+        >
+          Rate
+        </Button>
+
+        )}
+        
         <Dialog
           fullHeight={200}
           // maxWidth={100}
