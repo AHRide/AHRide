@@ -65,6 +65,10 @@ const DeliveryHistorySchema = new mongoose.Schema({
 		type: String,
 		default: false
 	  },
+	comment: {
+		type: String,
+		default: false
+	},
 	rating:{
 		type: Number,
 		required: false,	

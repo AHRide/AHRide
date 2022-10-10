@@ -424,7 +424,7 @@ const ClientHistoryInfo = () => {
 
                                 </Grid>
                                 <div className="RateLocation">
-                                <ModalRateClient />
+                                <ModalRateClient historyID={location.state._id}/>
                                 </div>
                             </Container>
                         </Col>
