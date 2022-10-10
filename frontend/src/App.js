@@ -25,6 +25,10 @@ import AdminRider from "./Admin/AdminRider";
 import AdminClient from "./Admin/AdminClient";
 import AdminRiderInformation from "./Admin/AdminRiderInformation";
 import AdminClientInformation from "./Admin/AdminClientInformation";
+import RiderHistoryPage from "./pages/HistoryPage/Rider/RiderHistoryPage";
+import RiderHistoryInfo from "./pages/HistoryPage/Rider/RiderHistoryInfo";
+import ClientHistoryInfo from "./pages/HistoryPage/Client/ClientHistoryInfo";
+import ClientHistoryPage from "./pages/HistoryPage/Client/ClientHistoryPage";
 
 
 function App() {
@@ -70,6 +74,10 @@ function App() {
               element={<RiderDeliveryItemInfo />}
             />
             <Route path="/admin/homepage" element={<AdminHomepage />} />
+            <Route path="/rider/deliveryHistory" element={<RiderHistoryPage />} />
+            <Route path="/rider/RiderHistoryInfo" element={<RiderHistoryInfo />} />
+            <Route path="/client/deliveryHistory" element={<ClientHistoryPage />} />
+            <Route path="/client/ClientHistoryInfo" element={<ClientHistoryInfo />} />
           </Route>
         </Routes>
       </UserProvider>

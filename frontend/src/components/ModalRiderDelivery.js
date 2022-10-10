@@ -7,9 +7,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import style from "../components/ModalRiderDelivery.module.css";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function ModalRiderDelivery() {
+const ModalRiderDelivery = ({ delivery_id, rider_email, client_email,
+  to, from, receiver_name, receiver_cont, note, payment, sPicking, sPicked, sOTW,
+  timeEnd }) => {
   const [open, setOpen] = React.useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,6 +23,33 @@ export default function ModalRiderDelivery() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const onSubmit = (
+  ) => {
+    axios.post("http://localhost:3001/deliveryHistory", {
+      delivery_id,
+      status: "Completed",
+      rider_email,
+      client_email,
+      to,
+      from,
+      receiver_name,
+      receiver_cont,
+      note,
+      payment,
+      sPicking,
+      sPicked,
+      sOTW,
+      timeEnd
+    });
+    axios
+      .delete(`http://localhost:3001/getDeliveryUpdates/${delivery_id}/`)
+      .then((response) => {
+        console.log(response);
+      });
+      handleClose();
+    alert("Successfully Cancelled");
+    navigate("/delivery-offers");
   };
 
   return (
@@ -38,7 +71,7 @@ export default function ModalRiderDelivery() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Time Delivered:
+            Time Delivered: {timeEnd}
           </DialogContentText>
           <div className={style.column}>
             <TextField
@@ -50,7 +83,7 @@ export default function ModalRiderDelivery() {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={()=> onSubmit()} autoFocus>
             Done
           </Button>
         </DialogActions>
@@ -58,3 +91,4 @@ export default function ModalRiderDelivery() {
     </div>
   );
 }
+export default ModalRiderDelivery;
