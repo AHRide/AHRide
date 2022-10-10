@@ -40,7 +40,8 @@ const ModalRiderDelivery = ({ delivery_id, rider_email, client_email,
       sPicking,
       sPicked,
       sOTW,
-      timeEnd
+      timeEnd,
+      rating: 0,  
     });
     axios
       .delete(`http://localhost:3001/getDeliveryUpdates/${delivery_id}/`)

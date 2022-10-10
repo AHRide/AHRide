@@ -64,7 +64,11 @@ const DeliveryHistorySchema = new mongoose.Schema({
 	timeEnd: {
 		type: String,
 		default: false
-	  }
+	  },
+	rating:{
+		type: Number,
+		required: false,	
+	}
 });
 
 const DeliveryHistoryModel = mongoose.model(

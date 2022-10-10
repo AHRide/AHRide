@@ -18,6 +18,7 @@ import axios from "axios";
 import Backdrop from "@mui/material/Backdrop";
 import { useNavigate } from "react-router-dom";
 import NavBarClient from "../../../components/NavBarClient";
+import ModalRateClient from "../../../components/ModalRateClient";
 
 const ClientHistoryInfo = () => {
     const navigate = useNavigate();
@@ -422,6 +423,9 @@ const ClientHistoryInfo = () => {
                                     )}
 
                                 </Grid>
+                                <div className="RateLocation">
+                                <ModalRateClient />
+                                </div>
                             </Container>
                         </Col>
                     </Row>
