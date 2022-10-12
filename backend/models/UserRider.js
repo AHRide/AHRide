@@ -25,6 +25,18 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	license:{
+		type: String,
+		required: true,
+	},
+	vehicle:{
+		type: String,
+		required: true,
+	},
+	plate:{
+		type: String,
+		required: true,
+	}
 });
 
 const UserModelRider = mongoose.model('userRider', UserSchema);
