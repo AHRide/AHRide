@@ -13,6 +13,8 @@ import Card from "react-bootstrap/Card";
 import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import Radio from '@mui/material/Radio';
+
 
 const genders = [
   {
@@ -36,6 +38,10 @@ const RiderSignUp = () => {
     setGender(event.target.value);
   };
 
+  const handleVehicle = (event) => {
+    setVehicle(event.target.value);
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,6 +50,9 @@ const RiderSignUp = () => {
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [license, setLicense] = useState("");
+  const [vehicle, setVehicle] = useState("");
+  const [plate, setPlate] = useState("");
 
   const createUser = () => {
     Axios.post("http://localhost:3001/createUserRider", {
@@ -53,6 +62,9 @@ const RiderSignUp = () => {
       contact,
       email,
       password,
+      license,
+      vehicle,
+      plate,
     });
   };
 
@@ -65,6 +77,9 @@ const RiderSignUp = () => {
     contact: "",
     email: "",
     password: "",
+    license: "",
+    vehicle: "",
+    plate: "",
   });
 
   // As explained in the Login page.
@@ -200,51 +215,85 @@ const RiderSignUp = () => {
 
             <p className="text_Labels_SignUp">License Number</p>
             <TextField
-              name="name"
-              type="name"
+              name="license"
+              type="license"
               label="License Number"
               variant="outlined"
               fullWidth
+              value={form.license}
+              onInput={onFormInputChange}
+              onChange={(event) => {
+                setLicense(event.target.value);
+              }}
             ></TextField>
             <p className="text_Labels_SignUp">Type of Vehicle</p>
-            <Row>
-              <Col>
-                <Card className="cardProperty">
-                  <Card.Body>
-                    <TwoWheelerIcon sx={{ fontSize: 70 }} />
-                    <Card.Text>Motorcycle</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card className="cardProperty">
-                  <Card.Body>
-                    <DirectionsCarFilledIcon sx={{ fontSize: 70 }} />
-                    <Card.Text>Car</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card className="cardProperty">
-                  <Card.Body>
-                    <LocalShippingIcon sx={{ fontSize: 70 }} />
-                    <Card.Text>Truck</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
+            <div>
+              <Row>
+                <Col>
+                  <Card className="cardProperty">
+                    <Card.Body>
+                      <TwoWheelerIcon sx={{ fontSize: 70 }} />
+                      <Card.Text>Motorcycle</Card.Text>
+                      <Radio
+                        checked={vehicle === 'Motorcycle'}
+                        onChange={handleVehicle}
+                        value="Motorcycle"
+                        name="radio-buttons"
+                        inputProps={{ 'aria-label': 'Motorcycle' }}
+                      />
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col>
+                  <Card className="cardProperty">
+                    <Card.Body>
+                      <DirectionsCarFilledIcon sx={{ fontSize: 70 }} />
+                      <Card.Text>Car</Card.Text>
+                      <Radio
+                        checked={vehicle === 'Car'}
+                        onChange={handleVehicle}
+                        value="Car"
+                        name="radio-buttons"
+                        inputProps={{ 'aria-label': 'Car' }}
+                      />
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col>
+                  <Card className="cardProperty">
+                    <Card.Body>
+                      <LocalShippingIcon sx={{ fontSize: 70 }} />
+                      <Card.Text>Truck</Card.Text>
+                      <Radio
+                        checked={vehicle === 'Truck'}
+                        onChange={handleVehicle}
+                        value="Truck"
+                        name="radio-buttons"
+                        inputProps={{ 'aria-label': 'Truck' }}
+                      />
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </div>
             <p className="text_Labels_SignUp">Plate Number</p>
             <TextField
-              name="name"
-              type="name"
+              name="plate"
+              type="plate"
               label="PlateNumber"
               variant="outlined"
               fullWidth
+              value={form.plate}
+              onInput={onFormInputChange}
+              onChange={(event) => {
+                setPlate(event.target.value);
+              }}
             ></TextField>
             <center>
               <ArrowForwardIcon
                 sx={{ fontSize: 120 }}
                 className="button_SignUp_Rider_SignUp"
+                onClick={onSubmit}
               ></ArrowForwardIcon>
             </center>
           </div>
