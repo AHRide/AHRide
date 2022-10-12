@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
 const UserModelRider = require('./models/UserRider');
+const UserModelAdmin = require('./models/UserAdmin');
 const DeliveryUpdateModel = require('./models/DeliveryUpdates');
 const DeliveryOfferModel = require('./models/DeliveryOffers');
 const BookDeliveryModel = require('./models/BookDelivery');
@@ -42,6 +43,16 @@ app.get('/getUserRider', (req, res) => {
 	});
 });
 
+app.get('/getUserAdmin', (req, res) => {
+	UserModelAdmin.find({}, (err, result) => {
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(result);
+		}
+	});
+});
+
 app.get('/getUser/:email', function (req, res) {
 	return UserModel.find({ email: req.params.email })
 		.then(function (users) {
@@ -54,6 +65,16 @@ app.get('/getUser/:email', function (req, res) {
 
 app.get('/getUserRider/:email', function (req, res) {
 	return UserModelRider.find({ email: req.params.email })
+		.then(function (users) {
+			res.send(users);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+});
+
+app.get('/getUserAdmin/:email', function (req, res) {
+	return UserModelAdmin.find({ email: req.params.email })
 		.then(function (users) {
 			res.send(users);
 		})

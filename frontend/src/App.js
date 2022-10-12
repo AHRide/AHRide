@@ -29,6 +29,7 @@ import RiderHistoryPage from "./pages/HistoryPage/Rider/RiderHistoryPage";
 import RiderHistoryInfo from "./pages/HistoryPage/Rider/RiderHistoryInfo";
 import ClientHistoryInfo from "./pages/HistoryPage/Client/ClientHistoryInfo";
 import ClientHistoryPage from "./pages/HistoryPage/Client/ClientHistoryPage";
+import SigninAdminPage from "./pages/LoginPage/Admin/FormAdminSignin";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route exact path="/client/signin" element={<ClientSignin />} />
           <Route exact path="/rider/signup" element={<RiderSignUp />} />
           <Route exact path="/rider/signin" element={<RiderSignin />} />
+          <Route path="/admin/signin" element={<SigninAdminPage />} />
           <Route path="/" element={<FirstPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/client/book" element={<BookDelivery />} />
@@ -78,6 +80,7 @@ function App() {
             <Route path="/rider/RiderHistoryInfo" element={<RiderHistoryInfo />} />
             <Route path="/client/deliveryHistory" element={<ClientHistoryPage />} />
             <Route path="/client/ClientHistoryInfo" element={<ClientHistoryInfo />} />
+           
           </Route>
         </Routes>
       </UserProvider>
