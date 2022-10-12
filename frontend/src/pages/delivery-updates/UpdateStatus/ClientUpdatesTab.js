@@ -17,7 +17,7 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ModalRateClient from "../../../components/ModalRateClient";
+
 
 const ClientUpdatesTab = () => {
   const navigate = useNavigate();
@@ -103,9 +103,6 @@ const ClientUpdatesTab = () => {
                   className="backButton"
                 />
               </Link>
-              <div className="RateLocation">
-                <ModalRateClient />
-              </div>
             </Container>
           </Row>
           <Row>

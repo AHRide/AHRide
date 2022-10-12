@@ -340,6 +340,22 @@ app.put('/getDeliveryUpdates/end/:_id', (req, res) =>{
 		});
 });
 
+app.put("/deliveryHistory/:_id", (req, res) => {
+	DeliveryHistoryModel.findByIdAndUpdate(
+	  { _id: req.params._id },
+	  {
+		rating: req.body.rating,
+		comment: req.body.comment,
+	  }
+	)
+	.then(function (updateDelivery) {
+		res.send(updateDelivery);
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+  });
+
 app.listen(3001, () => {
 	console.log('Server is Running ...');
 })

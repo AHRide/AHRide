@@ -18,6 +18,7 @@ import axios from "axios";
 import Backdrop from "@mui/material/Backdrop";
 import { useNavigate } from "react-router-dom";
 import NavBarClient from "../../../components/NavBarClient";
+import ModalRateClient from "../../../components/ModalRateClient";
 
 const ClientHistoryInfo = () => {
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ const ClientHistoryInfo = () => {
     const [chkValueOTW, setChkValueOTW] = useState(false);
 
     useEffect(() => {
+        
         axios
             .get(`http://localhost:3001/getDeliveryHistory/${location.state._id}/`)
             .then((response) => {
@@ -422,6 +424,9 @@ const ClientHistoryInfo = () => {
                                     )}
 
                                 </Grid>
+                                <div className="RateLocation">
+                                <ModalRateClient historyID={location.state._id}/>
+                                </div>
                             </Container>
                         </Col>
                     </Row>
