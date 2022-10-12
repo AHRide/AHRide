@@ -4,7 +4,7 @@ import React from "react";
 // import "./Form.css";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/user.context";
+import { UserContext } from "../../../contexts/user.context";
 import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
 import { TextField } from "@mui/material";
 
@@ -27,7 +27,7 @@ const AdminFormSignin = () => {
 
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
-    navigate(redirectTo ? redirectTo : "/rider/homepage");
+    navigate(redirectTo ? redirectTo : "/admin/homepage");
   }
 
   const loadUser = async () => {

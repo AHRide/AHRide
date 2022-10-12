@@ -12,20 +12,8 @@ const UserSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
-	},
-	gender:{
-		type: String,
-		required: true,
-	},
-	birthdate:{
-		type: String,
-		required: true,
-	},
-	contact:{
-		type: String,
-		required: true,
-	},
+	}
 });
 
-const UserModelRider = mongoose.model('userRider', UserSchema);
-module.exports = UserModelRider;
+const UserModelAdmin = mongoose.model('userAdmin', UserSchema);
+module.exports = UserModelAdmin;

@@ -1,5 +1,6 @@
 import React from "react";
-import styler from "./FirstPage.module.css";import { useContext, useEffect} from "react";
+import styler from "./FirstPage.module.css";
+import { useContext, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 
@@ -69,6 +70,15 @@ export default function ClientHomepage() {
               type="submit"
             >
               sign up
+            </button>
+            <button
+              onClick={() => {
+                navigate("/admin/signin");
+              }}
+              className={styler.AdminSignIn}
+              type="button"
+            >
+              sign in as Admin
             </button>
           </div>
         </div>

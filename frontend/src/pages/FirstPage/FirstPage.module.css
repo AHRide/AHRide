@@ -97,6 +97,29 @@
 
   cursor: pointer;
 }
+.AdminSignIn {
+  border-radius: 10px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  right: 5%;
+  top: 10%;
+
+  background: #ffffff;
+  border: 3px solid #f7bc50;
+  border-radius: 10px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 48px;
+
+  color: #f7bc50;
+
+  cursor: pointer;
+}
 .row:after {
   content: "";
   display: table;
