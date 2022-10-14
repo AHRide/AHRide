@@ -185,6 +185,16 @@ app.get('/getDeliveryOffers/:_id', function (req, res) {
 		});
 });
 
+app.get('/getDeliveryHistory', (req, res) => {
+	DeliveryHistoryModel.find({}, (error, result) => {
+		if (error) {
+			res.json(error);
+		} else {
+			res.json(result);
+		}
+	});
+});
+
 app.get('/getDeliveryHistory/rider/:rider_email', function (req, res) {
 	return DeliveryHistoryModel.find({ rider_email: req.params.rider_email })
 		.then(function (deli) {
