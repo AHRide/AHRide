@@ -3,10 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
 import style from "../Admin/AdminRider.module.css";
 import EastIcon from "@mui/icons-material/East";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Rating from "@mui/material/Rating";
-import axios from "axios";
+import AdminRiderCard from "../Admin/components/AdminRiderCard";
 
 function AdminRider() {
   const navigate = useNavigate();
@@ -56,26 +53,9 @@ function AdminRider() {
             <h1 className={style.to}>To</h1>
           </div>
         </div>
-        {updateList.map((lists, index) => (
-          <div key={index}>
-          		{(lists.rating === 3 || lists.rating === 4 || lists.rating === 0) &&(
-        <div className="center-layout" 
-       >
-          <div className="row-details" onClick={() => {
-                toInfoStatus(lists._id)
-              }}>
-          <div className="column-details"><h3>{lists.client_email}</h3></div>
-          <div className="column-details"><h3>{lists.from}</h3></div>
-          <div className="column-details2"><h3>---</h3></div>
-          <div className="column-details"><h3>{lists.to}</h3></div>
-          <div className={style.stars}>
-                <Rating name="read-only" value={lists.rating} readOnly size="large" />
-              </div>
-          </div>
+        <div className={style.column2}>
+          <AdminRiderCard />
         </div>
-        )}
-        </div>
-              ))}
       </div>
     </>
   );
