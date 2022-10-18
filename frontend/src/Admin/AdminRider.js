@@ -7,6 +7,7 @@ import EastIcon from "@mui/icons-material/East";
 import AdminRiderCard from "../Admin/components/AdminRiderCard";
 
 function AdminRider() {
+
   return (
     <>
       <NavBarAdmin />;
