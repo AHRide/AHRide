@@ -18,14 +18,18 @@ import UpdateInfo from "../Rider/UpdateInfo";
 function RiderProfile() {
   const [userProfileList, setuserProfileList] = useState([]);
   const { user } = useContext(UserContext);
-  console.log(user._profile.data.email);
+  // console.log(user._profile.data.email);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/getUserRider/${user._profile.data.email}`)
-      .then((response) => {
-        setuserProfileList(response.data);
-      });
+    const interval = setInterval(() => {
+      axios
+        .get(`http://localhost:3001/getUserRider/${user._profile.data.email}`)
+        .then((response) => {
+          setuserProfileList(response.data);
+        });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [user._profile.data.email]);
   const { logOutUser } = useContext(UserContext);
 
