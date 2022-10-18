@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 import axios from "axios";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import WcIcon from "@mui/icons-material/Wc";
@@ -53,15 +52,11 @@ function ClientProfile() {
               <ArrowBackIcon fontSize="large" />
             </Link>
             <h1 className={styles.ProfileName}>{lists.name}</h1>
-            <h2 className={styles.DateFont}>September 23, 2022</h2>
-            <button className={styles.UpdateInfoButton} type="submit">
-              Update Info
-            </button>
             <div className={styles.Information}>
               <WcIcon fontSize="large" className={styles.Design} />
               <h1>{lists.gender}</h1>
               <CallIcon fontSize="large" className={styles.Design} />
-              <h1>094512345678</h1>
+              <h1>{lists.contact}</h1>
               <AlternateEmailIcon fontSize="large" className={styles.Design} />
               <h1>{lists.email}</h1>
             </div>
