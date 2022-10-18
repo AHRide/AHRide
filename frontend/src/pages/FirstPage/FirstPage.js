@@ -11,15 +11,19 @@ export default function ClientHomepage() {
 
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
-    navigate(redirectTo ? redirectTo : "/rider/homepage");
+    navigate(redirectTo ? redirectTo : "/");
   };
 
   const loadUser = async () => {
     if (!user) {
+      
       const fetchedUser = await fetchUser();
       if (fetchedUser) {
         // Redirecting them once fetched.
         redirectNow();
+        console.log(fetchUser);
+      }else{
+        navigate("/");
       }
     }
   };
