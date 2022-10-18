@@ -4,6 +4,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
 import style from "../Admin/AdminRider.module.css";
 import EastIcon from "@mui/icons-material/East";
+import AdminRiderCard from "../Admin/components/AdminRiderCard";
 
 function AdminRider() {
   return (
@@ -38,22 +39,7 @@ function AdminRider() {
           </div>
         </div>
         <div className={style.column2}>
-          <Link to="/admin/rider/report/information">
-            <button className={style.RiderButton} type="submit">
-              <h1 className={style.clientName}>Fiona Qwerty</h1>
-              <h1 className={style.frombutton}>Chowking</h1>
-              <h1 className={style.tobutton}>Brgy. Mambaling, Cebu City</h1>
-              <h1 className={style.ratingbutton}>Rating</h1>
-            </button>
-          </Link>
-        </div>
-        <div className={style.column3}>
-          <button className={style.RiderButton1} type="submit">
-            <h1 className={style.clientName}>Fiona Qwerty</h1>
-            <h1 className={style.frombutton}>Chowking</h1>
-            <h1 className={style.tobutton}>Brgy. Mambaling, Cebu City</h1>
-            <h1 className={style.ratingbutton}>Rating</h1>
-          </button>
+          <AdminRiderCard />
         </div>
       </div>
     </>
