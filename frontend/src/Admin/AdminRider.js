@@ -7,21 +7,6 @@ import EastIcon from "@mui/icons-material/East";
 import AdminRiderCard from "../Admin/components/AdminRiderCard";
 
 function AdminRider() {
-  const navigate = useNavigate();
-  const [updateList, setUpdateList] = useState([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      axios.get(`http://localhost:3001/getDeliveryHistory`).then((response) => {
-        setUpdateList(response.data);
-      });
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
-
-  const toInfoStatus = (_id) => {
-    navigate("/admin/rider/report/information", { state: { _id } });
-  };
 
   return (
     <>

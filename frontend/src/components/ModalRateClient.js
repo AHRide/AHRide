@@ -100,7 +100,7 @@ const AlertDialog = ({ historyID }) => {;
         <Button
           className={style.RateLocation}
           variant="outlined"
-          disabled={true}
+          disabled={false}
           onClick={handleClickOpen}
         >
           Rate
