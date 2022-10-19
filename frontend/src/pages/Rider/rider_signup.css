@@ -14,8 +14,8 @@
 
 .RiderSignUpMain {
   float: left;
-  padding-top: 50px;
-  height: 100%;
+  /* padding-top: 20px; */
+  /* height: 100%; */
   padding-left: 100px;
 }
 
@@ -84,15 +84,11 @@
   cursor: pointer;
 }
 
-.button_Home_SignUp {
-  margin-top: 10px;
-  margin-left: 10px;
+.Back_button_Home_SignUp {
   width: 200px;
   height: 70px;
   size: 50px;
   color: #f7bc50;
-  font-size: 20px;
-  font-weight: 700;
   float: left;
   cursor: pointer;
 }
@@ -154,3 +150,15 @@
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.Rider_signUp_ColumnLeft{
+  justify-content: center;
+}
+
+.Rider_SignUpTextField{
+  margin-bottom: 20px;
+}
+.Rider_SignUpRightPane{
+  margin-top: 20px;
+}
+

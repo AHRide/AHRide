@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import MenuItem from "@mui/material/MenuItem";
 import Axios from "axios";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
@@ -109,25 +109,25 @@ const RiderSignUp = () => {
   return (
     <>
       <Row className="RowPrperty">
-        <Col sm={8} className="columnLeft">
-          <div>
+        <Col sm={8} className="Rider_signUp_ColumnLeft">
             <FirstPageIcon
               sx={{ fontSize: 40 }}
-              className="button_Home_SignUp"
+              className="Back_button_Home_SignUp"
               onClick={() => {
                 navigate("/");
               }}
               type="submit"
             ></FirstPageIcon>
-          </div>
           <div className="RiderSignUpMain">
             <p className="text_SignUp">Sign Up</p>
             <p className="text_TagLine">
               Creating an account only take a minute or so and you will become
               part of us! Great exchange, right?
             </p>
+            <Container className = "Rider_SignUpTextField">
             <p className="text_Labels_SignUp">Name</p>
             <TextField
+              className="Rider_SignUpTextField"
               name="name"
               type="name"
               label="Name"
@@ -139,7 +139,8 @@ const RiderSignUp = () => {
                 setName(event.target.value);
               }}
             ></TextField>
-            <div className="innercolumnL_SignUp">
+            </Container>
+            <Container className="Rider_SignUpTextField">
               <p className="text_Labels_SignUp">Gender</p>
               <TextField
                 select
@@ -156,8 +157,10 @@ const RiderSignUp = () => {
                   </MenuItem>
                 ))}
               </TextField>
-            </div>
-            <div className="innercolumnR_SignUp">
+            </Container>
+            <Container className="Rider_SignUpTextField">
+            <Row>
+              <Col>
               <p className="text_Labels_SignUp">Birthdate</p>
               <TextField
                 name="birthdate"
@@ -171,9 +174,9 @@ const RiderSignUp = () => {
                   setBirth(event.target.value);
                 }}
               ></TextField>
-            </div>
-
-            <p className="text_Labels_SignUp">Contact Number</p>
+              </Col>
+              <Col>
+               <p className="text_Labels_SignUp">Contact Number</p>
             <TextField
               name="contact"
               type="number"
@@ -186,6 +189,10 @@ const RiderSignUp = () => {
                 setContact(event.target.value);
               }}
             ></TextField>
+              </Col>
+            </Row>
+            </Container>
+            <Container className="Rider_SignUpTextField">
             <p className="text_Labels_SignUp">Email Address</p>
             <TextField
               name="email"
@@ -199,6 +206,8 @@ const RiderSignUp = () => {
                 setEmail(event.target.value);
               }}
             ></TextField>
+            </Container>
+            <Container className="Rider_SignUpTextField">
             <p className="text_Labels_SignUp">Password</p>
             <TextField
               label="Password"
@@ -212,7 +221,8 @@ const RiderSignUp = () => {
                 setPassword(event.target.value);
               }}
             ></TextField>
-
+            </Container>
+            <Container className="Rider_SignUpTextField">
             <p className="text_Labels_SignUp">License Number</p>
             <TextField
               name="license"
@@ -226,6 +236,8 @@ const RiderSignUp = () => {
                 setLicense(event.target.value);
               }}
             ></TextField>
+            </Container>
+            <Container className="Rider_SignUpTextField">
             <p className="text_Labels_SignUp">Type of Vehicle</p>
             <div>
               <Row>
@@ -276,6 +288,8 @@ const RiderSignUp = () => {
                 </Col>
               </Row>
             </div>
+            </Container>
+            <Container className="Rider_SignUpTextField">
             <p className="text_Labels_SignUp">Plate Number</p>
             <TextField
               name="plate"
@@ -289,6 +303,7 @@ const RiderSignUp = () => {
                 setPlate(event.target.value);
               }}
             ></TextField>
+            </Container>
             <center>
               <ArrowForwardIcon
                 sx={{ fontSize: 120 }}
@@ -299,7 +314,7 @@ const RiderSignUp = () => {
           </div>
         </Col>
         <Col sm={4} className="columnR_SignUp2" >
-          <div className="blankPageTop_SignUp"></div>
+          <Container className="Rider_SignUpRightPane">
           <p className="text_LabelR_SignUp">Already have an account?</p>
           <center>
             <button
@@ -312,7 +327,8 @@ const RiderSignUp = () => {
               Log In
             </button>
           </center>
-          <div className="blankPageBottom_SignUp"></div>
+          </Container>
+         
         </Col>
       </Row>
     </>
