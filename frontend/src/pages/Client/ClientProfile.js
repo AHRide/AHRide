@@ -9,9 +9,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CallIcon from "@mui/icons-material/Call";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import WcIcon from "@mui/icons-material/Wc";
+import { useNavigate } from "react-router-dom";
+
 
 function ClientProfile() {
   const [userProfileList, setuserProfileList] = useState([]);
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   console.log(user._profile.data.email);
 
@@ -31,7 +34,8 @@ function ClientProfile() {
       // Now we will refresh the page, and the user will be logged out and
       // redirected to the login page because of the <PrivateRoute /> component.
       if (loggedOut) {
-        window.location.reload(true);
+        console.log(loggedOut);
+        navigate("/");
       }
     } catch (error) {
       alert(error);

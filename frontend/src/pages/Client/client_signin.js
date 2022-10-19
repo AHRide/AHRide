@@ -6,10 +6,24 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
 import { TextField } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import "./client_signin.css";
+import axios from "axios";
 
 const ClientSignin = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [clientList, setClientList] = useState([]);
+
+  useEffect(() => {
+    // Sending HTTP GET request
+    axios
+    .get(`http://localhost:3001/getUsers/`)
+    .then((response) => {
+      const clientEmails = response.data.map(res => res.email)
+        setClientList(clientEmails);
+    });
+}, []);
+
 
   // We are consuming our user-management context to
   // get & set the user details here
@@ -44,6 +58,11 @@ const ClientSignin = () => {
     if (!user) {
       const fetchedUser = await fetchUser();
       if (fetchedUser) {
+        console.log(form.email);
+        if(!(clientList.includes(form.email)) ) {
+          alert(`${form.email} was not found in our record for registered Clients.`)
+          return
+      }
         // Redirecting them once fetched.
         redirectNow();
       }
@@ -65,6 +84,11 @@ const ClientSignin = () => {
       // to validate the user credentials and login the user into our App.
       const user = await emailPasswordLogin(form.email, form.password);
       if (user) {
+        console.log(form.email);
+        if(!(clientList.includes(form.email))) {
+          alert(`${form.email} was not found in our record for registered Clients.`)
+          return
+      }
         redirectNow();
       }
     } catch (error) {

@@ -3,15 +3,28 @@ import React from "react";
 // import useForm from "./useForm";
 // import "./Form.css";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/user.context";
 import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
 import { TextField } from "@mui/material";
+import axios from "axios";
 
 
 const AdminFormSignin = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [adminList, setAdminList] = useState([]);
+
+  useEffect(() => {
+    // Sending HTTP GET request
+    axios
+    .get(`http://localhost:3001/getUserAdmin/`)
+    .then((response) => {
+      const adminEmails = response.data.map(res => res.email)
+      setAdminList(adminEmails);
+    });
+}, []);
 
   const { user, fetchUser, emailPasswordLogin } = useContext(UserContext);
 
@@ -34,7 +47,12 @@ const AdminFormSignin = () => {
     if (!user) {
       const fetchedUser = await fetchUser();
       if (fetchedUser) {
-
+        console.log(form.email);
+        if(!(adminList.includes(form.email)) ) {
+          alert(`${form.email} is not an Admin.`)
+          return
+      }
+        // Redirecting them once fetched.
         redirectNow();
       }
     }
@@ -49,6 +67,11 @@ const AdminFormSignin = () => {
 
       const user = await emailPasswordLogin(form.email, form.password);
       if (user) {
+        console.log(form.email);
+        if(!(adminList.includes(form.email))) {
+          alert(`${form.email} is not an Admin`)
+          return
+      }
         redirectNow();
       }
     } catch (error) {
