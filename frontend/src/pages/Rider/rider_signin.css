@@ -74,24 +74,19 @@
 
 .button_SignIn {
   margin-top: 70px;
-  width: 200px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   color: #f7bc50;
-  font-size: 20px;
-  font-weight: 700;
   float: right;
   cursor: pointer;
 }
 
-.button_Home {
-  /* margin-top: 10px; */
-  margin-left: 10px;
+.Rider_signin_button_Home {
+  margin-top: 20px;
   width: 200px;
   height: 70px;
   size: 50px;
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
+  color: #f7bc50;
   float: left;
   cursor: pointer;
 }

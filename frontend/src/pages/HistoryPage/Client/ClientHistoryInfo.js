@@ -62,47 +62,47 @@ const ClientHistoryInfo = () => {
                             <Link to="/client/deliveryHistory">
                                 <KeyboardBackspaceOutlinedIcon
                                     sx={{ fontSize: 50 }}
-                                    className="backButton"
+                                    className="history-backButton"
                                 />
                             </Link>
                         </Container>
                     </Row>
                     <Row>
-                        <Col xs={9} className="LeftPane">
-                            <Container className="ContainerLowerRow">
+                        <Col xs={9} className="history-LeftPane">
+                            <Container className="history-ContainerLowerRow">
                                 <Row key={index}>
                                     <Col>
-                                        <h1 className="DataAndTextLable">Name: {lists.receiver_name}</h1>
+                                        <h1 className="history-DataAndTextLable">Name: {lists.receiver_name}</h1>
                                     </Col>
                                     <Col>
-                                        <h1 className="DataAndTextLable">
+                                        <h1 className="history-DataAndTextLable">
                                             Contact Number: {lists.receiver_cont}
                                         </h1>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={2}>
-                                        <Container className="MarginerTop">
+                                        <Container className="history-MarginerTop">
                                             <Row>
-                                                <h1 className="DataAndTextLable">From:</h1>
+                                                <h1 className="history-DataAndTextLable">From:</h1>
                                             </Row>
                                             <Row>
-                                                <h1 className="InvisibleInk">None</h1>
+                                                <h1 className="history-InvisibleInk">None</h1>
                                             </Row>
                                             <Row>
-                                                <h1 className="DataAndTextLable">To:</h1>
+                                                <h1 className="history-DataAndTextLable">To:</h1>
                                             </Row>
                                         </Container>
                                     </Col>
                                     <Col xs={7}>
-                                        <Container className="MarginerTop">
+                                        <Container className="history-MarginerTop">
                                             <Row>
-                                                <Col className="FromToContainer">
-                                                    <h1 className="DataAndTextLable">{lists.from}</h1>
+                                                <Col className="history-FromToContainer">
+                                                    <h1 className="history-DataAndTextLable">{lists.from}</h1>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Container className="CenterText">
+                                                <Container className="history-CenterText">
                                                     <ArrowDownwardOutlinedIcon
                                                         sx={{ fontSize: 30 }}
                                                         color="black"
@@ -110,42 +110,42 @@ const ClientHistoryInfo = () => {
                                                 </Container>
                                             </Row>
                                             <Row>
-                                                <Col className="FromToContainer">
-                                                    <h1 className="DataAndTextLable">{lists.to}</h1>
+                                                <Col className="history-FromToContainer">
+                                                    <h1 className="history-DataAndTextLable">{lists.to}</h1>
                                                 </Col>
                                             </Row>
                                         </Container>
                                     </Col>
                                     <Col xs={3}>
-                                        <Container className="WhitePayment">
+                                        <Container className="history-WhitePayment">
                                             <Row>
                                                 <h2>To Pay</h2>
                                             </Row>
                                             <Col>
-                                                <h2 className="CenterText">PHP {lists.payment}.00</h2>
+                                                <h2 className="history-CenterText">PHP {lists.payment}.00</h2>
                                             </Col>
                                         </Container>
                                     </Col>
                                 </Row>
-                                <Container className="ContainerRevceiverContact">
+                                <Container className="history-ContainerRevceiverContact">
                                     <Row>
                                         {/* <Col xs={5}><TextField id="ReceiversName" label="Receiver Name:" variant="outlined" className="TextField2"/></Col> */}
                                         {/* <Col xs={5}><TextField id="ContactNo" label="Contact Number:" variant="outlined" className="TextField2"/></Col> */}
                                         <Col>
-                                            <h2 className="HeaderTextLabelSmall">Receiver's Name:</h2>
-                                            <Box className="TextField2">
-                                                <Col className="FromToContainer">
-                                                    <h1 className="DataAndTextLable">
+                                            <h2 className="history-HeaderTextLabelSmall">Receiver's Name:</h2>
+                                            <Box className="history-TextField2">
+                                                <Col className="history-FromToContainer">
+                                                    <h1 className="history-DataAndTextLable">
                                                         {lists.receiver_name}
                                                     </h1>
                                                 </Col>
                                             </Box>
                                         </Col>
                                         <Col>
-                                            <h2 className="HeaderTextLabelSmall">Contact Number:</h2>
-                                            <Box className="TextField2">
-                                                <Col className="FromToContainer">
-                                                    <h1 className="DataAndTextLable">
+                                            <h2 className="history-HeaderTextLabelSmall">Contact Number:</h2>
+                                            <Box className="history-TextField2">
+                                                <Col className="history-FromToContainer">
+                                                    <h1 className="history-DataAndTextLable">
                                                         {lists.receiver_cont}
                                                     </h1>
                                                 </Col>
@@ -153,21 +153,21 @@ const ClientHistoryInfo = () => {
                                         </Col>
                                     </Row>
                                 </Container>
-                                <h1 className="DataAndTextLable">Note</h1>
+                                <h1 className="history-DataAndTextLable">Note</h1>
                                 <Box
                                     sx={{ width: 1200, maxWidth: "100%", height: 150 }}
-                                    className="WhiteNoteBox"
+                                    className="history-WhiteNoteBox"
                                 >
                                     <Col>
-                                        <h1 className="NoteContent">{lists.note}</h1>
+                                        <h1 className="history-NoteContent">{lists.note}</h1>
                                     </Col>
                                 </Box>
                             </Container>
                             <Container></Container>
                         </Col>
-                        <Col xs={3} className="RightPane">
+                        <Col xs={3} className="history-RightPane">
                             <Container>
-                                <h2 className="StatusText">Status</h2>
+                                <h2 className="history-StatusText">Status</h2>
                             </Container>
                             <Container>
                                 <Grid container direction={"column"} spacing={0}>
@@ -424,7 +424,7 @@ const ClientHistoryInfo = () => {
                                     )}
 
                                 </Grid>
-                                <div className="RateLocation">
+                                <div className="history-RateLocation">
                                 <ModalRateClient historyID={location.state._id}/>
                                 </div>
                             </Container>

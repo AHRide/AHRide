@@ -67,7 +67,7 @@ export default function FormDialog() {
         </Button>
       </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Update</DialogTitle>
+        <DialogTitle className={style.titleupdate}>Update</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Updating your information will automatically update it to all
@@ -100,7 +100,9 @@ export default function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={saveUpdatedPost}>Update</Button>
+          <Button className={style.updateb} onClick={saveUpdatedPost}>
+            Update
+          </Button>
           {/* onClick={() => updatePost(post)} */}
         </DialogActions>
       </Dialog>

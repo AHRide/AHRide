@@ -186,10 +186,10 @@ function BookDelivery() {
 								</div>
 							</div>
 							<div style={{ padding: '1rem' }}>
-								<FormControlLabel
+								{/* <FormControlLabel
 									control={<Checkbox defaultChecked size='large' />}
 									label='Are you the receiver?'
-								/>
+								/> */}
 							</div>
 							<div className='border-box'>
 								<div className='box-pad'>
@@ -332,7 +332,7 @@ function BookDelivery() {
 						sx={{
 							width: '15.5rem',
 							height: '4rem',
-
+							marginBottom: '10%',
 							background: '#F7BC50',
 							boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 							borderRadius: '15px',

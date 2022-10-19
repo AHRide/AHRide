@@ -1,25 +1,25 @@
-.body {
+.history-body {
 	width: 100%;
 	height: 100%;
 	background: rgb(19, 200, 200);
 }
-.colLeft {
+.history-colLeft {
 	width: 100%;
 	height: 100px;
 	background: rgb(200, 97, 19);
 }
 
-.container fluid {
+.history-container fluid {
 	max-width: 100%;
 	background: rgb(19, 200, 200);
 }
 
-.RightPane {
+.history-RightPane {
 	background: rgb(255, 255, 255);
 	border-left: 2px solid #000000;
 	height: 600px;
 }
-.ContainerUpperRow {
+.history-ContainerUpperRow {
 	background-color: #f7bc50;
 	border: 2px solid #000000;
 	border-radius: 13px;
@@ -32,7 +32,7 @@
 	text-align: start;
 	font-size: 20px;
 }
-.ContainerLowerRow {
+.history-ContainerLowerRow {
 	background-color: #f7bc50;
 	border: 2px solid #000000;
 	border-radius: 13px;
@@ -47,29 +47,29 @@
 	font-size: 20px;
 }
 
-.TextField1 {
+.history-TextField1 {
 	background: white;
 }
 
-.CenterText {
+.history-CenterText {
 	text-align: center;
 }
-.TextField2 {
+.history-TextField2 {
 	width: 100%;
 	background: white;
 }
 
-.ContainerRevceiver {
+.history-ContainerRevceiver {
 	background: white;
 }
 
-.WhiteNoteBox {
+.history-WhiteNoteBox {
 	background: rgb(255, 255, 255);
 	border-radius: 10px;
 	border: 2px solid #000000;
 }
 
-.HeaderTextLabel {
+.history-HeaderTextLabel {
 	width: 220px;
 	height: 29px;
 	left: 82px;
@@ -82,7 +82,7 @@
 
 	color: #000000;
 }
-.HeaderTextLabelSmall {
+.history-HeaderTextLabelSmall {
 	left: 23.97px;
 	top: 16.21px;
 
@@ -94,7 +94,7 @@
 
 	color: #000000;
 }
-.DataAndTextLable {
+.history-DataAndTextLable {
 	width: 100%;
 	height: 29px;
 	left: 82px;
@@ -126,31 +126,31 @@
 	color: #000000;
 }
 
-.boxColor {
+.history-boxColor {
 	align-content: center;
 	background: greenyellow;
 }
-.MarginerTop {
+.history-MarginerTop {
 	margin-top: 18px;
 }
-.InvisibleInk {
+.history-InvisibleInk {
 	height: 29px;
 	color: #f7bc50;
 }
 
-.CancelButton {
+.history-CancelButton {
 	color: #747474;
 	background-color: #747474;
 }
-.backButton {
+.history-backButton {
 	margin-top: 10px;
 
 	color: #f7bc50;
 }
-.CancelButtonContainer {
+.history-CancelButtonContainer {
 	margin-top: 10px;
 }
-.FromToContainer {
+.history-FromToContainer {
 	background: white;
 	border: 2px solid #000000;
 	width: 100%;
@@ -158,7 +158,7 @@
 	border-radius: 10px;
 }
 
-.NoteContent {
+.history-NoteContent {
 	left: 58.01px;
 	top: 421.37px;
 	padding-top: 10px;

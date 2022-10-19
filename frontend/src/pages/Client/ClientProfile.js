@@ -11,7 +11,6 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import WcIcon from "@mui/icons-material/Wc";
 import { useNavigate } from "react-router-dom";
 
-
 function ClientProfile() {
   const [userProfileList, setuserProfileList] = useState([]);
   const navigate = useNavigate();
@@ -56,6 +55,7 @@ function ClientProfile() {
               <ArrowBackIcon fontSize="large" />
             </Link>
             <h1 className={styles.ProfileName}>{lists.name}</h1>
+            <h2 className={styles.DateFont}>Birthdate: {lists.birthdate}</h2>
             <div className={styles.Information}>
               <WcIcon fontSize="large" className={styles.Design} />
               <h1>{lists.gender}</h1>

@@ -30,13 +30,6 @@ export default function NavBarClient() {
           <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
-            to="/client/about"
-          >
-            About
-          </Link>
-          <Link
-            className={styling.NavName}
-            style={{ textDecoration: "none" }}
             to="/client/deliveryHistory"
           >
             History
@@ -47,6 +40,13 @@ export default function NavBarClient() {
             to="/client/profile"
           >
             Profile
+          </Link>
+          <Link
+            className={styling.NavName}
+            style={{ textDecoration: "none" }}
+            to="/client/about"
+          >
+            About
           </Link>
         </nav>
       </div>

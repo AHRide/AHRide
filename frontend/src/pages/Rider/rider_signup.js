@@ -313,7 +313,7 @@ const RiderSignUp = () => {
             </center>
           </div>
         </Col>
-        <Col sm={4} className="columnR_SignUp2" >
+        <Col sm={4} className="Rider_SignUp_columnR_SignUp2" >
           <Container className="Rider_SignUpRightPane">
           <p className="text_LabelR_SignUp">Already have an account?</p>
           <center>
