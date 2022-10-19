@@ -6,7 +6,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
 import { TextField } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import "./rider_signin.css";
-import { Container } from "@mui/system";
+// import { Container } from "@mui/system";
+import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 
 const RiderSignin = () => {
@@ -97,16 +98,19 @@ useEffect(() => {
   };
 
   return (
-    <div className="bodyPage">
-      <div className="columnL">
+    <Row className="bodyPage">
+      <Col sm={4} className="columnL">
+        <Row>
         <FirstPageIcon
-          sx={{ fontSize: 60 }}
-          className="button_Home"
+          sx={{ fontSize:30 }}
+          className="Rider_signin_button_Home"
           onClick={() => {
             navigate("/");
           }}
           type="submit"
         ></FirstPageIcon>
+        </Row>
+        
         <Container className= "Rider_Signin_LeftPaneButton">
         <p className="text_LabelL">Don't have an account yet?</p>
         <center>
@@ -123,8 +127,8 @@ useEffect(() => {
 
         </Container>
        
-      </div>
-      <div className="columnR">
+      </Col>
+      <Col sm={8} className="columnR">
         <h1 className="text_SignIn">Sign In</h1>
         <p className="text_TagLine">
           Please sign in to your account to continue.
@@ -154,8 +158,8 @@ useEffect(() => {
           className="button_SignIn"
           onClick={onSubmit}
         ></ArrowForwardIcon>
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 };
 

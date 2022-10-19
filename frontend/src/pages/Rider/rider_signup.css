@@ -74,7 +74,7 @@
 }
 
 .button_SignUp_Rider_SignUp {
-  margin-top: 70px;
+  margin-top: 30px;
   width: 200px;
   height: 40px;
   color: #f7bc50;
@@ -163,3 +163,9 @@
   margin-top: 20px;
 }
 
+.Rider_SignUp_columnR_SignUp2{
+  float: left;
+  background: #f7bc50;
+  margin-right: 5;
+  
+}

@@ -7,6 +7,7 @@ import { TextField } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import "./client_signin.css";
 import axios from "axios";
+import { Col, Container, Row } from "react-bootstrap";
 
 const ClientSignin = () => {
   const navigate = useNavigate();
@@ -97,8 +98,9 @@ const ClientSignin = () => {
   };
 
   return (
-    <div className="bodyPage">
-      <div className="columnL">
+    <Row className="bodyPage">
+      <Col sm={4} className="columnL">
+        <Row>
         <FirstPageIcon
           sx={{ fontSize: 60 }}
           className="button_Home"
@@ -107,7 +109,8 @@ const ClientSignin = () => {
           }}
           type="submit"
         ></FirstPageIcon>
-        <div className="blankPageTop"></div>
+        </Row>
+        <Container>
         <p className="text_LabelL">Don't have an account yet?</p>
         <center>
           <button
@@ -120,8 +123,10 @@ const ClientSignin = () => {
             Sign Up
           </button>
         </center>
-      </div>
-      <div className="columnR">
+        </Container>
+        
+      </Col>
+      <Col sm={8}className="columnR">
         <h1 className="text_SignUp">Sign In</h1>
         <p className="text_TagLine">
           Please sign in to your account to continue.
@@ -152,8 +157,8 @@ const ClientSignin = () => {
           className="button_SignIn"
           onClick={onSubmit}
         ></ArrowForwardIcon>
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 };
 

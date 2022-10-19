@@ -155,3 +155,11 @@
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.Client_signin_button_Home{
+  width: 70px;
+  height: 70px;
+  color: rgb(255, 255, 255);
+  float: left;
+  cursor: pointer;
+}
