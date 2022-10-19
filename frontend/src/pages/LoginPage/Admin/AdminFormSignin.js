@@ -1,7 +1,7 @@
 import React from "react";
 // import validate from "./validateInfo";
 // import useForm from "./useForm";
-// import "./Form.css";
+import "./AdminForm.css";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/user.context";
@@ -80,13 +80,14 @@ const AdminFormSignin = () => {
   };
 
   return (
-    <div className="sign-in-form-content-right">
-        <h1>Sign In</h1>
-        <p className="sign-in-form-welcome">
+    <div className="admin-sign-in-form-content-right">
+      <div className="admin-sign-in-form">
+       <h1>Sign In</h1>
+        <p className="admin-sign-in-form-welcome">
           Welcome Admin! Please sign in to your account to continue.
         </p>
-        <div className='sign-in-form-inputs'>
-          <label className='sign-in-form-label'>Username</label>
+        <div className='admin-sign-in-form-inputs'>
+          <label className='admin-sign-in-form-label'>Username</label>
           <TextField
             name="email"
             type="name"
@@ -97,8 +98,8 @@ const AdminFormSignin = () => {
             onChange={onFormInputChange}
           />
         </div>
-        <div className='sign-in-form-inputs'>
-          <label className='sign-in-form-label'>Password</label>
+        <div className='admin-sign-in-form-inputs'>
+          <label className='admin-sign-in-form-label'>Password</label>
           <TextField
             label="Password"
             type="password"
@@ -111,9 +112,11 @@ const AdminFormSignin = () => {
         </div>
         <ArrowForwardIcon
               sx={{ fontSize: 120 }}
-              className="button_SignUp_Rider"
+              className="admin-button_SignIn"
               onClick={onSubmit}
-            ></ArrowForwardIcon>
+            ></ArrowForwardIcon> 
+      </div>
+        
     </div>
   );
 };

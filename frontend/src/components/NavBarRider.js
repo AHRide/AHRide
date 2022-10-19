@@ -27,13 +27,6 @@ export default function NavBarRider() {
           >
             Updates
           </Link>
-          <Link
-            className={styling.NavName}
-            style={{ textDecoration: "none" }}
-            to="/rider/about"
-          >
-            About
-          </Link>
            <Link
             className={styling.NavName}
             style={{ textDecoration: "none" }}
@@ -47,6 +40,13 @@ export default function NavBarRider() {
             to="/rider/profile"
           >
             Profile
+          </Link>
+          <Link
+            className={styling.NavName}
+            style={{ textDecoration: "none" }}
+            to="/rider/about"
+          >
+            About
           </Link>
         </nav>
       </div>

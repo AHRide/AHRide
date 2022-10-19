@@ -123,7 +123,7 @@ function BookDelivery() {
 		<div>
 			<NavBarClient />
 
-			<Box
+			<Box className = "book_a_delivery_body"
 				sx={{ width: '100vw', height: '100vh' }}
 				style={{ display: 'flex', flexDirection: 'column', padding: '2rem' }}>
 				<div
@@ -134,7 +134,7 @@ function BookDelivery() {
 						padding: '1.5rem',
 					}}>
 					<IconButton
-						className='back'
+						className="back"
 						size='large'
 						onClick={() => navigate('/client/homepage')}>
 						<ArrowBackIcon sx={{ color: orange[300] }} fontSize='inherit' />
@@ -177,6 +177,7 @@ function BookDelivery() {
 										display: 'flex',
 										flexDirection: 'row',
 										justifyContent: 'space-evenly',
+										marginBottom: '8%'
 									}}>
 									<h1 className='textField1'>To:</h1>
 									<PlacesAutoCompleteTo
@@ -185,12 +186,7 @@ function BookDelivery() {
 									/>
 								</div>
 							</div>
-							<div style={{ padding: '1rem' }}>
-								<FormControlLabel
-									control={<Checkbox defaultChecked size='large' />}
-									label='Are you the receiver?'
-								/>
-							</div>
+							
 							<div className='border-box'>
 								<div className='box-pad'>
 									<h2 className='text2'>Receiver Name: </h2>
@@ -332,7 +328,7 @@ function BookDelivery() {
 						sx={{
 							width: '15.5rem',
 							height: '4rem',
-
+							marginBottom: '15%',
 							background: '#F7BC50',
 							boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 							borderRadius: '15px',
