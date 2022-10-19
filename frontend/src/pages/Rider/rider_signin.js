@@ -7,10 +7,23 @@ import { TextField } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import "./rider_signin.css";
 import { Container } from "@mui/system";
+import axios from "axios";
 
 const RiderSignin = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+const [riderList, setRiderList] = useState([]);
+
+useEffect(() => {
+      // Sending HTTP GET request
+      axios
+      .get(`http://localhost:3001/getUserRider/`)
+      .then((response) => {
+        const riderEmails = response.data.map(res => res.email)
+          setRiderList(riderEmails);
+      });
+}, []);
 
   // We are consuming our user-management context to
   // get & set the user details here
@@ -45,6 +58,11 @@ const RiderSignin = () => {
     if (!user) {
       const fetchedUser = await fetchUser();
       if (fetchedUser) {
+        console.log(form.email);
+        if(!(riderList.includes(form.email)) ) {
+          alert(`${form.email} was not found in our record for registered AHRiders.`)
+          return
+      }
         // Redirecting them once fetched.
         redirectNow();
       }
@@ -66,6 +84,11 @@ const RiderSignin = () => {
       // to validate the user credentials and login the user into our App.
       const user = await emailPasswordLogin(form.email, form.password);
       if (user) {
+        console.log(form.email);
+        if(!(riderList.includes(form.email))) {
+          alert(`${form.email} was not found in our record for registered AHRiders.`)
+          return
+      }
         redirectNow();
       }
     } catch (error) {

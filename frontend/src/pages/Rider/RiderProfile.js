@@ -14,10 +14,12 @@ import CoPresentIcon from "@mui/icons-material/CoPresent";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import PaymentIcon from "@mui/icons-material/Payment";
 import UpdateInfo from "../Rider/UpdateInfo";
+import { useNavigate } from "react-router-dom";
 
 function RiderProfile() {
   const [userProfileList, setuserProfileList] = useState([]);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   // console.log(user._profile.data.email);
 
   useEffect(() => {
@@ -40,7 +42,8 @@ function RiderProfile() {
       // Now we will refresh the page, and the user will be logged out and
       // redirected to the login page because of the <PrivateRoute /> component.
       if (loggedOut) {
-        window.location.reload(true);
+        console.log(loggedOut);
+        navigate("/");
       }
     } catch (error) {
       alert(error);
@@ -50,7 +53,7 @@ function RiderProfile() {
     <>
       <NavBarRider />
       {userProfileList.map((lists, index) => (
-        <div>
+        <div key={index}>
           <Link
             className={style.backbutton}
             style={{ textDecoration: "none" }}
