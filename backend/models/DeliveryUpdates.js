@@ -56,6 +56,11 @@ const DeliveryUpdateSchema = new mongoose.Schema({
 	timeEnd: {
 		type: String,
 		default: false
+	  },
+	  clientReported: {
+		type: Boolean,
+		default: false,
+		required: false,
 	  }
 });
 

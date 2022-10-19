@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,9 +8,17 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import style from "../components/ModalReportV1.module.css";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 
-export default function ModalReportV1() {
+const ModalReportV1 = ({ updateID, rider_email, 
+  client_email, from, to }) => {
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const [open, setOpen] = React.useState(false);
+  const [btnValue, setBtnValue] = useState(false);
+  const [report, setReport] = useState("");
+  const [updatedPost, setUpdatedPost] = useState({
+    comment: "",
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,15 +28,80 @@ export default function ModalReportV1() {
     setOpen(false);
   };
 
+  useEffect(() => {
+		const interval = setInterval(() => {
+		axios
+			.get(
+				`http://localhost:3001/getDeliveryUpdates/${updateID}/`
+			)
+			.then((response) => {
+				const btn = response.data.map((res) => res.clientReported);
+        setReport(btn[0]);
+       
+			});
+		}, 500);
+    
+		return () => clearInterval(interval);
+	}, [updateID]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedPost((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const saveUpdatedPost = (post) => {
+    console.log(updatedPost);
+
+    axios.post("http://localhost:3001/createClientReport", {
+      deliveryID: updateID,
+      client_email,
+      rider_email,
+      to,
+      from,
+      comment: updatedPost.comment,
+      reporttime: time
+    });
+
+    axios
+      .put(`http://localhost:3001/getDeliveryUpdates/reported/${updateID}`, post)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+      setBtnValue(true);
+
+    handleClose();
+  };
+
+
   return (
     <div>
+      {report && (
       <Button
         className={style.buttonDesign}
         variant="outlined"
+        disabled={true}
         onClick={handleClickOpen}
       >
         Report
       </Button>
+      )}
+      {!report && (
+        <Button
+        className={style.buttonDesign}
+        variant="outlined"
+        disabled={false}
+        onClick={handleClickOpen}
+      >
+        Report
+        </Button>
+
+        )}
+        
       <Dialog
         open={open}
         onClose={handleClose}
@@ -47,10 +121,16 @@ export default function ModalReportV1() {
           <div className={style.column}>
             <TextField
               className={style.text2}
+              name="comment"
+              value={updatedPost.comment ? updatedPost.comment : ""}
               id="outlined-multiline-static"
               label="Tell us more..."
               multiline
               rows={4}
+              variant="filled"
+              onChange={(event) => {
+                handleChange(event);
+              }}
             />
           </div>
         </DialogContent>
@@ -60,7 +140,7 @@ export default function ModalReportV1() {
           </Button>
           <Button
             className={style.buttonDesign}
-            onClick={handleClose}
+            onClick={() => saveUpdatedPost(true)}
             autoFocus
           >
             Report
@@ -69,4 +149,6 @@ export default function ModalReportV1() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default ModalReportV1;

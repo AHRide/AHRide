@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect} from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -6,9 +6,19 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import style from "../components/BanRider.module.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function BanRider() {
-  const [open, setOpen] = React.useState(false);
+const BanRider = ( {userEmail, historyID} ) => {
+  const [open, setOpen] = useState(false);
+  const [user, setUserEmail] = useState(userEmail);
+  const [history, setHistory] = useState(historyID);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setUserEmail(userEmail);
+    setHistory(historyID);
+  }, [userEmail, historyID]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -16,6 +26,36 @@ export default function BanRider() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const onSubmit = () => {
+    // axios
+    //   .delete(`http://localhost:3001/getHistoryDelete/${historyID}/`)
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
+    //   axios
+    //   .delete(`http://localhost:3001/getRiderUser/delete/${user}/`)
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
+  
+      axios.all([
+        axios.delete(`http://localhost:3001/getHistoryDelete/${historyID}/`),
+        axios.delete(`http://localhost:3001/getRiderUser/delete/${user}/`)
+      ])
+      .then(responseArr =>{
+        console.log(responseArr[0]);
+        console.log(responseArr[1]);
+      });
+  
+      handleClose();
+      alert("Successfully Banned User");
+      navigate("/admin/rider/report");
+  };
+
+  const onDelete = () => {
+
   };
 
   return (
@@ -46,11 +86,12 @@ export default function BanRider() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button className={style.ban} onClick={handleClose} autoFocus>
+          <Button className={style.ban} onClick={()=> onSubmit()} autoFocus>
             Ban
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
+export default BanRider;

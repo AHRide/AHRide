@@ -205,7 +205,13 @@ const StatusOfDelivery = () => {
             <Row>
               <Col xs={9} className="LeftPane">
                 <div class="d-flex justify-content-end" size="medium">
-                  <ModalReportV1 />
+                  <ModalReportV1 
+                  updateID={lists._id}
+                  rider_email={user._profile.data.email}
+                  client_email={lists.client_email}
+                  from={lists.from}
+                  to={lists.to}
+                  />
                 </div>
                 <Container className="ContainerLowerRow">
                   <h1 className="HeaderTextLabel">Client Information</h1>

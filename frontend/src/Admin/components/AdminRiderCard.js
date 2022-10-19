@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import React, { useState, useEffect } from "react";
 import style from "../AdminRider.module.css";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
@@ -22,18 +19,18 @@ export default function AdminRiderCard() {
     return () => clearInterval(interval);
   }, []);
 
-  const toInfoStatus = (_id) => {
-    navigate("/admin/rider/report/information", { state: { _id } });
+  const toInfoStatus = (_id, rider_email) => {
+    navigate("/admin/rider/report/information", { state: { _id, rider_email } });
   };
   
   return (
 
     <>
-      {updateList.map((lists, index) => (
+      {updateList.slice(0).reverse().map((lists, index) => (
       <div key={index}>
-        {(lists.rating === 1 || lists.rating === 4 ) &&(
+      {(lists.rating === 1 || lists.rating === 2 || lists.rating === 3) && (
           <div className={style.RiderButton} onClick={() => {
-                toInfoStatus(lists._id)
+                toInfoStatus(lists._id, lists.rider_email)
               }}>
           <div className="column-details"><h3>{lists.client_email}</h3></div>
           <div className="column-details1"><h3>{lists.from}</h3></div>
@@ -43,7 +40,7 @@ export default function AdminRiderCard() {
                 <Rating name="read-only" value={lists.rating} readOnly size="large" />
               </div>
           </div>
-           )}
+)}
       </div>
       ))}
     </>
