@@ -1,13 +1,23 @@
 import React from "react";
 import styler from "./FirstPage.module.css";
 import { useContext, useEffect} from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 
 export default function ClientHomepage() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, fetchUser} = useContext(UserContext);
+
+  window.onpopstate = function(event) {
+   navigate(2);
+ };
+
+ window.onbeforeunload = (event) => {
+  const e = event || window.event;
+  // Cancel the event
+  e.preventDefault();
+};
 
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
