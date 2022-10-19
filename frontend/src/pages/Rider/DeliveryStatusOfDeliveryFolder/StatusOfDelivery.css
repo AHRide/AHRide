@@ -7,3 +7,9 @@
   background-color: #f7bc50 !important;
   color: white;
 }
+
+
+.Center_Content{
+  align-content:space-around;
+  background-color: aquamarine;
+}

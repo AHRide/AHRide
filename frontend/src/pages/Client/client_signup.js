@@ -7,6 +7,7 @@ import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import Axios from "axios";
+import { Col, Container, Row } from "react-bootstrap";
 
 const genders = [
   {
@@ -85,11 +86,11 @@ function ClientSignUp() {
     }
   };
   return (
-    <body className="bodyPage_SignUp">
-      <div className="columnL_SignUp">
+    <Row className="bodyPage_SignUp">
+      <Col sm={8} className="Client_signUp_ColumnLeft">
         <FirstPageIcon
-          sx={{ fontSize: 60 }}
-          className="button_Home_SignUp"
+          sx={{ fontSize: 40 }}
+          className="Back_button_Home_SignUp"
           onClick={() => {
             navigate("/");
           }}
@@ -101,6 +102,7 @@ function ClientSignUp() {
             Creating an account only take a minute or so and you will become
             part of us! Great exchange, right?
           </p>
+          <Container className="Client_SignUpTextField">
           <p className="text_Labels_SignUp">Name</p>
           <TextField
             name="name"
@@ -114,8 +116,11 @@ function ClientSignUp() {
               setName(event.target.value);
             }}
           ></TextField>
-          <div className="innercolumnL_SignUp">
-            <p className="text_Labels_SignUp">Gender</p>
+          </Container>
+          <Container className="Client_SignUpTextField">
+            <Row>
+              <Col>
+              <p className="text_Labels_SignUp">Gender</p>
             <TextField
               select
               variant="outlined"
@@ -131,9 +136,9 @@ function ClientSignUp() {
                 </MenuItem>
               ))}
             </TextField>
-          </div>
-          <div className="innercolumnR_SignUp">
-            <p className="text_Labels_SignUp">Birthdate</p>
+              </Col>
+              <Col>
+              <p className="text_Labels_SignUp">Birthdate</p>
             <TextField
               name="birthdate"
               type="date"
@@ -145,8 +150,10 @@ function ClientSignUp() {
                 setBirth(event.target.value);
               }}
             ></TextField>
-          </div>
-
+              </Col>
+            </Row>
+          </Container>
+          <Container className="Client_SignUpTextField">
           <p className="text_Labels_SignUp">Contact Number</p>
           <TextField
             name="contact"
@@ -160,6 +167,8 @@ function ClientSignUp() {
               setContact(event.target.value);
             }}
           ></TextField>
+          </Container>
+          <Container className="Client_SignUpTextField">
           <p className="text_Labels_SignUp">Email Address</p>
           <TextField
             name="email"
@@ -173,6 +182,8 @@ function ClientSignUp() {
               setEmail(event.target.value);
             }}
           ></TextField>
+          </Container>
+          <Container className="Client_SignUpTextField">
           <p className="text_Labels_SignUp">Password</p>
           <TextField
             label="Password"
@@ -186,7 +197,8 @@ function ClientSignUp() {
               setPassword(event.target.value);
             }}
           ></TextField>
-          <center>
+          </Container>
+          <Container className="Client_SignUpTextField">
             <button
               className="button_SignUp_SignUp"
               type="submit"
@@ -194,11 +206,11 @@ function ClientSignUp() {
             >
               Sign Up
             </button>
-          </center>
+          </Container>
         </div>
-      </div>
-      <div className="columnR_SignUp">
-        <div className="blankPageTop_SignUp"></div>
+      </Col>
+      <Col sm={4} className="Client_SignUp_columnR_SignUp2">
+        <Container className="Client_SignUpRightPane">
         <p className="text_LabelR_SignUp">Already have an account?</p>
         <center>
           <button
@@ -211,9 +223,11 @@ function ClientSignUp() {
             Log In
           </button>
         </center>
-        <div className="blankPageBottom_SignUp"></div>
-      </div>
-    </body>
+          
+        </Container>
+      
+      </Col>
+    </Row>
   );
 }
 

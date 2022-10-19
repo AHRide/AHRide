@@ -73,7 +73,7 @@ const RiderDeliveryItemInfo = () => {
 		<>
 			<NavBarRider />
 			{updateList.map((lists, index) => (
-				<Container fluid key={index}>
+				<Container fluid key={index} className="Rider_Delivery_Item_Info">
 					<Row>
 						<Col>
 							<Link to='/delivery-offers'>
@@ -177,7 +177,7 @@ const RiderDeliveryItemInfo = () => {
 						</Container>
 						<h1 className='DataAndTextLable'>Note</h1>
 						<Box
-							sx={{ width: 1200, maxWidth: '100%', height: 150 }}
+							sx={{ width: 1300, maxWidth: '100%', height: 150 }}
 							className='WhiteNoteBox'>
 							<Col>
 								<h1 className='NoteContent'>{lists.note}</h1>

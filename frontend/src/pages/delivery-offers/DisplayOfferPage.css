@@ -13,12 +13,18 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
 }
+.center-layout:hover {
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+}
 
 .column-details {
     text-align: center;
     float: left;
     width: 25%;
   }
+
+
 
   .column-details1 {
     margin-left: 20px;
@@ -117,4 +123,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+  }
+
+  .Display_Offer_List{
+    padding-bottom: 30px;
   }

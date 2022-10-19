@@ -28,6 +28,7 @@ import ModalRiderDelivery from "../../../components/ModalRiderDelivery";
 import { useNavigate } from "react-router-dom";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 
+
 const StatusOfDelivery = () => {
   const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });;
 
@@ -203,9 +204,9 @@ const StatusOfDelivery = () => {
               </Container>
             </Row>
             <Row>
-              <Col xs={9} className="LeftPane">
-                <div class="d-flex justify-content-end" size="medium">
-                  <ModalReportV1 />
+              <Col sm={9} className="LeftPane">
+                <div class="d-flex justify-content-end" size="medium" >
+                  <ModalReportV1 className="Rider_Report_Modal"></ModalReportV1>
                 </div>
                 <Container className="ContainerLowerRow">
                   <h1 className="HeaderTextLabel">Client Information</h1>
@@ -364,7 +365,7 @@ const StatusOfDelivery = () => {
                   </Row>
                 </Container>
               </Col>
-              <Col xs={3} className="RightPane">
+              <Col sm={3} className="RightPane">
                 <Container>
                   <h2 className="StatusText">Status</h2>
                   <h2 className="DataAndTextLable">
@@ -609,7 +610,7 @@ const StatusOfDelivery = () => {
 
                     <Grid item>
                       <FormControlLabel
-                        control={<Checkbox />}
+                        control={<Checkbox disabled={true} />}
                         label="Delivered"
                       />
                     </Grid>
@@ -649,9 +650,19 @@ const StatusOfDelivery = () => {
     return (
       <>
         <NavBarRider />
-        <div>
+        <Container>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '80vh',
+          }}
+        >
           <h3>No Current Delivery Yet</h3>
         </div>
+        </Container>
+        
       </>
     );
   }

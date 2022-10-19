@@ -1,4 +1,4 @@
-.body {
+/* .body {
 	width: 100%;
 	height: 100%;
 	background: rgb(19, 200, 200);
@@ -14,12 +14,12 @@
 	background: rgb(19, 200, 200);
 }
 
-.RightPane {
+/* .RightPane {
 	background: rgb(255, 255, 255);
 	border-left: 2px solid #000000;
 	height: 600px;
-}
-.ContainerUpperRow {
+} */
+/* .ContainerUpperRow {
 	background-color: #f7bc50;
 	border: 2px solid #000000;
 	border-radius: 13px;
@@ -45,9 +45,9 @@
 	min-width: xxx;
 	text-align: start;
 	font-size: 20px;
-}
+} */
 
-.TextField1 {
+/* .TextField1 {
 	background: white;
 }
 
@@ -81,8 +81,8 @@
 	line-height: 29px;
 
 	color: #000000;
-}
-.HeaderTextLabelSmall {
+} */
+/* .HeaderTextLabelSmall {
 	left: 23.97px;
 	top: 16.21px;
 
@@ -90,10 +90,11 @@
 	font-weight: 700;
 	font-size: 14.0993px;
 	line-height: 17px;
-	/* identical to box height */
+
 
 	color: #000000;
 }
+
 .DataAndTextLable {
 	width: 100%;
 	height: 29px;
@@ -121,12 +122,12 @@
 	font-weight: 700;
 	font-size: 50px;
 	line-height: 61px;
-	/* identical to box height */
+	
 
 	color: #000000;
-}
+} */
 
-.boxColor {
+/* .boxColor {
 	align-content: center;
 	background: greenyellow;
 }
@@ -169,7 +170,7 @@
 	font-weight: 400;
 	font-size: 16.1135px;
 	line-height: 20px;
-	/* identical to box height */
+
 
 	color: #000000;
-}
+} */ 
