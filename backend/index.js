@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
@@ -17,6 +18,7 @@ const time = new Date().toLocaleTimeString([], {
 	minute: '2-digit',
 });
 
+app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.json());
 app.use(cors());
 

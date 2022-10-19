@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1d882061.css",
+    "main.js": "/static/js/main.069d182e.js",
+    "static/media/Firstpagebackground.png": "/static/media/Firstpagebackground.679f4284c55ba67a56cd.png",
+    "static/media/ClientBackground.png": "/static/media/ClientBackground.5463b3c53ebcb3f1db54.png",
+    "static/media/RiderBackground.png": "/static/media/RiderBackground.22fe02653e5f3ef5f444.png",
+    "static/media/AdminBackground.png": "/static/media/AdminBackground.14b144a12610b50c8840.png",
+    "static/media/Admin_Logo.png": "/static/media/Admin_Logo.62b89f48cc2ea2940cc0.png",
+    "static/media/Picture4.gif": "/static/media/Picture4.e43d116158e7794a3b62.gif",
+    "static/media/Client_Logo.png": "/static/media/Client_Logo.0dd55594c29a767f46a7.png",
+    "static/media/Rider_Logo.png": "/static/media/Rider_Logo.5efb00761408a61d70f8.png",
+    "static/media/Picture3.png": "/static/media/Picture3.de3e39b2c05f95cc00ff.png",
+    "index.html": "/index.html",
+    "main.1d882061.css.map": "/static/css/main.1d882061.css.map",
+    "main.069d182e.js.map": "/static/js/main.069d182e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d882061.css",
+    "static/js/main.069d182e.js"
+  ]
+}
