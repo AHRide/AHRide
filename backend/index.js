@@ -8,6 +8,7 @@ const DeliveryUpdateModel = require("./models/DeliveryUpdates");
 const DeliveryOfferModel = require("./models/DeliveryOffers");
 const BookDeliveryModel = require("./models/BookDelivery");
 const DeliveryHistoryModel = require("./models/DeliveryHistory");
+const ClientReportsModel = require("./models/ClientReports");
 const cors = require("cors");
 
 const time = new Date().toLocaleTimeString([], {
@@ -90,6 +91,28 @@ app.get("/getDeliveryUpdates", (req, res) => {
       res.json(result);
     }
   });
+});
+
+app.get("/getClientReports", (req, res) => {
+  ClientReportsModel.find({}, (error, result) => {
+    if (error) {
+      res.json(error);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.get("/getClientReports/:_id", function (req, res) {
+  return ClientReportsModel.find({ _id: req.params._id })
+    .then(function (clientReports) {
+      // return orders when resolved
+      res.send(clientReports);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
 });
 
 app.get("/getDeliveryUpdates/:_id", function (req, res) {
@@ -182,14 +205,13 @@ app.get("/getDeliveryOffers/:_id", function (req, res) {
     });
 });
 
-app.get('/getDeliveryHistory', (req, res) => {
-	DeliveryHistoryModel.find({}, (error, result) => {
-		if (error) {
-			res.json(error);
-		} else {
-			res.json(result);
-		}
-	});
+app.get('/getDeliveryHistory',  async(req, res) => {
+    try{
+      const licenses = await DeliveryHistoryModel.find({}).sort({'rating': -1})
+      res.send(licenses);
+  } catch(e) {
+    console.log('error:-', e)
+  }
 });
 
 app.get('/getDeliveryHistory/rider/:rider_email', function (req, res) {
@@ -270,6 +292,14 @@ app.post("/createDeliveryOffers", async (req, res) => {
   res.json(delioffers);
 });
 
+app.post("/createClientReport", async (req, res) => {
+  const report = req.body;
+  const newReport = new ClientReportsModel(report);
+  await newReport.save();
+
+  res.json(report);
+});
+
 app.delete("/getBookDelivery/:_id", function (req, res) {
   return BookDeliveryModel.findByIdAndDelete({ _id: req.params._id })
     .then(function (bookDelivery) {
@@ -282,11 +312,71 @@ app.delete("/getBookDelivery/:_id", function (req, res) {
     });
 });
 
+app.delete("/getClientReport/delete/:_id", function (req, res) {
+  return ClientReportsModel.findByIdAndDelete({ _id: req.params._id })
+    .then(function (deleteReport) {
+      // return orders when resolved
+      res.send(deleteReport);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+});
+
 app.delete("/getDeliveryUpdates/:_id", function (req, res) {
   return DeliveryUpdateModel.findByIdAndDelete({ _id: req.params._id })
     .then(function (updateDelivery) {
       // return orders when resolved
       res.send(updateDelivery);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+});
+
+app.delete("/getHistory/:_id", function (req, res) {
+  return DeliveryUpdateModel.findByIdAndDelete({ _id: req.params._id })
+    .then(function (updateDelivery) {
+      // return orders when resolved
+      res.send(updateDelivery);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+});
+
+app.delete("/getHistoryDelete/:_id", function (req, res) {
+  return DeliveryHistoryModel.findByIdAndDelete({ _id: req.params._id })
+    .then(function (deletehist) {
+      // return orders when resolved
+      res.send(deletehist);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+});
+
+app.delete("/getRiderUser/delete/:email", function (req, res) {
+  return UserModelRider.findOneAndDelete({ email: req.params.email })
+    .then(function (deleteRider) {
+      // return orders when resolved
+      res.send(deleteRider);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+});
+
+app.delete("/getClientUser/delete/:email", function (req, res) {
+  return UserModel.findOneAndDelete({ email: req.params.email })
+    .then(function (deleteClient) {
+      // return orders when resolved
+      res.send(deleteClient);
     })
     .catch(function (error) {
       // handle error
@@ -368,6 +458,21 @@ app.put("/getDeliveryUpdates/end/:_id", (req, res) => {
     });
 });
 
+app.put("/getDeliveryUpdates/reported/:_id", (req, res) => {
+  DeliveryUpdateModel.findByIdAndUpdate(
+    { _id: req.params._id },
+    {
+      clientReported: true,
+    }
+  )
+    .then(function (updateDelivery) {
+      res.send(updateDelivery);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
 app.put("/deliveryHistory/:_id", (req, res) => {
   DeliveryHistoryModel.findByIdAndUpdate(
     { _id: req.params._id },
@@ -383,6 +488,7 @@ app.put("/deliveryHistory/:_id", (req, res) => {
       console.log(error);
     });
 });
+
 
 app.put("/UpdateInfo/rider/:email", (req, res) => {
   UserModelRider.findOneAndUpdate(

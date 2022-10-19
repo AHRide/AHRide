@@ -12,9 +12,9 @@ import { Row, Col, Container } from "react-bootstrap";
 import axios from "axios";
 
 function AdminRiderInformation() {
-  const [value, setValue] = useState(0);
 	const location = useLocation();
 	const [updateList, setUpdateList] = useState([]);
+  const [riderList, setRiderList] = useState([]);
 	useEffect(() => {
 		axios
 			.get(`http://localhost:3001/getDeliveryHistory/${location.state._id}/`)
@@ -22,7 +22,13 @@ function AdminRiderInformation() {
 				setUpdateList(response.data);
 				console.log(response.data);
 			});
-	}, [location.state._id]);
+
+      axios
+			.get(`http://localhost:3001/getUserRider/${location.state.rider_email}/`)
+			.then((response) => {
+				setRiderList(response.data);
+			});
+	}, [location.state._id, location.state.rider_email]);
 
   return (
     <>
@@ -39,11 +45,12 @@ function AdminRiderInformation() {
           </Link>
           <h1 className={style.title}>Rider's Information</h1>
         </div>
-        <div className={style.column2}>
+        {riderList.map((rider, index) => (
+        <div className={style.column2} key={index}>
           <div className={style.row1}>
             <div className={style.column11}>
-              <h1 className={style.name1}>Rider's Name: {lists.rider_email}</h1>
-              <h1 className={style.cont}>Contact Number: wla pa</h1>
+              <h1 className={style.name1}>Rider's Email: {rider.email}</h1>
+              <h1 className={style.cont}>Contact Number: {rider.contact}</h1>
             </div>
             <div className={style.column12}>
               <h1 className={style.from1}>From: </h1>
@@ -71,7 +78,7 @@ function AdminRiderInformation() {
               <div className={style.stars}>
                 <Rating name="read-only" value={lists.rating} readOnly size="large" />
               </div>
-              <h1 className={style.note}>Note from Client: </h1>
+              <h1 className={style.note}>Comment from Client: </h1>
               <div className={style.t3}>
               <Container className={style.text3}
                   id="filled-basic"
@@ -83,9 +90,10 @@ function AdminRiderInformation() {
             </div>
           </div>
         </div>
+        ))}
         <div className={style.column3}>
           <div className={style.button}>
-            <BanRider />
+            <BanRider userEmail={lists.rider_email} historyID={lists._id} />
           </div>
         </div>
       </div>
