@@ -6,6 +6,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowRightAlt";
 import { TextField } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import "./rider_signin.css";
+import { Container } from "@mui/system";
 
 const RiderSignin = () => {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ const RiderSignin = () => {
           }}
           type="submit"
         ></FirstPageIcon>
-        <div className="blankPageTop"></div>
+        <Container className= "Rider_Signin_LeftPaneButton">
         <p className="text_LabelL">Don't have an account yet?</p>
         <center>
           <button
@@ -96,6 +97,9 @@ const RiderSignin = () => {
             Sign Up
           </button>
         </center>
+
+        </Container>
+       
       </div>
       <div className="columnR">
         <h1 className="text_SignIn">Sign In</h1>
