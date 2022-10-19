@@ -63,6 +63,7 @@ function RiderProfile() {
           </Link>
           <h1 className={style.ProfileName}>{lists.name}</h1>
           <div>
+            <h2 className={style.DateFont}>Birthdate: {lists.birthdate}</h2>
             <UpdateInfo />
           </div>
 
@@ -76,7 +77,7 @@ function RiderProfile() {
               <CallIcon fontSize="large" className={style.Design} />
               <h1>{lists.contact}</h1>
               <AlternateEmailIcon fontSize="large" className={style.Design} />
-              <h1>{lists.email}</h1>
+              <h1 className={style.emailfont}>{lists.email}</h1>
             </div>
             <div className={style.column}>
               <CoPresentIcon fontSize="large" className={style.Design1} />
